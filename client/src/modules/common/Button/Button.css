@@ -1,0 +1,10 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 90%;
+}
+
+.button img:active {
+  transform: translateY(1px);
+}
