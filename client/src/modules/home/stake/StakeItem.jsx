@@ -1,8 +1,8 @@
-import './Stake.css';
+import './StakeItem.css';
 
 const StakeItem = () => {
   return (
-    <div className="stake">
+    <div className="main">
       <header className="stake-header">Crypto Trains StakeItem</header>
     </div>
   );

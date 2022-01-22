@@ -1,5 +1,5 @@
+import './StakeList.css';
 import StakeItem from './StakeItem';
-import './Stake.css';
 
 export const StakeList = () => {
   return (

@@ -1,12 +1,16 @@
 import './App.css';
-import { StakeList } from './modules/home/stake';
+// import { StakeList } from './modules/home/stake/StakeList';
+import Header from './modules/layout/header/Header';
+import { Outlet } from "react-router-dom";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+      <Header />
+      {/* <header className="App-header">
         <StakeList />
-      </header>
+      </header> */}
+      <Outlet />
     </div>
   );
 }
