@@ -1,6 +1,4 @@
 import './Profile.css';
-// import coin from '../../../assets/images/coin.png';
-// import profile from '../../../assets/images/profile.png';
 
 const Profile = () => {
   return (
@@ -11,14 +9,6 @@ const Profile = () => {
       <div className="account-img">
         <div className="accounts">Account</div>
       </div>
-      {/* <>
-        <img src={coin} alt="coins" />
-        <div className="coins">0</div>
-      </>
-      <>
-        <img src={profile} alt="profile" />
-        <div className="account">George</div>
-      </> */}
     </main>
   );
 };
