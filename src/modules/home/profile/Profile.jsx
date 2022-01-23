@@ -53,7 +53,15 @@ const Profile = () => {
         <div className="coins">{coins}</div>
       </div>
       <div className="account-img">
-        <div className="accounts">{user}</div>
+      {walletAddress.length > 0 ? (
+        <div className="accounts">
+          {String(walletAddress).substring(0, 6) +
+              "..." +
+              String(walletAddress).substring(38)}
+        </div>
+         ) : (
+        <div className="accounts" role = "button" tabIndex={0} onClick={connectWalletPressed} onKeyDown={connectWalletPressed}>Connect Wallet</div>
+        )}
       </div>
     </main>
   );
