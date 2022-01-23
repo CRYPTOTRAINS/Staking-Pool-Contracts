@@ -29,13 +29,13 @@
 }
 
 @media (min-width: 600px) and (max-width: 769px) {
-   .stake-list {
+  .stake-list {
     grid-template-columns: 50% 50%;
-   }
+  }
 }
 
 @media (min-width: 320px) and (max-width: 599px) {
   .stake-list {
     grid-template-columns: auto;
-   }
+  }
 }

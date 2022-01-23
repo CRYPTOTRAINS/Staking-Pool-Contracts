@@ -6,7 +6,7 @@
   /* width: 25%; */
   margin: 0 1rem 2rem 1rem;
   background-color: #f1e5bb;
-  padding: 1rem 0; 
+  padding: 1rem 0;
   box-shadow: 3px 3px rgb(107, 106, 106);
 }
 
@@ -46,10 +46,4 @@
 
 .min {
   padding-left: 2rem;
-}
-
-@media (min-width: 320px) and (max-width: 599px) {
-  .stake {
-    margin: 0;
-   }
 }
