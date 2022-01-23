@@ -11,7 +11,7 @@ async function main() {
     // const mageToken = await MageToken.deploy();
 
     const ENMT = await ethers.getContractFactory("ENMT");
-    const enmt =await ENMT.deploy("CTRAIN", "CTR", 18, , 30000000);
+    const enmt =await ENMT.deploy("CTRAIN", "CTR", 18, 0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266, 30000000);
 
     const StakeToken = await ethers.getContractFactory("StakeToken");
     const staketoken = await StakeToken.deploy(enmt.address, enmt.address);
@@ -26,7 +26,7 @@ async function main() {
     saveFrontendFiles(staketoken);
   }
 
-  function saveFrontendFiles(mageToken) {
+  function saveFrontendFiles(enmt) {
     const fs = require("fs");
     const contractsDir = __dirname + "/../src/contracts";
   
@@ -36,14 +36,17 @@ async function main() {
   
     fs.writeFileSync(
       contractsDir + "/contract-address.json",
-      JSON.stringify({ MageToken: mageToken.address }, undefined, 2)
+      JSON.stringify({ ENMT: enmt.address }, undefined, 2),
+      JSON.stringify({ StakeToken: staketoken.address }, undefined, 2)
     );
   
-    const MageTokenArtifact = artifacts.readArtifactSync("MageToken");
+    const ENMTTokenArtifact = artifacts.readArtifactSync("ENMT");
+    const StakeTokenArtifact = artifacts.readArtifactSync("StakeToken");
   
     fs.writeFileSync(
-      contractsDir + "/MageToken.json",
-      JSON.stringify(MageTokenArtifact, null, 2)
+      contractsDir + "/ENMT.json",
+      JSON.stringify(ENMTTokenArtifact, null, 2),
+      JSON.stringify(StakeTokenArtifact, null, 2)
     );
   }
   
