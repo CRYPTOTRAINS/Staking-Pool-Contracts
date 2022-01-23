@@ -22,11 +22,17 @@
   margin-left: 0.6rem;
 }
 
-.coins,
-.accounts {
+.coins {
   position: relative;
   top: 1.2rem;
   right: 1rem;
+}
+
+.accounts {
+  position: relative;
+  top: 1.5rem;
+  right: 1.5rem;
+  cursor: pointer;
 }
 
 @media (max-width: 599px) {
