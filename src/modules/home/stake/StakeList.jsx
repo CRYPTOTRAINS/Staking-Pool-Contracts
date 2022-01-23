@@ -7,8 +7,8 @@ import banco4 from '../../../assets/images/banco4.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useState } from 'react';
 import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
-// import StakingAddress from "../../../contracts/contract-address.json";
-// import StakingArtifact from "../../../contracts/StakeToken.json";
+import StakingAddress from "../../../contracts/contract-address.json";
+import StakingArtifact from "../../../contracts/StakeToken.json";
 // import ENMTAddress from "../../../contracts/ENMT-address.json";
 // import ENMTArtifact from "../../../contracts/ENMT.json";
 
@@ -70,33 +70,31 @@ export const StakeList = () => {
   //   //   }
   // }
 
-  // async function stake() {
-  //   // const {amount} = formInput;
+  async function stake() {
+    // const {amount} = formInput;
 
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const signer = provider.getSigner();
-  //   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
 
-  //   const amount = 1000;
-  //   try {
-  //     const transaction = await contract.stake({ value: amount });
-  //     const receipt = await transaction.wait();
-  //     if (receipt.status === 0) {
-  //       throw new Error("Transaction failed");
-  //       setStatus("Transaction failed");
-  //     } else {
-  //       setStatus("Staking successful");
-  //     }
-  //   } catch(error) {
-  //     if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-  //       return;
-  //     }
-  //     console.error(error);
-  //   } finally {
+    const amount = 1000;
+    try {
+      const transaction = await contract.stake({ value: amount });
+      const receipt = await transaction.wait();
+      if (receipt.status === 0) {
+        setStatus("Transaction failed");
+        throw new Error("Transaction failed");
+      } else {
+        setStatus("Staking successful");
+      }
+    } catch(error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        return;
+      }
+      console.error(error);
+    }
 
-  //   }
-
-  // }
+  }
   
 
 
@@ -106,6 +104,7 @@ export const StakeList = () => {
 
 
   const handleOnClick = async (item) => {
+    stake();
     // You will implement the logic to add a stake from the list here
     if (stakes.length) {
       stakes.map((stake) => {
