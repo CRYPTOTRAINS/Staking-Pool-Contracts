@@ -9,6 +9,7 @@ import ENMTArtifact from "../../../contracts/ENMT.json";
 
 const Profile = () => {
   const [coins, setCoins] = useState(0);
+  const [status, setStatus] = useState("");
   const [walletAddress, setWallet] = useState("");
 
   useEffect(() => {
@@ -49,12 +50,27 @@ const Profile = () => {
       No Ethereum wallet was detected. Install metamask</a>
     </div>)
   }
+
+  // async function updateBalance() {
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const signer = provider.getSigner();
+  //   const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+  //   const balance = await contract.BalancOf(signer);
+  //   setStatus("Updating balance");
+  //   // console.log(balance);
+  //   //   if(balance) {
+  //   //     setStatus({balance});
+  //   //     // return (
+  //   //     //   <div><p>{balance}</p></div>
+  //   //     // )
+  //   //   }
+  // }
   
   
   return (
     <main className="profile">
       <div className="coin-img">
-        <div className="coins">{coins}</div>
+        <div className="coins"></div>
       </div>
       <div className="account-img">
       {walletAddress.length > 0 ? (
