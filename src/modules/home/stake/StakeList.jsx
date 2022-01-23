@@ -56,20 +56,16 @@ const listItem = [
 export const StakeList = () => {
   const [stakes, setStakes] = useState([]);
 
-  // async function updateBalance() {
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const signer = provider.getSigner();
-  //   const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-  //   const balance = await contract.BalancOf(signer);
-  //   setStatus("Updating balance");
-  //   // console.log(balance);
-  //   //   if(balance) {
-  //   //     setStatus({balance});
-  //   //     // return (
-  //   //     //   <div><p>{balance}</p></div>
-  //   //     // )
-  //   //   }
-  // }
+  async function updateBalance() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+    const balance = await contract.balancOf(signer);
+    console.log(balance);
+    return balance;
+  }
+
+  updateBalance();
 
   async function stake() {
     // const {amount} = formInput;
