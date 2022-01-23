@@ -1,10 +1,11 @@
 /* eslint-disable no-unused-vars */
 import './Profile.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { connectWallet, getCurrentWalletConnected } from "../../../utils/wallet";
 
 const Profile = () => {
   const [coins, setCoins] = useState(0);
-  const [user, setUser] = useState('123..6777');
+  const [walletAddress, setWallet] = useState("");
   
   return (
     <main className="profile">
