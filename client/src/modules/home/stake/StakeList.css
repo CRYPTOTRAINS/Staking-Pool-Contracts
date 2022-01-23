@@ -2,7 +2,9 @@
   display: flex;
 }
 
-.title {
+.title,
+.stake-title,
+.no-stake {
   color: #df5832;
   font-weight: bolder;
   font-size: 1.6rem;
@@ -12,4 +14,15 @@
   margin-left: 1rem;
   margin-top: 2rem;
   padding-top: 4rem;
+}
+
+.stake-title {
+  padding: 0;
+  font-size: 1.3rem;
+}
+
+.no-stake {
+  padding: 0 0 4rem 0;
+  font-size: 1.1rem;
+  color: #946a54;
 }

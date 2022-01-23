@@ -1,7 +1,9 @@
 import './StakeItem.css';
 import Button from '../../common/Button/Button';
 
-const StakeItem = ({ image, name, apr, min, lockdays, status }) => {
+const StakeItem = (prop) => {
+  const { image, name, apr, min, lockdays, status, handleOnClick } = prop;
+
   return (
     <main className="stake">
       <img src={image} alt="banco" />
@@ -22,7 +24,7 @@ const StakeItem = ({ image, name, apr, min, lockdays, status }) => {
           Status: <span className="status">{status}</span>
         </article>
       </section>
-      <Button />
+      <Button handleOnClick={handleOnClick} />
     </main>
   );
 };

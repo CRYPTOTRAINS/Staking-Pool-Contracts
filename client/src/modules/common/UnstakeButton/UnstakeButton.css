@@ -1,4 +1,4 @@
-.button {
+.unstake-button {
   display: flex;
   justify-content: center;
   align-self: center;
@@ -8,6 +8,6 @@
   padding-top: 0.8rem;
 }
 
-.button img:active {
+.unstake-button img:active {
   transform: translateY(1px);
 }

@@ -1,0 +1,12 @@
+.back-arrow {
+  background-color: transparent;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.back-arrow img {
+  display: flex;
+  justify-content: flex-start;
+  width: 20%;
+}

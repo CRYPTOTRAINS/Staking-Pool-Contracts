@@ -6,16 +6,12 @@
   width: 25%;
   margin: 0 1rem 2rem 1rem;
   background-color: #f1e5bb;
-  padding-bottom: 1rem;
+  padding: 1rem 0; 
   box-shadow: 3px 3px rgb(107, 106, 106);
-  /* background-image: url('../../../assets/images/itemBackground.png');
-  background-repeat: no-repeat;
-  background-size: contain; */
 }
 
 .stake img {
   width: 90%;
-  padding-top: 1rem;
 }
 
 .item-container {

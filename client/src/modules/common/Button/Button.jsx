@@ -1,11 +1,11 @@
 import './Button.css';
 import button from '../../../assets/images/botondebanco.png';
 
-const Button = () => {
+const Button = ({ handleOnClick }) => {
   return (
-    <main className="button">
+    <button className="button" onClick={handleOnClick} onKeyDown={handleOnClick}>
       <img src={button} alt="boton de banco" />
-    </main>
+    </button>
   );
 };
 
