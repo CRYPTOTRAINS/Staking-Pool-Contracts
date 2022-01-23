@@ -5,10 +5,17 @@ async function main() {
   
     console.log("Account balance:", (await deployer.getBalance()).toString());
   
-    const MageToken = await ethers.getContractFactory("MageToken");
-    const mageToken = await MageToken.deploy();
+    // const MageToken = await ethers.getContractFactory("MageToken");
+    // const mageToken = await MageToken.deploy();
+
+    const ENMT = await ethers.getContractFactory("ENMT");
+    const enmt =await ENMT.deploy("CTRAIN", "CTR", 18, , 30000000);
+
+    const StakeToken = await ethers.getContractFactory("ENMT");
+
   
-    console.log("MageToken address:", mageToken.address);
+    // console.log("MageToken address:", mageToken.address);
+    console.log("ENMT address:", enmt.address);
 
     //  To save the contract's artifacts and address in the frontend directory
     saveFrontendFiles(mageToken);
