@@ -65,7 +65,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         return userIndex; 
     }
     
-    function stake(uint256 amount) external nonReentrant whenNotPaused {
+    function stake(uint256 amount) external payable nonReentrant whenNotPaused {
         require(amount >= 50, "Cannot stake below 50");
         require(amount <= 500000, "Cannot stake more than 500000");
         _totalSupply = _totalSupply.add(amount);

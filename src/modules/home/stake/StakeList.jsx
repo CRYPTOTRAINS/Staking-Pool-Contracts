@@ -6,13 +6,14 @@ import banco3 from '../../../assets/images/banco3.png';
 import banco4 from '../../../assets/images/banco4.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useState } from 'react';
+import { ethers } from "ethers";
 import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
 import StakingAddress from "../../../contracts/contract-address.json";
 import StakingArtifact from "../../../contracts/StakeToken.json";
-// import ENMTAddress from "../../../contracts/ENMT-address.json";
-// import ENMTArtifact from "../../../contracts/ENMT.json";
+import ENMTAddress from "../../../contracts/ENMT-address.json";
+import ENMTArtifact from "../../../contracts/ENMT.json";
 
-
+const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 const listItem = [
   {
     image: banco1,
@@ -77,9 +78,12 @@ export const StakeList = () => {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
 
+    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+
     const amount = 1000;
     try {
-      const transaction = await contract.stake({ value: amount });
+      await token.approve(StakingAddress.StakeToken, amount);
+      const transaction = await contract.stake(amount, { value: amount });
       const receipt = await transaction.wait();
       if (receipt.status === 0) {
         setStatus("Transaction failed");
