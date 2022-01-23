@@ -1,8 +1,11 @@
 import './StakeItem.css';
 import Button from '../../common/Button/Button';
 
+
 const StakeItem = (prop) => {
-  const { image, name, apr, min, lockdays, status, handleOnClick } = prop;
+  const { image, name, apr, min, max, lockdays, handleOnClick } = prop;
+  // const [formInput, updateFormInput] = useState({amount: 0});
+  // const [status, setStatus] = useState("");
 
   return (
     <main className="stake">
@@ -18,11 +21,14 @@ const StakeItem = (prop) => {
           Min: <span className="min">{min}</span>
         </article>
         <article className="item">
-          Lock Days: <span className="lockdays">{lockdays}</span>
+          Max: <span className="min">{max}</span>
         </article>
         <article className="item">
-          Status: <span className="status">{status}</span>
+          Lock Days: <span className="lockdays">{lockdays}</span>
         </article>
+        {/* <article className="item">
+          Status: <span className="status">{status}</span>
+        </article> */}
       </section>
       <Button handleOnClick={handleOnClick} />
     </main>

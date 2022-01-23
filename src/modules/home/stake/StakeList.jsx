@@ -7,44 +7,103 @@ import banco4 from '../../../assets/images/banco4.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useState } from 'react';
 import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
+// import StakingAddress from "../../../contracts/contract-address.json";
+// import StakingArtifact from "../../../contracts/StakeToken.json";
+// import ENMTAddress from "../../../contracts/ENMT-address.json";
+// import ENMTArtifact from "../../../contracts/ENMT.json";
+
 
 const listItem = [
   {
     image: banco1,
-    name: 'CTRIAN INVESTORS',
-    apr: '150%',
-    min: 'Staking 300',
-    lockdays: '10 days',
-    status: '19999,0000',
+    name: 'CTRAIN INVESTORS',
+    apr: '100%',
+    min: 'Staking 50',
+    max: 'Staking 500,000',
+    lockdays: '12 days'
+    // status: '199,990,000', //What is this?
   },
   {
     image: banco2,
-    name: 'CTRIAN ADVOCATE',
-    apr: '170%',
-    min: 'Staking 380',
-    lockdays: '10 days',
-    status: '19999,0000',
+    name: 'CTRAIN ADVOCATE',
+    apr: '165%',
+    min: 'Staking 100',
+    max: 'Staking 625,000',
+    lockdays: '28 days'
+    // status: '19999,0000',
   },
   {
     image: banco3,
-    name: 'CTRIAN MAMSION',
-    apr: '140%',
-    min: 'Staking 330',
-    lockdays: '10 days',
-    status: '19999,0000',
+    name: 'CTRAIN MANSION',
+    apr: '245%',
+    min: 'Staking 250',
+    max: 'Staking 750,000',
+    lockdays: '44 days'
+    // status: '19999,0000',
   },
   {
     image: banco4,
-    name: 'CTRIAN INVESTOR',
-    apr: '200%',
-    min: 'Staking 700',
-    lockdays: '10 days',
-    status: '19999,0000',
+    name: 'CTRAIN INVESTOR',
+    apr: '300%',
+    min: 'Staking 300',
+    max: 'Staking 1,000,000',
+    lockdays: '60 days'
+    // status: '19999,0000',
   },
 ];
 
 export const StakeList = () => {
   const [stakes, setStakes] = useState([]);
+
+  // async function updateBalance() {
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const signer = provider.getSigner();
+  //   const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+  //   const balance = await contract.BalancOf(signer);
+  //   setStatus("Updating balance");
+  //   // console.log(balance);
+  //   //   if(balance) {
+  //   //     setStatus({balance});
+  //   //     // return (
+  //   //     //   <div><p>{balance}</p></div>
+  //   //     // )
+  //   //   }
+  // }
+
+  // async function stake() {
+  //   // const {amount} = formInput;
+
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const signer = provider.getSigner();
+  //   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
+
+  //   const amount = 1000;
+  //   try {
+  //     const transaction = await contract.stake({ value: amount });
+  //     const receipt = await transaction.wait();
+  //     if (receipt.status === 0) {
+  //       throw new Error("Transaction failed");
+  //       setStatus("Transaction failed");
+  //     } else {
+  //       setStatus("Staking successful");
+  //     }
+  //   } catch(error) {
+  //     if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+  //       return;
+  //     }
+  //     console.error(error);
+  //   } finally {
+
+  //   }
+
+  // }
+  
+
+
+
+
+
+
 
   const handleOnClick = async (item) => {
     // You will implement the logic to add a stake from the list here
@@ -78,8 +137,9 @@ export const StakeList = () => {
             name={item.name}
             apr={item.apr}
             min={item.min}
+            max={item.max}
             lockdays={item.lockdays}
-            status={item.status}
+            // status={item.status}
             handleOnClick={() => handleOnClick(item)}
           />
         ))}
@@ -103,11 +163,14 @@ export const StakeList = () => {
                   Min: <span className="min">{stake.min}</span>
                 </article>
                 <article className="item">
-                  Lock Days: <span className="lockdays">{stake.lockdays}</span>
+                  Max: <span className="min">{stake.max}</span>
                 </article>
                 <article className="item">
-                  Status: <span className="status">{stake.status}</span>
+                  Lock Days: <span className="lockdays">{stake.lockdays}</span>
                 </article>
+                {/* <article className="item">
+                  Status: <span className="status">{stake.status}</span>
+                </article> */}
               </section>
               <UnstakeButton handleRemove={() => handleRemove(stakes, stake)} />
             </div>
