@@ -2,6 +2,8 @@
 import './Profile.css';
 import { useEffect, useState } from 'react';
 import { connectWallet, getCurrentWalletConnected } from "../../../utils/wallet";
+import StakingAddress from "../../../contracts/contract-address.json";
+import StakingArtifact from "../../../contracts/StakeToken.json";
 
 const Profile = () => {
   const [coins, setCoins] = useState(0);
