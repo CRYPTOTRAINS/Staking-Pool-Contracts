@@ -1,3 +1,5 @@
+const { ethers } = require("ethers");
+
 async function main() {
     const [deployer] = await ethers.getSigners();
   
@@ -11,11 +13,13 @@ async function main() {
     const ENMT = await ethers.getContractFactory("ENMT");
     const enmt =await ENMT.deploy("CTRAIN", "CTR", 18, , 30000000);
 
-    const StakeToken = await ethers.getContractFactory("ENMT");
+    const StakeToken = await ethers.getContractFactory("StakeToken");
+    const staketoken = await ethers.getContractFactory(enmt.address, enmt.address);
 
   
     // console.log("MageToken address:", mageToken.address);
     console.log("ENMT address:", enmt.address);
+    console.log("StakeToken address:", staketoken.address);
 
     //  To save the contract's artifacts and address in the frontend directory
     saveFrontendFiles(mageToken);
