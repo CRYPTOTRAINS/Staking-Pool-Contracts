@@ -6,9 +6,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { StakeList } from './modules/home/stake/StakeList';
 import { TrainList } from './modules/home/train/TrainList';
+import backgroundImage from './assets/images/background.png';
 
 ReactDOM.render(
   <React.StrictMode>
+    <img className='bg' src={backgroundImage} alt='background' />
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>

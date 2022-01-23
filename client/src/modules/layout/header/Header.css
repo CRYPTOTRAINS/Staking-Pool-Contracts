@@ -1,5 +1,7 @@
 .header {
   display: flex;
+  position: sticky;
+  top: 0;
   padding: 0.2rem 1.4rem;
   background-color: #f1e5bb;
   justify-content: space-between;
