@@ -28,3 +28,13 @@
   top: 1.2rem;
   right: 1rem;
 }
+
+@media (max-width: 599px) {
+  .profile {
+    justify-content: center;
+  }
+  .profile .account-img,
+  .profile .coin-img {
+    margin: 0;
+  }
+}

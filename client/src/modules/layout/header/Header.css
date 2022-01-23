@@ -34,3 +34,59 @@
 .link-item:hover {
   color: #d3431b;
 }
+
+#hamnav {
+  display: none;
+}
+
+@media (max-width: 599px) {
+  .header {
+    display: none;
+  }
+  .logo {
+    position: relative;
+    width: 20%;
+    display: flex;
+    justify-content: flex-start;
+  }
+  #hamnav {
+    display: block;
+    width: 100%;
+    background-color: #f1e5bb;
+    position: sticky;
+    top: 0;
+  }
+  #hamburger { display: none; }
+
+  #hamitems a {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    border-top: 1px solid rgb(192, 190, 190);
+    padding: 1rem 0;
+  }
+
+  #hamitems a:nth-of-type(2) {
+    border-bottom: 1px solid rgb(192, 190, 190);
+  }
+
+  #hamnav label {
+    display: flex;
+    position: relative;
+    right: -18rem;
+    bottom: 3rem;
+    justify-content: flex-end;
+    color: white;
+    font-style: normal;
+    font-size: 2.2em;
+    width: max-content;
+    padding: 2px;
+  }
+
+  #hamitems {
+    display: none;
+  }
+  #hamnav input:checked ~ #hamitems {
+    display: block;
+  }
+}

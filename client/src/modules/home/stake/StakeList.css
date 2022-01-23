@@ -34,8 +34,12 @@
   }
 }
 
-@media (min-width: 320px) and (max-width: 599px) {
+@media (max-width: 599px) {
   .stake-list {
     grid-template-columns: auto;
+  }
+  .title {
+    text-align: center;
+    margin-top: 0;
   }
 }
