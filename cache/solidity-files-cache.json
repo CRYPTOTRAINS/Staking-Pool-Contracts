@@ -2,7 +2,7 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "/home/ggr/blockchain/Staking-Pool-Contracts/contracts/ENMT.sol": {
-      "lastModificationDate": 1642945423744,
+      "lastModificationDate": 1642981241144,
       "contentHash": "7905bbbd769987e8cd40e329f2df99d3",
       "sourceName": "contracts/ENMT.sol",
       "solcConfig": {
@@ -185,8 +185,8 @@
       ]
     },
     "/home/ggr/blockchain/Staking-Pool-Contracts/contracts/StakeToken.sol": {
-      "lastModificationDate": 1642978820628,
-      "contentHash": "4bca9a6ebefbd51f68237e4db51d84b8",
+      "lastModificationDate": 1643031795448,
+      "contentHash": "24214f9c8f5ca859a189e99b31108211",
       "sourceName": "contracts/StakeToken.sol",
       "solcConfig": {
         "version": "0.8.4",

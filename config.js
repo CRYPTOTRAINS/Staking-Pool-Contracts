@@ -1,4 +1,4 @@
 
-    export const azaniamarketaddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
-    export const azaniaaddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
+    export const azaniamarketaddress = "0x379891DaD32Bf08AC07b5FaECd8072b33e6D8D03"
+    export const azaniaaddress = "0xe4295C40Cc099aA7cFF9102f0C5443Cf6C6D261D"
       
