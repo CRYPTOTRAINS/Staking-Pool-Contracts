@@ -10,7 +10,7 @@ async function main() {
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
     const ENMT = await ethers.getContractFactory("ENMT");
-    const enmt =await ENMT.deploy("CTRAIN", "CTR", 18, "0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266", 30000000);
+    const enmt =await ENMT.deploy("CTRAIN", "CTR", 18, "0x77d715A989AfaFBCAEF671CEDBe010faDD0dBeAD", 30000000);
 
     const StakeToken = await ethers.getContractFactory("StakeToken");
     const staketoken = await StakeToken.deploy(enmt.address, enmt.address);
