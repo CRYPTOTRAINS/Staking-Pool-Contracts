@@ -2,9 +2,9 @@ import './StakeList.css';
 import './StakeItem.css';
 // import StakeItem from './StakeItem';
 import banco1 from '../../../assets/images/banco1.png';
-// import banco2 from '../../../assets/images/banco2.png';
-// import banco3 from '../../../assets/images/banco3.png';
-// import banco4 from '../../../assets/images/banco4.png';
+import banco2 from '../../../assets/images/banco2.png';
+import banco3 from '../../../assets/images/banco3.png';
+import banco4 from '../../../assets/images/banco4.png';
 import button from '../../../assets/images/botondebanco.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useState } from 'react';
@@ -121,29 +121,103 @@ export const StakeList = () => {
     <>
       <h2 className="title">POOLS</h2>
       <div className="stake-list">
-      <main className="stake">
-      <img src={banco1} alt="banco" />
-      <section className="item-container">
-        <article className="item">
-          Name: <span className="name">CTRAIN INVESTORS</span>
-        </article>
-        <article className="item">
-          APR: <span className="apr">100%</span>
-        </article>
-        <article className="item">
-          Min: <span className="min">Staking 50</span>
-        </article>
-        <article className="item">
-          Max: <span className="min">Staking 500,000</span>
-        </article>
-        <article className="item">
-          Lock Days: <span className="lockdays">12 days</span>
-        </article>
-      </section>
-      <input placeholder="amount" required className="input"
-          onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
-      <img src={button} alt="boton de banco" className="button"/>
-    </main>
+        {/*=============POOL ONE ======================*/}
+        <main className="stake"> 
+            <img src={banco1} alt="banco" />
+            <section className="item-container">
+              <article className="item">
+                Name: <span className="name">CTRAIN INVESTORS</span>
+              </article>
+              <article className="item">
+                APR: <span className="apr">100%</span>
+              </article>
+              <article className="item">
+                Min: <span className="min">Staking 100</span>
+              </article>
+              <article className="item">
+                Max: <span className="min">Staking 500,000</span>
+              </article>
+              <article className="item">
+                Lock Days: <span className="lockdays">12 days</span>
+              </article>
+            </section>
+            <input placeholder="amount" required className="input"
+                onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
+            <img src={button} alt="boton de banco" className="button"/>
+        </main>
+        {/*=============POOL TWO ======================*/}
+        <main className="stake">
+            <img src={banco2} alt="banco" />
+            <section className="item-container">
+              <article className="item">
+                Name: <span className="name">CTRAIN ADVOCATE</span>
+              </article>
+              <article className="item">
+                APR: <span className="apr">165%</span>
+              </article>
+              <article className="item">
+                Min: <span className="min">Staking 50</span>
+              </article>
+              <article className="item">
+                Max: <span className="min">Staking 625,000</span>
+              </article>
+              <article className="item">
+                Lock Days: <span className="lockdays">28 days</span>
+              </article>
+            </section>
+            <input placeholder="amount" required className="input"
+                onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
+            <img src={button} alt="boton de banco" className="button"/>
+        </main>
+        {/*=============POOL THREE======================*/}
+        <main className="stake">
+            <img src={banco3} alt="banco" />
+            <section className="item-container">
+              <article className="item">
+                Name: <span className="name">CTRAIN ADVOCATE</span>
+              </article>
+              <article className="item">
+                APR: <span className="apr">245%</span>
+              </article>
+              <article className="item">
+                Min: <span className="min">Staking 250</span>
+              </article>
+              <article className="item">
+                Max: <span className="min">Staking 750,000</span>
+              </article>
+              <article className="item">
+                Lock Days: <span className="lockdays">44 days</span>
+              </article>
+            </section>
+            <input placeholder="amount" required className="input"
+                onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
+            <img src={button} alt="boton de banco" className="button"/>
+        </main>
+
+        {/*=============POOL FOUR======================*/}
+        <main className="stake">
+            <img src={banco4} alt="banco" />
+            <section className="item-container">
+              <article className="item">
+                Name: <span className="name">CTRAIN ADVOCATE</span>
+              </article>
+              <article className="item">
+                APR: <span className="apr">300%</span>
+              </article>
+              <article className="item">
+                Min: <span className="min">Staking 300</span>
+              </article>
+              <article className="item">
+                Max: <span className="min">Staking 1,000,000</span>
+              </article>
+              <article className="item">
+                Lock Days: <span className="lockdays">60 days</span>
+              </article>
+            </section>
+            <input placeholder="amount" required className="input"
+                onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
+            <img src={button} alt="boton de banco" className="button"/>
+        </main>
 
 
 
@@ -154,19 +228,10 @@ export const StakeList = () => {
 
 
 
-        {/* {listItem.map((item) => (
-          <StakeItem
-            key={item.image}
-            image={item.image}
-            name={item.name}
-            apr={item.apr}
-            min={item.min}
-            max={item.max}
-            lockdays={item.lockdays}
-            // status={item.status}
-            handleOnClick={() => handleOnClick(item)}
-          />
-        ))} */}
+
+
+
+        
       </div>
       <BackArrow />
       <h2 className="stake-title">Your Stakes</h2>
