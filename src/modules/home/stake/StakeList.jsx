@@ -9,50 +9,11 @@ import button from '../../../assets/images/botondebanco.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useState } from 'react';
 import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
-// import StakingAddress from "../../../contracts/contract-address.json";
-// import StakingArtifact from "../../../contracts/StakeToken.json";
-// import ENMTAddress from "../../../contracts/ENMT-address.json";
-// import ENMTArtifact from "../../../contracts/ENMT.json";
-// import { ethers } from "ethers";
-
-// const listItem = [
-//   {
-//     image: banco1,
-//     name: 'CTRAIN INVESTORS',
-//     apr: '100%',
-//     min: 'Staking 50',
-//     max: 'Staking 500,000',
-//     lockdays: '12 days'
-//     // status: '199,990,000', //What is this?
-//   },
-//   {
-//     image: banco2,
-//     name: 'CTRAIN ADVOCATE',
-//     apr: '165%',
-//     min: 'Staking 100',
-//     max: 'Staking 625,000',
-//     lockdays: '28 days'
-//     // status: '19999,0000',
-//   },
-//   {
-//     image: banco3,
-//     name: 'CTRAIN MANSION',
-//     apr: '245%',
-//     min: 'Staking 250',
-//     max: 'Staking 750,000',
-//     lockdays: '44 days'
-//     // status: '19999,0000',
-//   },
-//   {
-//     image: banco4,
-//     name: 'CTRAIN INVESTOR',
-//     apr: '300%',
-//     min: 'Staking 300',
-//     max: 'Staking 1,000,000',
-//     lockdays: '60 days'
-//     // status: '19999,0000',
-//   },
-// ];
+import StakingAddress from "../../../contracts/contract-address.json";
+import StakingArtifact from "../../../contracts/StakeToken.json";
+import ENMTAddress from "../../../contracts/ENMT-address.json";
+import ENMTArtifact from "../../../contracts/ENMT.json";
+import { ethers } from "ethers";
 
 export const StakeList = () => {
   const [stakes, setStakes] = useState([]);
