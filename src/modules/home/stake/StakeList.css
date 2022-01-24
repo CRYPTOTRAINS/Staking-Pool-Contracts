@@ -28,6 +28,26 @@
   color: #946a54;
 }
 
+.button {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  width: 90%;
+  border: 0;
+  background-color: transparent;
+  padding-top: 0.8rem;
+}
+
+.button img:active {
+  transform: translateY(1px);
+}
+
+.input {
+  width: 50%;
+  margin-top: 5px;
+  align-self: center;
+}
+
 @media (min-width: 600px) and (max-width: 769px) {
   .stake-list {
     grid-template-columns: 50% 50%;

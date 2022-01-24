@@ -1,12 +1,10 @@
 import './StakeItem.css';
 import Button from '../../common/Button/Button';
 
-
 const StakeItem = (prop) => {
   const { image, name, apr, min, max, lockdays, handleOnClick } = prop;
-  // const [formInput, updateFormInput] = useState({amount: 0});
-  // const [status, setStatus] = useState("");
 
+  
   return (
     <main className="stake">
       <img src={image} alt="banco" />

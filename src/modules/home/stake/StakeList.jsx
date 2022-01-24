@@ -1,123 +1,115 @@
 import './StakeList.css';
-import StakeItem from './StakeItem';
+import './StakeItem.css';
+// import StakeItem from './StakeItem';
 import banco1 from '../../../assets/images/banco1.png';
-import banco2 from '../../../assets/images/banco2.png';
-import banco3 from '../../../assets/images/banco3.png';
-import banco4 from '../../../assets/images/banco4.png';
+// import banco2 from '../../../assets/images/banco2.png';
+// import banco3 from '../../../assets/images/banco3.png';
+// import banco4 from '../../../assets/images/banco4.png';
+import button from '../../../assets/images/botondebanco.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useState } from 'react';
-import { ethers } from "ethers";
 import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
-import StakingAddress from "../../../contracts/contract-address.json";
-import StakingArtifact from "../../../contracts/StakeToken.json";
-import ENMTAddress from "../../../contracts/ENMT-address.json";
-import ENMTArtifact from "../../../contracts/ENMT.json";
+// import StakingAddress from "../../../contracts/contract-address.json";
+// import StakingArtifact from "../../../contracts/StakeToken.json";
+// import ENMTAddress from "../../../contracts/ENMT-address.json";
+// import ENMTArtifact from "../../../contracts/ENMT.json";
+// import { ethers } from "ethers";
 
-const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
-const listItem = [
-  {
-    image: banco1,
-    name: 'CTRAIN INVESTORS',
-    apr: '100%',
-    min: 'Staking 50',
-    max: 'Staking 500,000',
-    lockdays: '12 days'
-    // status: '199,990,000', //What is this?
-  },
-  {
-    image: banco2,
-    name: 'CTRAIN ADVOCATE',
-    apr: '165%',
-    min: 'Staking 100',
-    max: 'Staking 625,000',
-    lockdays: '28 days'
-    // status: '19999,0000',
-  },
-  {
-    image: banco3,
-    name: 'CTRAIN MANSION',
-    apr: '245%',
-    min: 'Staking 250',
-    max: 'Staking 750,000',
-    lockdays: '44 days'
-    // status: '19999,0000',
-  },
-  {
-    image: banco4,
-    name: 'CTRAIN INVESTOR',
-    apr: '300%',
-    min: 'Staking 300',
-    max: 'Staking 1,000,000',
-    lockdays: '60 days'
-    // status: '19999,0000',
-  },
-];
+// const listItem = [
+//   {
+//     image: banco1,
+//     name: 'CTRAIN INVESTORS',
+//     apr: '100%',
+//     min: 'Staking 50',
+//     max: 'Staking 500,000',
+//     lockdays: '12 days'
+//     // status: '199,990,000', //What is this?
+//   },
+//   {
+//     image: banco2,
+//     name: 'CTRAIN ADVOCATE',
+//     apr: '165%',
+//     min: 'Staking 100',
+//     max: 'Staking 625,000',
+//     lockdays: '28 days'
+//     // status: '19999,0000',
+//   },
+//   {
+//     image: banco3,
+//     name: 'CTRAIN MANSION',
+//     apr: '245%',
+//     min: 'Staking 250',
+//     max: 'Staking 750,000',
+//     lockdays: '44 days'
+//     // status: '19999,0000',
+//   },
+//   {
+//     image: banco4,
+//     name: 'CTRAIN INVESTOR',
+//     apr: '300%',
+//     min: 'Staking 300',
+//     max: 'Staking 1,000,000',
+//     lockdays: '60 days'
+//     // status: '19999,0000',
+//   },
+// ];
 
 export const StakeList = () => {
   const [stakes, setStakes] = useState([]);
+  // const [formInput, updateFormInput] = useState({amount:0});
 
-  async function updateBalance() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-    const balance = await contract.balancOf(signer);
-    console.log(balance);
-    return balance;
-  }
+  // // async function updateBalance() {
+  // //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  // //   const signer = provider.getSigner();
+  // //   // const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+  // //   // const balance = await contract.balanceOf(signer);
+  // //   console.log(signer);
+  // //   // return balance;
+  // // }
 
-  updateBalance();
+  // async function stake() {
+  //   const {amount} = formInput;
 
-  async function stake() {
-    // const {amount} = formInput;
+  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
+  //   const signer = provider.getSigner();
+  //   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
+  //   const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
 
-    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+  //   try {
+  //     await token.approve(StakingAddress.StakeToken, amount);
+  //     const transaction = await contract.stake(amount, { value: amount });
+  //     const receipt = await transaction.wait();
+  //     if (receipt.status === 0) {
+  //       setStatus("Transaction failed");
+  //       throw new Error("Transaction failed");
+  //     } else {
+  //       setStatus("Staking successful");
+  //     }
+  //   } catch(error) {
+  //     if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+  //       return;
+  //     }
+  //     console.error(error);
+  //   }
 
-    const amount = 1000;
-    try {
-      await token.approve(StakingAddress.StakeToken, amount);
-      const transaction = await contract.stake(amount, { value: amount });
-      const receipt = await transaction.wait();
-      if (receipt.status === 0) {
-        setStatus("Transaction failed");
-        throw new Error("Transaction failed");
-      } else {
-        setStatus("Staking successful");
-      }
-    } catch(error) {
-      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        return;
-      }
-      console.error(error);
-    }
-
-  }
+ // }
   
-
-
-
-
-
-
-
-  const handleOnClick = async (item) => {
-    stake();
-    // You will implement the logic to add a stake from the list here
-    if (stakes.length) {
-      stakes.map((stake) => {
-        if (stake.name === item.name) {
-          return;
-        } else {
-          setStakes((stakes) => stakes.concat(item));
-        }
-      });
-    } else {
-      setStakes((stakes) => stakes.concat(item));
-    }
-  };
+  // const handleOnClick = async (item) => {
+  //   stake();
+  //   // You will implement the logic to add a stake from the list here
+  //   if (stakes.length) {
+  //     stakes.map((stake) => {
+  //       if (stake.name === item.name) {
+  //         return;
+  //       } else {
+  //         setStakes((stakes) => stakes.concat(item));
+  //       }
+  //     });
+  //   } else {
+  //     setStakes((stakes) => stakes.concat(item));
+  //   }
+  // };
 
   const handleRemove = async (array, item) => {
     // You will implement the logic to remove a stake from the list here
@@ -129,7 +121,40 @@ export const StakeList = () => {
     <>
       <h2 className="title">POOLS</h2>
       <div className="stake-list">
-        {listItem.map((item) => (
+      <main className="stake">
+      <img src={banco1} alt="banco" />
+      <section className="item-container">
+        <article className="item">
+          Name: <span className="name">CTRAIN INVESTORS</span>
+        </article>
+        <article className="item">
+          APR: <span className="apr">100%</span>
+        </article>
+        <article className="item">
+          Min: <span className="min">Staking 50</span>
+        </article>
+        <article className="item">
+          Max: <span className="min">Staking 500,000</span>
+        </article>
+        <article className="item">
+          Lock Days: <span className="lockdays">12 days</span>
+        </article>
+      </section>
+      <input placeholder="amount" required className="input"
+          onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
+      <img src={button} alt="boton de banco" className="button"/>
+    </main>
+
+
+
+
+
+
+
+
+
+
+        {/* {listItem.map((item) => (
           <StakeItem
             key={item.image}
             image={item.image}
@@ -141,7 +166,7 @@ export const StakeList = () => {
             // status={item.status}
             handleOnClick={() => handleOnClick(item)}
           />
-        ))}
+        ))} */}
       </div>
       <BackArrow />
       <h2 className="stake-title">Your Stakes</h2>
