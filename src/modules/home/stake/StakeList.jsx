@@ -1,3 +1,5 @@
+/* eslint-disable  jsx-a11y/no-noninteractive-element-interactions
+ */
 import './StakeList.css';
 import './StakeItem.css';
 // import StakeItem from './StakeItem';
@@ -17,7 +19,7 @@ import { ethers } from "ethers";
 
 export const StakeList = () => {
   const [stakes, setStakes] = useState([]);
-  // const [formInput, updateFormInput] = useState({amount:0});
+  const [formInput, updateFormInput] = useState({amount:0});
 
   // // async function updateBalance() {
   // //   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -28,33 +30,33 @@ export const StakeList = () => {
   // //   // return balance;
   // // }
 
-  // async function stake() {
-  //   const {amount} = formInput;
+  async function stake() {
+    const {amount} = formInput;
 
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const signer = provider.getSigner();
-  //   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
 
-  //   const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
 
-  //   try {
-  //     await token.approve(StakingAddress.StakeToken, amount);
-  //     const transaction = await contract.stake(amount, { value: amount });
-  //     const receipt = await transaction.wait();
-  //     if (receipt.status === 0) {
-  //       setStatus("Transaction failed");
-  //       throw new Error("Transaction failed");
-  //     } else {
-  //       setStatus("Staking successful");
-  //     }
-  //   } catch(error) {
-  //     if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-  //       return;
-  //     }
-  //     console.error(error);
-  //   }
+    try {
+      await token.approve(StakingAddress.StakeToken, amount);
+      const transaction = await contract.stake(amount, { value: amount });
+      const receipt = await transaction.wait();
+      if (receipt.status === 0) {
+        setStatus("Transaction failed");
+        throw new Error("Transaction failed");
+      } else {
+        setStatus("Staking successful");
+      }
+    } catch(error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        return;
+      }
+      console.error(error);
+    }
 
- // }
+ }
   
   // const handleOnClick = async (item) => {
   //   stake();
@@ -104,7 +106,7 @@ export const StakeList = () => {
             </section>
             <input placeholder="amount" required className="input"
                 onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
-            <img src={button} alt="boton de banco" className="button"/>
+            <img src={button} onClick={stake} onKeyDown={stake} alt="boton de banco" className="button"/>
         </main>
         {/*=============POOL TWO ======================*/}
         <main className="stake">
