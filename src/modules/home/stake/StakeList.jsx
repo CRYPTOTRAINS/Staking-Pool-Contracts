@@ -2,7 +2,6 @@
  */
 import './StakeList.css';
 import './StakeItem.css';
-// import StakeItem from './StakeItem';
 import banco1 from '../../../assets/images/banco1.png';
 import banco2 from '../../../assets/images/banco2.png';
 import banco3 from '../../../assets/images/banco3.png';
@@ -16,10 +15,11 @@ import StakingArtifact from "../../../contracts/StakeToken.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
-
+const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 export const StakeList = () => {
   const [stakes, setStakes] = useState([]);
   const [formInput, updateFormInput] = useState({amount:0});
+  const [status, setStatus] = useState("");
 
   // // async function updateBalance() {
   // //   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -38,16 +38,18 @@ export const StakeList = () => {
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
 
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-
+   
     try {
       await token.approve(StakingAddress.StakeToken, amount);
       const transaction = await contract.stake(amount, { value: amount });
+      
       const receipt = await transaction.wait();
       if (receipt.status === 0) {
         setStatus("Transaction failed");
         throw new Error("Transaction failed");
       } else {
-        setStatus("Staking successful");
+        
+        setStatus({confirmedStatus});
       }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
@@ -57,7 +59,7 @@ export const StakeList = () => {
     }
 
  }
-  
+ const confirmedStatus =  "Staking successful..."
   // const handleOnClick = async (item) => {
   //   stake();
   //   // You will implement the logic to add a stake from the list here
@@ -80,8 +82,10 @@ export const StakeList = () => {
     setStakes(newStakes);
   }
 
+
   return (
     <>
+    <p className="status">{status}</p>
       <h2 className="title">POOLS</h2>
       <div className="stake-list">
         {/*=============POOL ONE ======================*/}
@@ -95,7 +99,7 @@ export const StakeList = () => {
                 APR: <span className="apr">100%</span>
               </article>
               <article className="item">
-                Min: <span className="min">Staking 100</span>
+                Min: <span className="min">Staking 50</span>
               </article>
               <article className="item">
                 Max: <span className="min">Staking 500,000</span>
@@ -104,9 +108,12 @@ export const StakeList = () => {
                 Lock Days: <span className="lockdays">12 days</span>
               </article>
             </section>
-            <input placeholder="amount" required className="input"
-                onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
-            <img src={button} onClick={stake} onKeyDown={stake} alt="boton de banco" className="button"/>
+            <form>
+              <input placeholder="amount" required className="input"
+                  onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
+              <img src={button} onClick={stake} onKeyDown={stake} alt="boton de banco" className="button"/>
+            </form>
+           
         </main>
         {/*=============POOL TWO ======================*/}
         <main className="stake">
@@ -119,7 +126,7 @@ export const StakeList = () => {
                 APR: <span className="apr">165%</span>
               </article>
               <article className="item">
-                Min: <span className="min">Staking 50</span>
+                Min: <span className="min">Staking 100</span>
               </article>
               <article className="item">
                 Max: <span className="min">Staking 625,000</span>
@@ -129,7 +136,7 @@ export const StakeList = () => {
               </article>
             </section>
             <input placeholder="amount" required className="input"
-                onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
+                onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
             <img src={button} alt="boton de banco" className="button"/>
         </main>
         {/*=============POOL THREE======================*/}
@@ -153,7 +160,7 @@ export const StakeList = () => {
               </article>
             </section>
             <input placeholder="amount" required className="input"
-                onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
+                onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
             <img src={button} alt="boton de banco" className="button"/>
         </main>
 
@@ -178,19 +185,9 @@ export const StakeList = () => {
               </article>
             </section>
             <input placeholder="amount" required className="input"
-                onChange={e => updateFormInput({...formInput, account: e.target.value})}  />
+                onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
             <img src={button} alt="boton de banco" className="button"/>
         </main>
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -198,7 +195,7 @@ export const StakeList = () => {
       </div>
       <BackArrow />
       <h2 className="stake-title">Your Stakes</h2>
-      {stakes.length === 0 ? (
+      {status != confirmedStatus ? (
         <div className='no-stake'>You do not have any Stake Yet, Choose from above to Place Your Stake</div>
       ) : (
         <div className="stake-list">
