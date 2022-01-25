@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { connectWallet, getCurrentWalletConnected } from "../../../utils/wallet";
 import Web3Modal from "web3modal"
 import { ethers } from "ethers";
+import ENMTAddress from "../../../contracts/ENMT-address.json";
+import ENMTArtifact from "../../../contracts/ENMT.json";
 
 const Profile = () => {
   const [walletAddress, setWallet] = useState("");
@@ -31,7 +33,7 @@ const Profile = () => {
     const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const {address} = await getCurrentWalletConnected();
     const data = await contract.balanceOf(address);
-    console.log(data.toNumber())
+    
     setBalance(data.toNumber())
       return data.toNumber()
   
