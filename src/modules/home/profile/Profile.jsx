@@ -2,18 +2,41 @@
 import './Profile.css';
 import { useEffect, useState } from 'react';
 import { connectWallet, getCurrentWalletConnected } from "../../../utils/wallet";
+import Web3Modal from "web3modal"
+import { ethers } from "ethers";
 
 const Profile = () => {
   const [walletAddress, setWallet] = useState("");
+  const [balance, setBalance] = useState("");
 
   useEffect(() => {
     (async() => {
       const {address} = await getCurrentWalletConnected();
       setWallet(address)
-  
+      updateBalance()
       addWalletListener();
     }) ()
   }, []);
+
+
+  async function updateBalance() {
+    const web3Modal = new Web3Modal({
+      network: "mainnet",
+      cacheProvider: true,
+    })
+
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+    const {address} = await getCurrentWalletConnected();
+    const data = await contract.balanceOf(address);
+    console.log(data.toNumber())
+    setBalance(data.toNumber())
+      return data.toNumber()
+  
+      
+  }
 
    // connect wallet 
   const connectWalletPressed = async () => {
@@ -48,7 +71,7 @@ const Profile = () => {
   return (
     <main className="profile">
       <div className="coin-img">
-        <div className="coins"></div>
+        <div className="coins">{balance}</div>
       </div>
       <div className="account-img">
       {walletAddress.length > 0 ? (

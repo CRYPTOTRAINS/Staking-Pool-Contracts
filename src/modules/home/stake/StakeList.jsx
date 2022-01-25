@@ -10,40 +10,23 @@ import banco4 from '../../../assets/images/banco4.png';
 import button from '../../../assets/images/botondebanco.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useEffect, useState } from 'react';
-// import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
+import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
 import StakingAddress from "../../../contracts/contract-address.json";
 import StakingArtifact from "../../../contracts/StakeToken.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal"
-import { getCurrentWalletConnected } from "../../../utils/wallet";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 export const StakeList = () => {
   const [stakes, setStakes] = useState([]);
   const [formInput, updateFormInput] = useState({amount:0});
   const [status, setStatus] = useState("");
-
-  useEffect(() => {
-    fetchMyStakes()
-  }, []);
-
-  // async function updateBalance() {
-  //   const provider = new ethers.providers.Web3Provider(window.ethereum);
-  //   const signer = provider.getSigner();
-  //   const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-
-  //   const {address} = await getCurrentWalletConnected();
-  //   const balance = await contract.balanceOf(address);
-  //   const hex = ethers.BigNumber.from("0x01ab3f00");
-  //   console.log(hex);
-  //   return balance;
-
-  // }
-
-  // updateBalance();
   
+  useEffect(() => {
+    fetchMyStakes() 
+  }, []);
 
   async function approve() {
     const {amount} = formInput;
@@ -332,6 +315,7 @@ export const StakeList = () => {
                     Stake Pool: <span>Pool {stake.Pool}</span> 
                   </article>
                 </section>
+                <UnstakeButton />
               </div>
             ))
           }
@@ -341,31 +325,3 @@ export const StakeList = () => {
     </>
   );
 };
-// if (loadingState === 'loaded' && !stakes.length) return ();
-// <div className="stake-list">
-          
-//           <div className="stake" key={stake.image}>
-//             <section className="item-container">
-//               <article className="item">
-//                 Name: <span className="name">{stake.name}</span>
-//               </article>
-//               <article className="item">
-//                 APR: <span className="apr">{stake.apr}</span>
-//               </article>
-//               <article className="item">
-//                 Min: <span className="min">{stake.min}</span>
-//               </article>
-//               <article className="item">
-//                 Max: <span className="min">{stake.max}</span>
-//               </article>
-//               <article className="item">
-//                 Lock Days: <span className="lockdays">{stake.lockdays}</span>
-//               </article>
-//               {/* <article className="item">
-//                 Status: <span className="status">{stake.status}</span>
-//               </article> */}
-//             </section>
-//             <UnstakeButton handleRemove={() => handleRemove(stakes, stake)} />
-//           </div>
-        
-//       </div>
