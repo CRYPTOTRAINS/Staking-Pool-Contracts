@@ -16,6 +16,7 @@ import StakingArtifact from "../../../contracts/StakeToken.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
+import Web3Modal from "web3modal"
 import { getCurrentWalletConnected } from "../../../utils/wallet";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
@@ -151,7 +152,6 @@ export const StakeList = () => {
           const transaction = await contract.stakePoolFour(amount);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
-              console.log("failed transaction");
               setStatus("Transaction failed");
               throw new Error("Transaction failed");
             } else {
@@ -166,29 +166,31 @@ export const StakeList = () => {
       }
 }
  
-  // const handleOnClick = async (item) => {
-  //   stake();
-  //   // You will implement the logic to add a stake from the list here
-  //   if (stakes.length) {
-  //     stakes.map((stake) => {
-  //       if (stake.name === item.name) {
-  //         return;
-  //       } else {
-  //         setStakes((stakes) => stakes.concat(item));
-  //       }
-  //     });
-  //   } else {
-  //     setStakes((stakes) => stakes.concat(item));
-  //   }
-  // };
+  async function fetchMyStakes() {
+    const web3Modal = new Web3Modal({
+      network: "mainnet",
+      cacheProvider: true,
+    })
 
-  // const handleRemove = async (array, item) => {
-  //   // You will implement the logic to remove a stake from the list here
-  //   const newStakes = array.filter(stake => stake.name !== item.name );
-  //   setStakes(newStakes);
-  // }
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
+    const data = await contract.fetchMyStakes()
+    const stakes = await Promise.all(data.map(async i => {
+      let stake = {
+        Amount: i.amount.toNumber(),
+        Start: i.since.toNumber(),
+        Pool: i.pool.toNumber(),
+      }
+      console.log(stake)
+      return stake
+    }))
+  }
 
+  fetchMyStakes();
 
+  
   return (
     <>
     <p className="status">{status}</p>

@@ -185,8 +185,8 @@
       ]
     },
     "/home/ggr/blockchain/Staking-Pool-Contracts/contracts/StakeToken.sol": {
-      "lastModificationDate": 1643031795448,
-      "contentHash": "24214f9c8f5ca859a189e99b31108211",
+      "lastModificationDate": 1643070693152,
+      "contentHash": "4565af07a80af36b0ae44b3aadd7400d",
       "sourceName": "contracts/StakeToken.sol",
       "solcConfig": {
         "version": "0.8.4",
