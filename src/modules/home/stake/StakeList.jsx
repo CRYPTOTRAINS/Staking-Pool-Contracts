@@ -10,7 +10,7 @@ import banco4 from '../../../assets/images/banco4.png';
 import button from '../../../assets/images/botondebanco.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useEffect, useState } from 'react';
-import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
+import unstake from '../../../assets/images/unstake-web.png';
 import StakingAddress from "../../../contracts/contract-address.json";
 import StakingArtifact from "../../../contracts/StakeToken.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
@@ -173,10 +173,57 @@ export const StakeList = () => {
       return stake
     }))
 
+    let count = 0
+    for(let index = 0; index < stakes.length; index++) {
+      console.log(count)
+      count++
+    }
+
     setStakes(stakes)
   }
-
   
+  async function withdraw() {
+    console.log("call")
+    const {amount} = formInput;
+
+    // const data = await contract.fetchMyStakes()
+    // const stakes = await Promise.all(data.map(async i => {
+    //   let stake = {
+    //     Amount: i.amount.toNumber(),
+    //     Start: i.since.toNumber(),
+    //     Pool: i.pool.toNumber(),
+    //   }
+    //   return stake
+    // }))
+
+    // let count = 0
+    // for(let index = 0; index < stakes.length; index++) {
+    //   console.log(count)
+    //   count++
+    // }
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
+    let index = 0
+    try{
+      const transaction = await contract.withdrawStakePoolOne(amount, index)
+      const receipt = await transaction.wait();
+      
+            if (receipt.status === 0) {
+              setStatus("Transaction failed");
+              throw new Error("Transaction failed");
+            } else {
+              setStatus("Transaction successful");
+            }
+    } catch(error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        return;
+      }
+      console.error(error.message);
+      setStatus(console.error(error.message));
+    }
+  }
 
   return (
     <>
@@ -315,7 +362,10 @@ export const StakeList = () => {
                     Stake Pool: <span>Pool {stake.Pool}</span> 
                   </article>
                 </section>
-                <UnstakeButton />
+                <input placeholder="amount" required className="input"
+                onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
+                    <img src={unstake} className="unstake-button" onClick={withdraw} onKeyDown={withdraw} alt="boton de banco" />
+                
               </div>
             ))
           }
