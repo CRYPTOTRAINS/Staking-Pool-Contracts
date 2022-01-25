@@ -65,8 +65,15 @@ img.bg {
 }
 
 .presale-main {
+  position: relative;
   display: flex;
   justify-content: center;
+}
+
+.presale-main-items {
+  position: relative;
+  top: 14rem;
+  right: 1.4rem;
 }
 
 .presale-img {
@@ -75,6 +82,49 @@ img.bg {
   background-size: contain;
   width: 40rem;
   height: 29rem;
+}
+
+.quantity {
+  color: #df5832;
+  font-weight: bolder;
+  font-size: 1.6rem;
+  font-family: 'Secular One', sans-serif;
+  vertical-align: middle;
+  padding: 0;
+  margin: 0;
+}
+
+.approve {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  border: 0;
+  background-color: transparent;
+}
+
+.approve img {
+  width: 40%;
+}
+
+.congrats {
+  padding: 0;
+  margin: 0;
+  color: rgb(19, 146, 19);
+}
+
+.sales-progress {
+  padding-top: 2.2rem;
+}
+
+.sales-progress .sales-progress-text {
+  padding: 0;
+  margin: 0;
+  color: #f1e5bb;
+  font-weight: bold;
+}
+
+.sales-progress img {
+  width: 30%;
 }
 
 @media (max-width: 599px) {
@@ -88,7 +138,7 @@ img.bg {
     margin: 0;
     padding-top: 0.6rem;
   }
-  
+
   .card .reminder {
     color: #f8f2dd;
     font-weight: bold;
@@ -96,6 +146,34 @@ img.bg {
     font-size: 0.6rem;
   }
   .presale-img {
+    position: relative;
     background-image: url('../../../assets/images/nft_presale_mobile.png');
+  }
+
+  .presale-main-items {
+    top: 12rem;
+    left: 0.8rem;
+  }
+
+  .quantity {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .sales-progress {
+    padding-top: 2.6rem;
+  }
+
+  .sales-progress .sales-progress-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 376px) {
+  .presale-main-items {
+    top: 11rem;
+  }
+  .sales-progress {
+    padding-top: 1.4rem;
   }
 }
