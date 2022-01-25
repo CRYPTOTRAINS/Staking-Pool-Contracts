@@ -231,7 +231,7 @@ export const StakeList = () => {
             <img src={banco1} alt="banco" />
             <section className="item-container">
               <article className="item">
-                Name: <span className="name">CTRAIN INVESTORS</span>
+                Name: <span className="name">Bullet Branch</span>
               </article>
               <article className="item">
                 APR: <span className="apr">100%</span>
@@ -257,7 +257,7 @@ export const StakeList = () => {
             <img src={banco2} alt="banco" />
             <section className="item-container">
               <article className="item">
-                Name: <span className="name">CTRAIN ADVOCATE</span>
+                Name: <span className="name">Rail X Branch</span>
               </article>
               <article className="item">
                 APR: <span className="apr">165%</span>
@@ -282,7 +282,7 @@ export const StakeList = () => {
             <img src={banco3} alt="banco" />
             <section className="item-container">
               <article className="item">
-                Name: <span className="name">CTRAIN ADVOCATE</span>
+                Name: <span className="name">North Star Branch</span>
               </article>
               <article className="item">
                 APR: <span className="apr">245%</span>
@@ -307,7 +307,7 @@ export const StakeList = () => {
             <img src={banco4} alt="banco" />
             <section className="item-container">
               <article className="item">
-                Name: <span className="name">CTRAIN ADVOCATE</span>
+                Name: <span className="name">Stellar Branch</span>
               </article>
               <article className="item">
                 APR: <span className="apr">300%</span>

@@ -1,0 +1,50 @@
+.stake {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  /* width: 25%; */
+  margin: 0 1rem 2rem 1rem;
+  background-color: #f1e5bb;
+  padding: 1rem 0;
+  box-shadow: 3px 3px rgb(107, 106, 106);
+}
+
+.stake img {
+  width: 90%;
+}
+
+.item-container {
+  align-self: center;
+  background-color: #f8f8f0;
+  width: 80%;
+  border-top-left-radius: 4px;
+  box-shadow: -2px -2px rgb(192, 189, 189);
+}
+
+.item-container .item {
+  text-align: left;
+  font-size: 0.7rem;
+  padding: 0.6rem 0.2rem;
+}
+
+.item-container .item:not(:last-child) {
+  border-bottom: solid rgb(224, 222, 222) 1px;
+}
+
+.name {
+  padding-left: 1.2rem;
+}
+
+.status {
+  padding-left: 1.2rem;
+}
+
+.apr {
+  padding-left: 1.7rem;
+}
+
+.min {
+  padding-left: 2rem;
+}
+

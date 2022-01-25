@@ -15,8 +15,8 @@ const Profile = () => {
     (async() => {
       const {address} = await getCurrentWalletConnected();
       setWallet(address)
-      updateBalance()
       addWalletListener();
+      updateBalance()
     }) ()
   }, []);
 
@@ -31,7 +31,7 @@ const Profile = () => {
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
     const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-    const {address} = await getCurrentWalletConnected();
+   const {address} = await getCurrentWalletConnected();
     const data = await contract.balanceOf(address);
     
     setBalance(data.toNumber())
