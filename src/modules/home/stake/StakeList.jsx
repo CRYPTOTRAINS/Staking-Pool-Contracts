@@ -50,7 +50,7 @@ export const StakeList = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-    // const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
+
     try {
       const tx = await token.approve(StakingAddress.StakeToken, amount);
       await tx.wait();
@@ -194,6 +194,7 @@ export const StakeList = () => {
   }
 
   
+
   return (
     <>
     <p className="status">{status}</p>
@@ -306,17 +307,18 @@ export const StakeList = () => {
 
       </div>
       <BackArrow />
-      <h2 className="stake-title">Your Stakes</h2>
       
+      <h2 className="stake-title">Your Stakes</h2>
+      {stakes.length === 0 ? (
         <div className='no-stake'>You do not have any Stake Yet, Choose from above to Place Your Stake</div>
-        
+      ) : (
         <div className="stake-list">
             <div>
           {
             stakes.map((stake, i) => (
               <div  className="stake" key={i}>
                 <section className="item-container">
-                  
+                
                   <article className="item">
                     Name: <span> CTRAIN ADVOCATE</span>
                   </article>
@@ -329,18 +331,17 @@ export const StakeList = () => {
                   <article className="item">
                     Stake Pool: <span>Pool {stake.Pool}</span> 
                   </article>
-                  
                 </section>
               </div>
             ))
           }
         </div>
       </div>
-      
+       )}
     </>
   );
 };
-
+// if (loadingState === 'loaded' && !stakes.length) return ();
 // <div className="stake-list">
           
 //           <div className="stake" key={stake.image}>
