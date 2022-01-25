@@ -343,7 +343,7 @@ export const StakeList = () => {
         <div className='no-stake'>You do not have any Stake Yet, Choose from above to Place Your Stake</div>
       ) : (
         <div className="stake-list">
-            <div>
+          
           {
             stakes.map((stake, i) => (
               <div  className="stake" key={i}>
@@ -369,7 +369,7 @@ export const StakeList = () => {
               </div>
             ))
           }
-        </div>
+        
       </div>
        )}
     </>
