@@ -316,7 +316,10 @@ export const StakeList = () => {
             stakes.map((stake, i) => (
               <div  className="stake" key={i}>
                 <section className="item-container">
-                  <div>
+                  
+                  <article className="item">
+                    Name: <span> CTRAIN ADVOCATE</span>
+                  </article>
                   <article className="item">
                     Amount: <span>{stake.Amount} CTRAIN</span>
                   </article>
@@ -326,7 +329,7 @@ export const StakeList = () => {
                   <article className="item">
                     Stake Pool: <span>Pool {stake.Pool}</span> 
                   </article>
-                  </div>
+                  
                 </section>
               </div>
             ))
