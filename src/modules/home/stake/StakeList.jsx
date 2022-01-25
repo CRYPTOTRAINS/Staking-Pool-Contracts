@@ -28,24 +28,7 @@ export const StakeList = () => {
     fetchMyStakes() 
   }, []);
 
-  async function approve() {
-    const {amount} = formInput;
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-
-    try {
-      const tx = await token.approve(StakingAddress.StakeToken, amount);
-      await tx.wait();
-    } catch(error) {
-      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        return;
-      }
-      console.error(error.message);
-      setStatus(console.error(error.message));
-    }
-
-  }
+  
 // ================ pool one ======================
   async function stakeOne() {
     const {amount} = formInput;
@@ -53,7 +36,11 @@ export const StakeList = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
+    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
     try {
+              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
+              await tx.wait();                                              ///////
+              
             const transaction = await contract.stakePoolOne(amount);
             const receipt = await transaction.wait();
               if (receipt.status === 0) {
@@ -81,7 +68,10 @@ export const StakeList = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-  try {
+  const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
+    try {
+              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
+              await tx.wait();                                              ///////
           const transaction = await contract.stakePoolTwo(amount);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
@@ -108,7 +98,10 @@ export const StakeList = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-  try {
+  const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
+    try {
+              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
+              await tx.wait();                                              ///////
           const transaction = await contract.stakePoolThree(amount);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
@@ -135,7 +128,10 @@ export const StakeList = () => {
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-  try {
+  const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
+    try {
+              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
+              await tx.wait();                                              ///////
           const transaction = await contract.stakePoolFour(amount);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
@@ -173,11 +169,11 @@ export const StakeList = () => {
       return stake
     }))
 
-    let count = 0
-    for(let index = 0; index < stakes.length; index++) {
-      console.log(count)
-      count++
-    }
+    // let count = 0
+    // for(let index = 0; index < stakes.length; index++) {
+    //   console.log(count)
+    //   count++
+    // }
 
     setStakes(stakes)
   }
@@ -253,7 +249,6 @@ export const StakeList = () => {
             <form>
               <input placeholder="amount" required className="input"
                   onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
-              <img src={button} onClick={approve} onKeyDown={approve} alt="boton de banco" className="button"/>
               <img src={button} onClick={stakeOne} onKeyDown={stakeOne} alt="boton de banco" className="button"/>
             </form>
         </main>
@@ -280,7 +275,6 @@ export const StakeList = () => {
             
             <input placeholder="amount" required className="input"
                 onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
-            <img src={button} onClick={approve} onKeyDown={approve} alt="boton de banco" className="button"/>
             <img src={button} onClick={stakeTwo} onKeyDown={stakeTwo} alt="boton de banco" className="button"/>
         </main>
         {/*=============POOL THREE======================*/}
@@ -305,7 +299,6 @@ export const StakeList = () => {
             </section>
             <input placeholder="amount" required className="input"
                 onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
-            <img src={button} onClick={approve} onKeyDown={approve} alt="boton de banco" className="button"/>
             <img src={button} onClick={stakeThree} onKeyDown={stakeThree} alt="boton de banco" className="button"/>
         </main>
 
@@ -331,7 +324,6 @@ export const StakeList = () => {
             </section>
             <input placeholder="amount" required className="input"
                 onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
-            <img src={button} onClick={approve} onKeyDown={approve} alt="boton de banco" className="button"/>
             <img src={button} onClick={stakeFour} onKeyDown={stakeFour} alt="boton de banco" className="button"/>
         </main>
 
