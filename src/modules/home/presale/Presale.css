@@ -1,0 +1,101 @@
+.presale-header {
+  color: #df5832;
+  font-weight: bolder;
+  font-size: 1.6rem;
+  font-family: 'Secular One', sans-serif;
+  vertical-align: middle;
+  padding-top: 2rem;
+}
+
+.time-cards {
+  display: flex;
+  justify-content: center;
+  /* grid-template-columns: 10% 10% 10% 10%;
+  justify-items: center;
+  align-items: center; */
+}
+
+.card {
+  width: 4rem;
+  height: 7rem;
+  margin: 0.6rem;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.card .number {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 3rem;
+  margin: 0;
+  padding-top: 0.8rem;
+  color: #f8f2dd;
+}
+
+.card .reminder {
+  color: #f8f2dd;
+  font-weight: bolder;
+  background-color: rgba(0, 0, 0, 0.747);
+  padding: 0.8rem 0;
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+img.bg {
+  /* Set rules to fill background */
+  min-height: 100%;
+  min-width: 1024px;
+
+  /* Set up proportionate scaling */
+  width: 100%;
+  height: auto;
+
+  /* Set up positioning */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -100;
+}
+
+@media screen and (max-width: 1024px) {
+  /* Specific to this particular image */
+  img.bg {
+    left: 50%;
+    margin-left: -512px; /* 50% */
+  }
+}
+
+.presale-main {
+  display: flex;
+  justify-content: center;
+}
+
+.presale-img {
+  background-image: url('../../../assets/images/nft_presale_web.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 40rem;
+  height: 29rem;
+}
+
+@media (max-width: 599px) {
+  .card {
+    width: 3rem;
+    height: 5rem;
+  }
+  .card .number {
+    font-weight: 300;
+    font-size: 2rem;
+    margin: 0;
+    padding-top: 0.6rem;
+  }
+  
+  .card .reminder {
+    color: #f8f2dd;
+    font-weight: bold;
+    padding: 0.8rem 0;
+    font-size: 0.6rem;
+  }
+  .presale-img {
+    background-image: url('../../../assets/images/nft_presale_mobile.png');
+  }
+}

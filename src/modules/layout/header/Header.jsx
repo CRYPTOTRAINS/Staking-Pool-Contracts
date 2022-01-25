@@ -17,6 +17,9 @@ const Header = () => {
           <Link className="link-item" to="/">
             Staking
           </Link>
+          <Link className="link-item" to="/presale">
+            Presale
+          </Link>
         </header>
         <Profile />
       </nav>
