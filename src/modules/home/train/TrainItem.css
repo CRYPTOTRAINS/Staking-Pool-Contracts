@@ -1,5 +1,8 @@
-.main {
-  padding: 1rem 0;
-  font-weight: 400;
-  color: blue;
+.train {
+  background-image: url('../../../assets/images/common_train.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 14rem;
+  height: 24rem;
+  margin: 0 0.6rem;
 }

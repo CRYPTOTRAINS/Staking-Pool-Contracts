@@ -1,0 +1,6 @@
+.train-list {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  justify-items: center;
+  align-items: center;
+}
