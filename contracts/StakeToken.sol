@@ -41,6 +41,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         uint256 amount;
         uint256 since;
         uint256 claimable;
+        uint256 pool;
     }
 
     struct Stakeholder{
@@ -86,7 +87,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         if(index == 0){
             index = _addStakeholder(msg.sender);
         }
-        stakeholders[index].address_stakes.push(Stake(msg.sender, amount, timestamp, 0));
+        stakeholders[index].address_stakes.push(Stake(msg.sender, amount, timestamp, 0, 1));
 
         stakingToken.safeTransferFrom(msg.sender, address(this), amount);
         emit Staked(msg.sender, amount);
@@ -138,7 +139,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         if(index == 0){
             index = _addStakeholder(msg.sender);
         }
-        stakeholders[index].address_stakes.push(Stake(msg.sender, amount, timestamp, 0));
+        stakeholders[index].address_stakes.push(Stake(msg.sender, amount, timestamp, 0, 2));
 
         stakingToken.safeTransferFrom(msg.sender, address(this), amount);
         emit Staked(msg.sender, amount);
@@ -189,7 +190,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         if(index == 0){
             index = _addStakeholder(msg.sender);
         }
-        stakeholders[index].address_stakes.push(Stake(msg.sender, amount, timestamp, 0));
+        stakeholders[index].address_stakes.push(Stake(msg.sender, amount, timestamp, 0, 3));
 
         stakingToken.safeTransferFrom(msg.sender, address(this), amount);
         emit Staked(msg.sender, amount);
@@ -240,7 +241,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         if(index == 0){
             index = _addStakeholder(msg.sender);
         }
-        stakeholders[index].address_stakes.push(Stake(msg.sender, amount, timestamp, 0));
+        stakeholders[index].address_stakes.push(Stake(msg.sender, amount, timestamp, 0, 4));
 
         stakingToken.safeTransferFrom(msg.sender, address(this), amount);
         emit Staked(msg.sender, amount);
@@ -274,6 +275,15 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         emit Withdrawn(msg.sender, amount);
 
         return amount+reward;
+     }
+
+     function fetchMyStakes() public view returns(Stake[] memory) {
+         for (uint i = 0; i < stakeholders.length; i++) {
+             if(stakeholders[i].user == msg.sender) {
+                 Stake[] memory user_stakes = stakeholders[i].address_stakes;
+                 return user_stakes;
+             }
+         }
      }
 
     event Staked(address indexed user, uint256 amount);

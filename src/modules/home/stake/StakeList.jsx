@@ -220,7 +220,6 @@ export const StakeList = () => {
               <img src={button} onClick={approve} onKeyDown={approve} alt="boton de banco" className="button"/>
               <img src={button} onClick={stakeOne} onKeyDown={stakeOne} alt="boton de banco" className="button"/>
             </form>
-           
         </main>
         {/*=============POOL TWO ======================*/}
         <main className="stake">
@@ -300,9 +299,6 @@ export const StakeList = () => {
             <img src={button} onClick={stakeFour} onKeyDown={stakeFour} alt="boton de banco" className="button"/>
         </main>
 
-
-
-        
       </div>
       <BackArrow />
       <h2 className="stake-title">Your Stakes</h2>
