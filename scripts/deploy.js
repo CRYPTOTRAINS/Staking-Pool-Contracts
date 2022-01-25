@@ -19,8 +19,8 @@ async function main() {
     console.log("StakeToken address:", staketoken.address);
 
     let config = `
-    export const azaniamarketaddress = "${enmt.address}"
-    export const azaniaaddress = "${staketoken.address}"
+    export const enmtaddress = "${enmt.address}"
+    export const staketoken = "${staketoken.address}"
       `
     let data = JSON.stringify(config)
     fs.writeFileSync('config.js', JSON.parse(data))
