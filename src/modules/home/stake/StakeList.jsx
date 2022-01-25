@@ -9,7 +9,7 @@ import banco3 from '../../../assets/images/banco3.png';
 import banco4 from '../../../assets/images/banco4.png';
 import button from '../../../assets/images/botondebanco.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import UnstakeButton from '../../common/UnstakeButton/UnstakeButton';
 import StakingAddress from "../../../contracts/contract-address.json";
 import StakingArtifact from "../../../contracts/StakeToken.json";
@@ -21,9 +21,13 @@ import { getCurrentWalletConnected } from "../../../utils/wallet";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 export const StakeList = () => {
-  // const [stakes, setStakes] = useState([]);
+  const [stakes, setStakes] = useState([]);
   const [formInput, updateFormInput] = useState({amount:0});
   const [status, setStatus] = useState("");
+
+  useEffect(() => {
+    fetchMyStakes()
+  }, []);
 
   // async function updateBalance() {
   //   const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -183,12 +187,11 @@ export const StakeList = () => {
         Start: i.since.toNumber(),
         Pool: i.pool.toNumber(),
       }
-      console.log(stake)
       return stake
     }))
-  }
 
-  fetchMyStakes();
+    setStakes(stakes)
+  }
 
   
   return (
@@ -306,13 +309,34 @@ export const StakeList = () => {
       <h2 className="stake-title">Your Stakes</h2>
       
         <div className='no-stake'>You do not have any Stake Yet, Choose from above to Place Your Stake</div>
-      
         
+        <div className="stake-list">
+            <div>
+          {
+            stakes.map((stake, i) => (
+              <div  className="stake" key={i}>
+                <section className="item-container">
+                  <div>
+                  <article className="item">
+                    Amount: <span>{stake.Amount} CTRAIN</span>
+                  </article>
+                  <article className="item">
+                    Start Time: <span>{stake.Start} days ago</span> 
+                  </article>
+                  <article className="item">
+                    Stake Pool: <span>Pool {stake.Pool}</span> 
+                  </article>
+                  </div>
+                </section>
+              </div>
+            ))
+          }
+        </div>
+      </div>
       
     </>
   );
 };
-
 
 // <div className="stake-list">
           
