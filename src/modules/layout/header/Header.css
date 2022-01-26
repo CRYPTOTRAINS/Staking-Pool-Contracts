@@ -39,7 +39,7 @@
   display: none;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 769px) {
   .header {
     display: none;
   }
@@ -73,12 +73,12 @@
   #hamnav label {
     display: flex;
     position: relative;
-    right: -18rem;
-    bottom: 3rem;
+    right: -38rem;
+    bottom: 6rem;
     justify-content: flex-end;
     color: white;
     font-style: normal;
-    font-size: 2.2em;
+    font-size: 4rem;
     width: max-content;
     padding: 2px;
   }
@@ -88,5 +88,20 @@
   }
   #hamnav input:checked ~ #hamitems {
     display: block;
+  }
+}
+
+@media (max-width: 481px) {
+  #hamnav label {
+    display: flex;
+    position: relative;
+    right: -18rem;
+    bottom: 3rem;
+    justify-content: flex-end;
+    color: white;
+    font-style: normal;
+    font-size: 2.2em;
+    width: max-content;
+    padding: 2px;
   }
 }

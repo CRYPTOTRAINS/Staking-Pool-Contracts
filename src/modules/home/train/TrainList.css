@@ -4,3 +4,15 @@
   justify-items: center;
   align-items: center;
 }
+
+@media (min-width: 600px) and (max-width: 769px) {
+  .train-list {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (max-width: 599px) {
+  .train-list {
+    grid-template-columns: auto;
+  }
+}

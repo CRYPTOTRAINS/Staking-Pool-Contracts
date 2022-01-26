@@ -11,16 +11,19 @@ export const TrainList = () => {
     <>
       <h2 className="title">Your Trains</h2>
       <div className="train-list">
-        {/*=============POOL ONE ======================*/}
+        {/*=============TRAIN ONE ======================*/}
         <main className="train"> 
            
         </main>
+        {/*=============TRAIN TWO ======================*/}
         <main className="train"> 
            
         </main>
+        {/*=============TRAIN THREE ======================*/}
         <main className="train"> 
            
         </main>
+        {/*=============TRAIN FOUR ======================*/}
         <main className="train"> 
            
         </main>
