@@ -1,3 +1,7 @@
+.body {
+  overflow-x: hidden;
+}
+
 .presale-header {
   color: #df5832;
   font-weight: bolder;
@@ -132,6 +136,7 @@ img.bg {
     width: 3rem;
     height: 5rem;
   }
+
   .card .number {
     font-weight: 300;
     font-size: 2rem;
@@ -145,14 +150,16 @@ img.bg {
     padding: 0.8rem 0;
     font-size: 0.6rem;
   }
+
   .presale-img {
     position: relative;
     background-image: url('../../../assets/images/nft_presale_mobile.png');
+    width: 21rem;
   }
 
   .presale-main-items {
-    top: 12rem;
-    left: 0.8rem;
+    top: 10rem;
+    left: 0.2rem;
   }
 
   .quantity {
@@ -161,7 +168,7 @@ img.bg {
   }
 
   .sales-progress {
-    padding-top: 2.6rem;
+    padding-top: 1rem;
   }
 
   .sales-progress .sales-progress-text {
@@ -171,9 +178,9 @@ img.bg {
 
 @media (max-width: 376px) {
   .presale-main-items {
-    top: 11rem;
+    top: 10rem;
   }
   .sales-progress {
-    padding-top: 1.4rem;
+    padding-top: 1.1rem;
   }
 }
