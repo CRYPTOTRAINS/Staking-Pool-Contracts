@@ -1,18 +1,53 @@
 .train {
-  /* background-image: url('../../../assets/images/common_train.png');
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 14rem;
-  height: 24rem;
-  margin: 0 0.6rem; */
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
   margin: 0 1rem 2rem 1rem;
+  background-color: #f1e5bb;
+  box-shadow: 3px 3px rgb(107, 106, 106);
   padding: 1rem 0;
+  position: relative;
+  z-index: -10;
 }
 
-.train img {
-  width: 100%;
+.train-image {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.bullet {
+  position: relative;
+  top: -0.6rem;
+}
+
+.bullet img {
+  width: 70%;
+  z-index: 1;
+}
+
+.train-image img {
+  width: 60%;
+}
+
+.item-container {
+  display: flex;
+  justify-content: space-evenly;
+  /* display: grid;
+  grid-template-columns: 50% 50%; */
+  position: relative;
+  top: -1.2rem;
+  z-index: -4;
+}
+
+.v-separator
+{
+    content: "";
+    display: inline-block;
+    width: 0px;
+    height: 160px;
+    border-right: 1px solid #fafafa;
+    border-left: 1px solid #b4b4b4;
+    padding: 0;
 }
