@@ -1,8 +1,18 @@
 .train {
-  background-image: url('../../../assets/images/common_train.png');
+  /* background-image: url('../../../assets/images/common_train.png');
   background-repeat: no-repeat;
   background-size: contain;
   width: 14rem;
   height: 24rem;
-  margin: 0 0.6rem;
+  margin: 0 0.6rem; */
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin: 0 1rem 2rem 1rem;
+  padding: 1rem 0;
+}
+
+.train img {
+  width: 100%;
 }
