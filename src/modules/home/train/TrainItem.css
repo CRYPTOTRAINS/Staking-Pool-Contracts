@@ -1,9 +1,25 @@
+.sno {
+  text-align: left;
+  margin-left: 1rem;
+  color: #df5832;
+  font-weight: bolder;
+  font-size: 0.9rem;
+}
+.sell {
+  position: relative;
+  top: -3rem;
+  right: -5rem;
+}
+.sell img {
+  width: 20%;
+}
+
 .train {
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
-  margin: 0 1rem 2rem 1rem;
+  margin: 0 0.3rem 2rem 0.3rem;
   background-color: #f1e5bb;
   box-shadow: 3px 3px rgb(107, 106, 106);
   padding: 1rem 0;
@@ -19,7 +35,7 @@
 
 .bullet {
   position: relative;
-  top: -0.6rem;
+  top: -0.1rem;
 }
 
 .bullet img {
@@ -31,23 +47,110 @@
   width: 60%;
 }
 
-.item-container {
+.train-container {
   display: flex;
+  align-self: center;
+  background-color: #f8f8f0;
+  width: 96%;
+  border-top-left-radius: 4px;
+  box-shadow: -2px -2px rgb(192, 189, 189);
   justify-content: space-evenly;
-  /* display: grid;
-  grid-template-columns: 50% 50%; */
   position: relative;
-  top: -1.2rem;
+  top: -0.3rem;
   z-index: -4;
+  text-align: left;
 }
 
-.v-separator
+.table-data {
+  font-size: 0.7rem;
+}
+
+.icon {
+  position: relative;
+  top: -3px;
+  margin-right: 2px;
+}
+
+.icon img {
+  width: 1rem;
+}
+
+.image-icon {
+  display: flex;
+  justify-content: center;
+}
+
+.image-icon img {
+  width: 2rem;
+}
+
+.value {
+  color: black;
+  font-weight: bold;
+}
+
+.train-button {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 0.6rem 0;
+}
+
+.train-button img {
+  width: 45%;
+}
+
+.purchase {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+.purchase-button {
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket .ticket-image {
+  background-image: url('../../../assets/images/ticket.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 6rem;
+  height: 6rem;
+}
+
+.ticket .buy-ticket-image {
+  background-image: url('../../../assets/images/buy_tickets_button.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 7rem;
+  height: 4rem;
+}
+
+.box .box-image {
+  background-image: url('../../../assets/images/box.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 6rem;
+  height: 6rem;
+}
+
+.box .unbox-image {
+  background-image: url('../../../assets/images/unbox_train_button.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 7rem;
+  height: 4rem;
+}
+
+/* .v-separator
 {
     content: "";
     display: inline-block;
     width: 0px;
-    height: 160px;
+    height: 190px;
     border-right: 1px solid #fafafa;
     border-left: 1px solid #b4b4b4;
     padding: 0;
-}
+} */
