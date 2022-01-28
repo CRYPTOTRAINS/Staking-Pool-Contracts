@@ -1,0 +1,18 @@
+.buy-button {
+  background-color: transparent;
+  border: 0;
+  padding-top: 0.7rem;
+}
+
+.cTrainValue {
+ padding: 1rem;
+ color: #ffffff;
+ font-weight: bold;
+ font-size: 0.8rem;
+}
+
+.buy-train-image {
+  background-image: url('../../../assets/images/button_buy.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}

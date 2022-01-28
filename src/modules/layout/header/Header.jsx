@@ -20,6 +20,9 @@ const Header = () => {
           <Link className="link-item" to="/presale">
             Presale
           </Link>
+          <Link className="link-item" to="/Marketplace">
+            Marketplace
+          </Link>
         </header>
         <Profile />
       </nav>
