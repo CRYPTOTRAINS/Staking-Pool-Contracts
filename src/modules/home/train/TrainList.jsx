@@ -23,7 +23,7 @@ import mechanic from '../../../assets/icons/mechanic.png';
 import legendary_bullet from '../../../assets/images/legendary_bullet.png';
 import dispatch from '../../../assets/images/dispatch_button.png';
 import reward from '../../../assets/images/reward_button.png';
-// import sell from '../../../assets/images/sell.png';
+import sell from '../../../assets/images/sell.png';
 
 export const TrainList = () => {
   return (
@@ -47,9 +47,7 @@ export const TrainList = () => {
         {/*=============TRAIN ONE ======================*/}
         <main className="train">
           <p className="sno">#1</p>
-          {/* <span className="sell">
-            <img src={sell} alt="sell icon" />
-          </span> */}
+          <img src={sell} className='sell' alt="sell" />
           <article className="train-image">
             <img src={common} alt="common train" />
           </article>
@@ -146,9 +144,7 @@ export const TrainList = () => {
         {/*=============TRAIN TWO ======================*/}
         <main className="train">
           <p className="sno">#2</p>
-          {/* <span className="sell">
-            <img src={sell} alt="sell icon" />
-          </span> */}
+          <img src={sell} className='sell' alt="sell" />
           <article className="train-image">
             <img src={rare} alt="rare train" />
           </article>
@@ -245,9 +241,7 @@ export const TrainList = () => {
         {/*=============TRAIN THREE ======================*/}
         <main className="train">
           <p className="sno">#3</p>
-          {/* <span className="sell">
-            <img src={sell} alt="sell icon" />
-          </span> */}
+          <img src={sell} className='sell' alt="sell" />
           <article className="train-image">
             <img src={epic} alt="epic train" />
           </article>
@@ -344,9 +338,7 @@ export const TrainList = () => {
         {/*=============TRAIN FOUR ======================*/}
         <main className="train">
           <p className="sno">#4</p>
-          {/* <span className="sell">
-            <img src={sell} alt="sell icon" />
-          </span> */}
+          <img src={sell} className='sell' alt="sell" />
           <article className="train-image">
             <img src={legendary} alt="legendary train" />
           </article>

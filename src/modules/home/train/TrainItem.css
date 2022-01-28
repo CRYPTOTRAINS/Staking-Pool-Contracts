@@ -5,14 +5,7 @@
   font-weight: bolder;
   font-size: 0.9rem;
 }
-.sell {
-  position: relative;
-  top: -3rem;
-  right: -5rem;
-}
-.sell img {
-  width: 20%;
-}
+
 
 .train {
   display: flex;
@@ -25,6 +18,15 @@
   padding: 1rem 0;
   position: relative;
   z-index: -10;
+}
+
+.sell {
+  position: relative;
+  display: flex;
+  width: 15%;
+  align-self: flex-end;
+  margin-right: 1rem;
+  top: -2.6rem;
 }
 
 .train-image {
