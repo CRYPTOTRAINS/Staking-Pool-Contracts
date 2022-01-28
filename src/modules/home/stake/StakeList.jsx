@@ -161,8 +161,7 @@ export const StakeList = () => {
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
     const data = await contract.fetchMyStakes()
     const stakes = await Promise.all(data.map(async i => {
-      const time = moment.unix(i.since)
-      console.log(time);
+      const time = moment.unix(i.since) // convert blocktime to actual time
       let stake = {
         Amount: i.amount.toNumber(),
         Start: time.toString(),
