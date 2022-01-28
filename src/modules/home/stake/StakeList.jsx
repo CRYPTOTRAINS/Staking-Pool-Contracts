@@ -162,11 +162,24 @@ export const StakeList = () => {
     const data = await contract.fetchMyStakes()
     const stakes = await Promise.all(data.map(async i => {
       const time = moment.unix(i.since) // convert blocktime to actual time
+      //Selective pool display
+      const pool = i.pool.toNumber();
+      
       let stake = {
         Amount: i.amount.toNumber(),
         Start: time.toString(),
         Pool: i.pool.toNumber(),
       }
+      if(pool == 1) {
+        stake.Pool = "Bullet Branch"
+      } else if(pool == 2) {
+        stake.Pool = "Rail X Branch"
+      } else if(pool == 3) {
+        stake.Pool = "North Star Branch"
+      } else {
+        stake.Pool = "Stellar Branch"
+      }
+
       return stake
     }))
 
@@ -327,7 +340,7 @@ export const StakeList = () => {
                 <section className="item-container">
                 
                   <article className="item">
-                    Name: <span> CTRAIN ADVOCATE</span>
+                    Name: <span>{stake.Pool}</span>
                   </article>
                   <article className="item">
                     Amount: <span>{stake.Amount} CTRAIN</span>
@@ -335,9 +348,9 @@ export const StakeList = () => {
                   <article className="item">
                     Start Time: <span>{stake.Start} </span> 
                   </article>
-                  <article className="item">
-                    Stake Pool: <span>Pool {stake.Pool}</span> 
-                  </article>
+                  {/* <article className="item">
+                    Stake Pool: <span>{stake.Pool}</span> 
+                  </article> */}
                 </section>
                 <input placeholder="amount" required className="input"
                 onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
