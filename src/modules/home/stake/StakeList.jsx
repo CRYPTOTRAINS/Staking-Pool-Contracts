@@ -181,22 +181,6 @@ export const StakeList = () => {
     console.log("call")
     const {amount} = formInput;
 
-    // const data = await contract.fetchMyStakes()
-    // const stakes = await Promise.all(data.map(async i => {
-    //   let stake = {
-    //     Amount: i.amount.toNumber(),
-    //     Start: i.since.toNumber(),
-    //     Pool: i.pool.toNumber(),
-    //   }
-    //   return stake
-    // }))
-
-    // let count = 0
-    // for(let index = 0; index < stakes.length; index++) {
-    //   console.log(count)
-    //   count++
-    // }
-
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
