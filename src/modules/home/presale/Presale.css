@@ -14,6 +14,7 @@
 .time-cards {
   display: flex;
   justify-content: center;
+  z-index: -20;
   /* grid-template-columns: 10% 10% 10% 10%;
   justify-items: center;
   align-items: center; */
@@ -24,6 +25,7 @@
   height: 7rem;
   margin: 0.6rem;
   background-color: rgba(0, 0, 0, 0.3);
+  z-index: -2;
 }
 
 .card .number {
@@ -72,12 +74,14 @@ img.bg {
   position: relative;
   display: flex;
   justify-content: center;
+  z-index: -20;
 }
 
 .presale-main-items {
   position: relative;
   top: 14rem;
   right: 1.4rem;
+  z-index: -2;
 }
 
 .presale-img {
@@ -155,6 +159,7 @@ img.bg {
     position: relative;
     background-image: url('../../../assets/images/nft_presale_mobile.png');
     width: 21rem;
+    z-index: -2;
   }
 
   .presale-main-items {

@@ -43,6 +43,7 @@ input:focus {
   position: relative;
   left: -6px;
   top: -2px;
+  z-index: -2;
 }
 
 select {
@@ -58,4 +59,12 @@ select {
 
 .price-select {
   margin-left: 1.4rem;
+}
+
+@media (max-width: 601px) {
+  .search-section {
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+  }
 }

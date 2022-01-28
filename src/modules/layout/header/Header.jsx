@@ -38,6 +38,12 @@ const Header = () => {
           <Link className="link-item" to="/">
             Staking
           </Link>
+          <Link className="link-item" to="/presale">
+            Presale
+          </Link>
+          <Link className="link-item" to="/marketplace">
+            Marketplace
+          </Link>
           <Profile />
         </div>
       </nav>
