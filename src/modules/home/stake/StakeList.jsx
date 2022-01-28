@@ -17,6 +17,7 @@ import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal"
+import moment from "moment";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 export const StakeList = () => {
@@ -160,9 +161,11 @@ export const StakeList = () => {
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
     const data = await contract.fetchMyStakes()
     const stakes = await Promise.all(data.map(async i => {
+      const time = moment.unix(i.since)
+      console.log(time);
       let stake = {
         Amount: i.amount.toNumber(),
-        Start: i.since.toNumber(),
+        Start: time.toString(),
         Pool: i.pool.toNumber(),
       }
       return stake
@@ -331,7 +334,7 @@ export const StakeList = () => {
                     Amount: <span>{stake.Amount} CTRAIN</span>
                   </article>
                   <article className="item">
-                    Start Time: <span>{stake.Start} days ago</span> 
+                    Start Time: <span>{stake.Start} </span> 
                   </article>
                   <article className="item">
                     Stake Pool: <span>Pool {stake.Pool}</span> 
