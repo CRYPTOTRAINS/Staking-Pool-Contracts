@@ -74,14 +74,12 @@ img.bg {
   position: relative;
   display: flex;
   justify-content: center;
-  z-index: -20;
 }
 
 .presale-main-items {
   position: relative;
   top: 14rem;
   right: 1.4rem;
-  z-index: -2;
 }
 
 .presale-img {
