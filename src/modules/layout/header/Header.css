@@ -8,10 +8,9 @@
 }
 
 .logo {
-  position: absolute;
-  width: 7%;
+  position: relative;
+  width: 5%;
   left: 1rem;
-  top: 0.6rem;
 }
 
 .link-container {
@@ -19,6 +18,7 @@
   display: flex;
   justify-content: flex-start;
   margin-left: 10%;
+  align-items: center;
 }
 
 .link-item {
@@ -39,13 +39,13 @@
   display: none;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 769px) {
   .header {
     display: none;
   }
   .logo {
     position: relative;
-    width: 20%;
+    width: 10%;
     display: flex;
     justify-content: flex-start;
   }
@@ -73,12 +73,12 @@
   #hamnav label {
     display: flex;
     position: relative;
-    right: -18rem;
+    right: -30rem;
     bottom: 3rem;
     justify-content: flex-end;
     color: white;
     font-style: normal;
-    font-size: 2.2em;
+    font-size: 3rem;
     width: max-content;
     padding: 2px;
   }
@@ -88,5 +88,23 @@
   }
   #hamnav input:checked ~ #hamitems {
     display: block;
+  }
+}
+
+@media (max-width: 481px) {
+  .logo {
+    width: 20%;
+  }
+  #hamnav label {
+    display: flex;
+    position: relative;
+    right: -18rem;
+    bottom: 3rem;
+    justify-content: flex-end;
+    color: white;
+    font-style: normal;
+    font-size: 2.2em;
+    width: max-content;
+    padding: 2px;
   }
 }
