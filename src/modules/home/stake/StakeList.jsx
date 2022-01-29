@@ -17,6 +17,7 @@ import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import Web3Modal from "web3modal"
+import moment from "moment";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 export const StakeList = () => {
@@ -32,7 +33,6 @@ export const StakeList = () => {
 // ================ pool one ======================
   async function stakeOne() {
     const {amount} = formInput;
-
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
@@ -161,11 +161,25 @@ export const StakeList = () => {
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
     const data = await contract.fetchMyStakes()
     const stakes = await Promise.all(data.map(async i => {
+      const time = moment.unix(i.since) // convert blocktime to actual time
+      //Selective pool display
+      const pool = i.pool.toNumber();
+      
       let stake = {
         Amount: i.amount.toNumber(),
-        Start: i.since.toNumber(),
+        Start: time.toString(),
         Pool: i.pool.toNumber(),
       }
+      if(pool == 1) {
+        stake.Pool = "Bullet Branch"
+      } else if(pool == 2) {
+        stake.Pool = "Rail X Branch"
+      } else if(pool == 3) {
+        stake.Pool = "North Star Branch"
+      } else {
+        stake.Pool = "Stellar Branch"
+      }
+
       return stake
     }))
 
@@ -181,22 +195,6 @@ export const StakeList = () => {
   async function withdraw() {
     console.log("call")
     const {amount} = formInput;
-
-    // const data = await contract.fetchMyStakes()
-    // const stakes = await Promise.all(data.map(async i => {
-    //   let stake = {
-    //     Amount: i.amount.toNumber(),
-    //     Start: i.since.toNumber(),
-    //     Pool: i.pool.toNumber(),
-    //   }
-    //   return stake
-    // }))
-
-    // let count = 0
-    // for(let index = 0; index < stakes.length; index++) {
-    //   console.log(count)
-    //   count++
-    // }
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -342,17 +340,17 @@ export const StakeList = () => {
                 <section className="item-container">
                 
                   <article className="item">
-                    Name: <span> CTRAIN ADVOCATE</span>
+                    Name: <span>{stake.Pool}</span>
                   </article>
                   <article className="item">
                     Amount: <span>{stake.Amount} CTRAIN</span>
                   </article>
                   <article className="item">
-                    Start Time: <span>{stake.Start} days ago</span> 
+                    Start Time: <span>{stake.Start} </span> 
                   </article>
-                  <article className="item">
-                    Stake Pool: <span>Pool {stake.Pool}</span> 
-                  </article>
+                  {/* <article className="item">
+                    Stake Pool: <span>{stake.Pool}</span> 
+                  </article> */}
                 </section>
                 <input placeholder="amount" required className="input"
                 onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
