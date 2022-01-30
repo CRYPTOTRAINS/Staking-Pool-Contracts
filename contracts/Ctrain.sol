@@ -17,7 +17,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     
     Counters.Counter private _tokenIds;
 
-    uint256 private _price = 600000000000000000000;
+    uint256 private _price = 600000000000000000000; // public sale at 15%
     
     bool public presale = true;
      
@@ -71,4 +71,5 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     function unpause() public onlyOwner {
         _unpause();
     }
+
 }
