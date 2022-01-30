@@ -17,7 +17,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     
     Counters.Counter private _tokenIds;
 
-    uint256 private _price = 600; // public sale at 15%
+    uint256 private _price = 600000000000000000000;
     
     bool public presale = true;
      
@@ -40,9 +40,9 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
         if(presale == true) {
-            _price = 420; // 30% presale discount
+            _price = 420000000000000000000; // 30% presale discount
         } else {
-            _price = 510; // 15% public sale
+            _price = 510000000000000000000; // 15% public sale
         }
         uint256 _mintingPrice = _price * _mintAmount;
         uint256 ownerMintedCount = balanceOf(msg.sender);
