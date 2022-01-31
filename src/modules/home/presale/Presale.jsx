@@ -17,41 +17,24 @@ export const Presale = () => {
   const [status, setStatus] = useState("");
   const [formInput, updateFormInput] = useState({no:0});
 
-  async function createToken() {
-    const no = formInput;
-   
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
+  async function createToken(no) {
 
-    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
-    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-    
-    const price = await contract.getMintingPrice(no);
-    const amt = JSON.stringify(price);
-   
-
-    try {
-      const tx = await token.approve(CtrainAddress.Ctrain, amt);
-      await tx.wait();
-
-      const transaction = await contract.createToken(no);
-      const receipt = await transaction.wait();
-      if (receipt.status === 0) {
-        console.log("failed transaction");
-        setStatus("Transaction failed");
-        throw new Error("Transaction failed");
-      } else {
-        setStatus("Transaction successful");
-      }
-
-    } catch(error) {
-      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        return;
-      }
-      console.error(error.message);
-      setStatus(console.error(error.message));
-    }
   }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <main>
