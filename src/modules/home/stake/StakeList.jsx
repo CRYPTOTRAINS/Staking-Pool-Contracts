@@ -33,11 +33,6 @@ export const StakeList = () => {
 // ================ pool one ======================
   async function stakeOne() {
     const {amount} = formInput;
-<<<<<<< HEAD
-    const amt = JSON.stringify(amount*1000000000000000000)
-    console.log(amt)
-=======
->>>>>>> c70fa1d9246546f8246ae7d877dfc245e1034663
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
