@@ -25,23 +25,24 @@ export const StakeList = () => {
   const [status, setStatus] = useState("");
   
   useEffect(() => {
-    fetchMyStakes() 
+    fetchMyStakes()
   }, []);
 
   
 // ================ pool one ======================
   async function stakeOne() {
     const {amount} = formInput;
-
+    const amt = JSON.stringify(amount*1000000000000000000)
+    console.log(amt)
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
+              const tx = await token.approve(StakingAddress.StakeToken, amt);  ////
               await tx.wait();                                              ///////
               
-            const transaction = await contract.stakePoolOne(amount);
+            const transaction = await contract.stakePoolOne(amt);
             const receipt = await transaction.wait();
               if (receipt.status === 0) {
                 console.log("failed transaction");
@@ -64,15 +65,15 @@ export const StakeList = () => {
  // ======================== pool two ======================
  async function stakeTwo() {
   const {amount} = formInput;
-
+  const amt = JSON.stringify(amount*1000000000000000000)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
   const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
+              const tx = await token.approve(StakingAddress.StakeToken, amt);  ////
               await tx.wait();                                              ///////
-          const transaction = await contract.stakePoolTwo(amount);
+          const transaction = await contract.stakePoolTwo(amt);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
               console.log("failed transaction");
@@ -94,15 +95,15 @@ export const StakeList = () => {
  // ======================== pool three ======================
  async function stakeThree() {
   const {amount} = formInput;
-
+  const amt = JSON.stringify(amount*1000000000000000000)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
   const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
+              const tx = await token.approve(StakingAddress.StakeToken, amt);  ////
               await tx.wait();                                              ///////
-          const transaction = await contract.stakePoolThree(amount);
+          const transaction = await contract.stakePoolThree(amt);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
               console.log("failed transaction");
@@ -124,15 +125,15 @@ export const StakeList = () => {
  // ======================== pool four ======================
  async function stakeFour() {
   const {amount} = formInput;
-
+  const amt = JSON.stringify(amount*1000000000000000000)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
   const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
+              const tx = await token.approve(StakingAddress.StakeToken, amt);  ////
               await tx.wait();                                              ///////
-          const transaction = await contract.stakePoolFour(amount);
+          const transaction = await contract.stakePoolFour(amt);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
               setStatus("Transaction failed");
@@ -169,41 +170,18 @@ export const StakeList = () => {
       return stake
     }))
 
-    // let count = 0
-    // for(let index = 0; index < stakes.length; index++) {
-    //   console.log(count)
-    //   count++
-    // }
-
     setStakes(stakes)
   }
   
   async function withdraw() {
-    console.log("call")
     const {amount} = formInput;
-
-    // const data = await contract.fetchMyStakes()
-    // const stakes = await Promise.all(data.map(async i => {
-    //   let stake = {
-    //     Amount: i.amount.toNumber(),
-    //     Start: i.since.toNumber(),
-    //     Pool: i.pool.toNumber(),
-    //   }
-    //   return stake
-    // }))
-
-    // let count = 0
-    // for(let index = 0; index < stakes.length; index++) {
-    //   console.log(count)
-    //   count++
-    // }
-
+    const amt = JSON.stringify(amount*1000000000000000000)
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
     let index = 0
     try{
-      const transaction = await contract.withdrawStakePoolOne(amount, index)
+      const transaction = await contract.withdrawStakePoolOne(amt, index)
       const receipt = await transaction.wait();
       
             if (receipt.status === 0) {
@@ -347,9 +325,9 @@ export const StakeList = () => {
                   <article className="item">
                     Amount: <span>{stake.Amount} CTRAIN</span>
                   </article>
-                  <article className="item">
+                  {/* <article className="item">
                     Start Time: <span>{stake.Start} days ago</span> 
-                  </article>
+                  </article> */}
                   <article className="item">
                     Stake Pool: <span>Pool {stake.Pool}</span> 
                   </article>

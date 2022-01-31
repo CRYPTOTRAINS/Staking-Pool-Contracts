@@ -76,7 +76,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     
     // ============= STAKING POOL ONE ======================= 
     function stakePoolOne(uint256 amount) external nonReentrant whenNotPaused {
-        require(amount >= 50, "Cannot stake below 50");
+        require(amount >= 50 , "Cannot stake below 50");
         require(amount <= 500000, "Cannot stake more than 500000");
         _totalSupply = _totalSupply.add(amount);
         _balances[msg.sender] = _balances[msg.sender].add(amount);
@@ -99,26 +99,27 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     }
 
     function withdrawStakePoolOne(uint256 amount, uint256 index) public returns(uint256){
+        uint256 amt = amount / 1000000000000000000;
         require(amount > 0, "Cannot withdraw 0");
-        _totalSupply = _totalSupply.sub(amount);
-        _balances[msg.sender] = _balances[msg.sender].sub(amount);
+        _totalSupply = _totalSupply.sub(amt);
+        _balances[msg.sender] = _balances[msg.sender].sub(amt);
 
         uint256 user_index = stakes[msg.sender];
         Stake memory current_stake = stakeholders[user_index].address_stakes[index];
-        require(current_stake.amount >= amount, "Staking: Cannot withdraw more than you have staked");
+        require(current_stake.amount >= amt, "Staking: Cannot withdraw more than you have staked");
         
         require (block.timestamp >= (current_stake.since + rewardsDurationPoolOne), "Token locked. Wait till after rewards duration for this pool.");
          uint256 reward = calculateStakeRewardPoolOne(current_stake);
           
-         current_stake.amount = current_stake.amount - amount;
+         current_stake.amount = current_stake.amount - amt;
          if(current_stake.amount == 0){
              delete stakeholders[user_index].address_stakes[index];
          }else {
              stakeholders[user_index].address_stakes[index].amount = current_stake.amount;    
          }
-        uint totalPayable = amount+reward;
+        uint totalPayable = amt+reward;
         stakingToken.safeTransfer(msg.sender, totalPayable);
-        emit Withdrawn(msg.sender, amount);
+        emit Withdrawn(msg.sender, amt);
 
         return amount+reward;
      }

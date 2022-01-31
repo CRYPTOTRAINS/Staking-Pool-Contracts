@@ -33,8 +33,10 @@ const Profile = () => {
     const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
    const {address} = await getCurrentWalletConnected();
     const data = await contract.balanceOf(address);
-    
-    setBalance(data.toNumber())
+    const number = data.toNumber()
+    const numberToWei = number * 1000000000000000000
+    setBalance(numberToWei)
+    console.log(numberToWei)
       return data.toNumber()
   
       
