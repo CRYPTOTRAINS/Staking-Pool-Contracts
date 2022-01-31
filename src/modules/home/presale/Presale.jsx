@@ -17,7 +17,13 @@ export const Presale = () => {
   const [status, setStatus] = useState("");
   const [formInput, updateFormInput] = useState({no:0});
 
-  async function createToken(no) {
+  async function createToken() {
+    const no = formInput;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
 
   }
   
