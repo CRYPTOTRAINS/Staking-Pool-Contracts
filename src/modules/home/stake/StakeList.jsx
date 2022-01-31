@@ -41,7 +41,7 @@ export const StakeList = () => {
               const tx = await token.approve(StakingAddress.StakeToken, amount);  
               await tx.wait();                                              
               
-            const transaction = await contract.stakePoolOne(amt);
+            const transaction = await contract.stakePoolOne(amount);
             const receipt = await transaction.wait();
               if (receipt.status === 0) {
                 console.log("failed transaction");

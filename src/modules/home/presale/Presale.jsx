@@ -15,18 +15,20 @@ const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
 export const Presale = () => {
   const [status, setStatus] = useState("");
-  const [formInput, updateFormInput] = useState({no:0});
+  const [formNumber, updateFormNumber] = useState({no:0});
 
   async function createToken() {
-    const no = formInput;
-
+    const no = formNumber;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact, signer);
+    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-
-    const price = await contract.getMintingPrice(no);
-    const amount = JSON.stringify(price);
+    const num = no.no;
+    console.log(num);
+    // const price = await contract.getMintingPrice(no);
+    const amount = JSON.stringify(num*60000000000000000000);
+    console.log(amount);
+    
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, amount);
       await tx.wait();
@@ -92,7 +94,7 @@ export const Presale = () => {
           <div className="presale-main-items">
             <p className="quantity">QUANTITY: </p>
             <input placeholder="E.g 2" required className="no"
-                  onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
+                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  />
             <button className="approve">
               <img src={approve} onClick={createToken} onKeyDown={createToken} alt="approve button" />
             </button>
