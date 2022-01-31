@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import { StakeList } from './modules/home/stake/StakeList';
 import { TrainList } from './modules/home/train/TrainList';
+import { Presale } from './modules/home/presale/Presale';
+import { MarketList } from './modules/home/marketplace/MarketPlaceList';
 import backgroundImage from './assets/images/background.png';
 
 ReactDOM.render(
@@ -16,6 +18,8 @@ ReactDOM.render(
         <Route path="/" element={<App />}>
           <Route path="" element={<StakeList />} />
           <Route path="train" element={<TrainList />} />
+          <Route path="presale" element={<Presale />} />
+          <Route path="marketplace" element={<MarketList />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -11,11 +11,17 @@ const Header = () => {
       <nav className="header">
         <img className="logo" src={logo} alt="logo" />
         <header className="link-container">
-          <Link className="link-item" to="/train">
+          {/* <Link className="link-item" to="/train">
             Trains
-          </Link>
+          </Link> */}
           <Link className="link-item" to="/">
             Staking
+          </Link>
+          <Link className="link-item" to="/presale">
+            Presale
+          </Link>
+          <Link className="link-item" to="/Marketplace">
+            Marketplace
           </Link>
         </header>
         <Profile />
@@ -31,6 +37,12 @@ const Header = () => {
           </Link>
           <Link className="link-item" to="/">
             Staking
+          </Link>
+          <Link className="link-item" to="/presale">
+            Presale
+          </Link>
+          <Link className="link-item" to="/marketplace">
+            Marketplace
           </Link>
           <Profile />
         </div>

@@ -1,6 +1,7 @@
 .profile {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   color: #ffffff;
 }
 
@@ -35,7 +36,7 @@
   cursor: pointer;
 }
 
-@media (max-width: 599px) {
+@media (max-width: 769px) {
   .profile {
     justify-content: center;
   }
