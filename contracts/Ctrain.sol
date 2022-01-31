@@ -14,11 +14,11 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     using SafeERC20 for IERC20;
 
     using Counters for Counters.Counter;
-    
+   
     Counters.Counter private _tokenIds;
 
     uint256 private _price = 600000000000000000000; // public sale at 15%
-    
+   
     bool public presale = true;
      
     uint256 public nftPerAddressLimit = 10;
@@ -30,7 +30,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
     }        
-            
+           
 
     function getMintingPrice(uint256 _mintAmount) public view returns (uint256) {
         return  _mintAmount *_price;
@@ -59,7 +59,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     function endPresale() public onlyOwner {
         presale = false;
     }
-    
+   
     function setNftPerAddressLimit(uint256 _limit) public onlyOwner {
         nftPerAddressLimit = _limit;
     }
