@@ -29,6 +29,7 @@ export const Presale = () => {
     const amount = JSON.stringify(price);
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, amount);
+      await tx.wait();
 
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
