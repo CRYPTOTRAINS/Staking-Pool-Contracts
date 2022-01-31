@@ -32,13 +32,13 @@ export const StakeList = () => {
   
 // ================ pool one ======================
   async function stakeOne() {
-    const {amount} = formInput;
+    const amount = formInput;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amt);  ////
+              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
               await tx.wait();                                              ///////
               
             const transaction = await contract.stakePoolOne(amt);
@@ -187,18 +187,13 @@ export const StakeList = () => {
   }
   
   async function withdraw() {
-    const {amount} = formInput;
-<<<<<<< HEAD
-    const amt = JSON.stringify(amount*1000000000000000000)
-=======
-
->>>>>>> c70fa1d9246546f8246ae7d877dfc245e1034663
+    const amount = formInput;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
     let index = 0
     try{
-      const transaction = await contract.withdrawStakePoolOne(amt, index)
+      const transaction = await contract.withdrawStakePoolOne(amount, index)
       const receipt = await transaction.wait();
       
             if (receipt.status === 0) {
@@ -342,16 +337,8 @@ export const StakeList = () => {
                   <article className="item">
                     Amount: <span>{stake.Amount} CTRAIN</span>
                   </article>
-<<<<<<< HEAD
-                  {/* <article className="item">
-                    Start Time: <span>{stake.Start} days ago</span> 
-                  </article> */}
-                  <article className="item">
-                    Stake Pool: <span>Pool {stake.Pool}</span> 
-=======
                   <article className="item">
                     Start Time: <span>{stake.Start} </span> 
->>>>>>> c70fa1d9246546f8246ae7d877dfc245e1034663
                   </article>
                   {/* <article className="item">
                     Stake Pool: <span>{stake.Pool}</span> 
