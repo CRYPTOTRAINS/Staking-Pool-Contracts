@@ -24,7 +24,11 @@ export const Presale = () => {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+
+    const price = await contract.getMintingPrice(no);
+    const amount = JSON.stringify(price);
     try {
+      const tx = await token.approve(CtrainAddress.Ctrain, amount);
 
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {

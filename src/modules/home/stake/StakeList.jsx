@@ -36,10 +36,10 @@ export const StakeList = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
+    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); 
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
-              await tx.wait();                                              ///////
+              const tx = await token.approve(StakingAddress.StakeToken, amount);  
+              await tx.wait();                                              
               
             const transaction = await contract.stakePoolOne(amt);
             const receipt = await transaction.wait();
