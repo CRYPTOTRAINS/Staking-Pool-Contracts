@@ -33,7 +33,13 @@ export const Presale = () => {
 
       const transaction = await contract.createToken(no);
       const receipt = await transaction.wait();
-
+        if (receipt.status === 0) {
+          console.log("failed transaction");
+          setStatus("Transaction failed");
+          throw new Error("Transaction failed");
+        } else {
+          setStatus("Transaction successful");
+        }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
         return;
