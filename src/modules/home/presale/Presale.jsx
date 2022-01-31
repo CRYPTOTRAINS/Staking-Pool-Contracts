@@ -22,8 +22,8 @@ export const Presale = () => {
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-
-    const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact, signer);
+    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
 
   }
   
