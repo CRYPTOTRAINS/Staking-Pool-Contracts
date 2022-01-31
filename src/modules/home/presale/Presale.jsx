@@ -24,7 +24,15 @@ export const Presale = () => {
     const signer = provider.getSigner();
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+    try {
 
+    } catch(error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        return;
+      }
+      console.error(error.message);
+      setStatus(console.error(error.message));
+    }
   }
   
 
