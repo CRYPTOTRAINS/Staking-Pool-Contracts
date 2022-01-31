@@ -31,6 +31,9 @@ export const Presale = () => {
       const tx = await token.approve(CtrainAddress.Ctrain, amount);
       await tx.wait();
 
+      const transaction = await contract.createToken(no);
+      const receipt = await transaction.wait();
+
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
         return;
