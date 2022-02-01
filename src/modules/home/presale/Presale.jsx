@@ -12,7 +12,7 @@ import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import { useState } from 'react';
-import moment from "moment";
+// import moment from "moment";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
@@ -29,7 +29,7 @@ export const Presale = () => {
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
    
-    const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
+    const price = (num * 6000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     console.log(price);
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
