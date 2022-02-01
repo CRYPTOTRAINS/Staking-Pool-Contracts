@@ -21,6 +21,34 @@ export const Presale = () => {
   const [status, setStatus] = useState("");
   const [formNumber, updateFormNumber] = useState({no:0});
 
+  useEffect(() => {
+    (async() => {
+      presaleTimeGone();
+    }) ()
+  }, []);
+
+  async function presaleTimeGone() {
+    // const web3Modal = new Web3Modal({
+    //   network: "mainnet",
+    //   cacheProvider: true,
+    // })
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
+
+    // const connection = await web3Modal.connect();
+    // const provider = new ethers.providers.Web3Provider(connection);
+    // const signer = provider.getSigner();
+    // const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
+    const presaleStart = await contract.startPresale();
+    const blockTime = await presaleStart.wait();
+    const time = moment.unix(blockTime) // convert blocktime to actual time
+    const timeGone = moment(time).startOf('hour').fromNow();
+    console.log(timeGone);
+    return timeGone;
+  }
+
   async function createToken() {
     const no = formNumber;
     
@@ -30,11 +58,7 @@ export const Presale = () => {
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
    
-    const presaleStart = await contract.startOfPresale();
-    const blockTime = await presaleStart.wait();
-    const time = moment.unix(blockTime) // convert blocktime to actual time
-    const timeGone = moment(time).startOf('hour').fromNow();
-    console.log(timeGone)
+    
     const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     try {
