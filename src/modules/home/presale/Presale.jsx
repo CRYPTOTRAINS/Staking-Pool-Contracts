@@ -11,8 +11,9 @@ import CtrainArtifact from "../../../contracts/Ctrain.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
-import { useState } from 'react';
-// import Big from 'big.js';
+import { useEffect, useState } from 'react';
+import Web3Modal from "web3modal"
+import moment from "moment";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
@@ -29,6 +30,11 @@ export const Presale = () => {
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
    
+    const presaleStart = await contract.startOfPresale();
+    const blockTime = await presaleStart.wait();
+    const time = moment.unix(blockTime) // convert blocktime to actual time
+    const timeGone = moment(time).startOf('hour').fromNow();
+    console.log(timeGone)
     const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     try {
