@@ -185,7 +185,7 @@
       ]
     },
     "/home/ggr/blockchain/Staking-Pool-Contracts/contracts/StakeToken.sol": {
-      "lastModificationDate": 1643158065358,
+      "lastModificationDate": 1643671255112,
       "contentHash": "f4c5cbfd687374695a57a2fc55fdf1f3",
       "sourceName": "contracts/StakeToken.sol",
       "solcConfig": {
@@ -444,8 +444,8 @@
       ]
     },
     "/home/ggr/blockchain/Staking-Pool-Contracts/contracts/Ctrain.sol": {
-      "lastModificationDate": 1643661482592,
-      "contentHash": "f2f05da3155db337cfe275ca36d7cff6",
+      "lastModificationDate": 1643702163556,
+      "contentHash": "fb0ff4e2282b76bd22031d9ca6e2f016",
       "sourceName": "contracts/Ctrain.sol",
       "solcConfig": {
         "version": "0.8.4",

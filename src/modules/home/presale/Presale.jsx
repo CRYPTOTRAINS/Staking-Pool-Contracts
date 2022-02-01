@@ -29,15 +29,16 @@ export const Presale = () => {
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
     
-   // console.log((price).toLocaleString("fullwide", { useGrouping: false }));
-    // console.log(price);
+   
+    const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
+ 
+    console.log(price);
     
-    const amount = 600;
     try {
-      const tx = await token.approve(CtrainAddress.Ctrain, amount);
+      const tx = await token.approve(CtrainAddress.Ctrain, price);
       await tx.wait();
-
-      const transaction = await contract.createToken(no);
+      const tokenUri = "https";
+      const transaction = await contract.create(num, price,tokenUri);
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
           console.log("failed transaction");
