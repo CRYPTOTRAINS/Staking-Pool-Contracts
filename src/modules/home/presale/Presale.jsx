@@ -1,5 +1,7 @@
 /* eslint-disable  jsx-a11y/no-noninteractive-element-interactions
  */
+/* eslint-disable  no-unused-vars
+ */
 import './Presale.css';
 import backgroundImage from '../../../assets/images/fondoNFTPresale.png';
 import approve from '../../../assets/images/approve.png';
@@ -26,12 +28,13 @@ export const Presale = () => {
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
-    console.log(num);
-    const price = await contract.getMintingPrice(no);
-    const amount = ethers.utils.parseEther(price);
-    // const amount = new Big(JSON.stringify(num*600000000000000000000));
-    console.log(amount);
     
+    
+    const price = await contract.getMintingPrice(no);
+   // console.log((price).toLocaleString("fullwide", { useGrouping: false }));
+    // console.log(price);
+    
+    const amount = 600;
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, amount);
       await tx.wait();

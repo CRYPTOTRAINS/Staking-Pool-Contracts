@@ -16,48 +16,71 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     using Counters for Counters.Counter;
    
     Counters.Counter private _tokenIds;
-
-    uint256 private _price = 600000000000000000000; // public sale at 15%
-   
-    bool public presale = true;
      
     uint256 public nftPerAddressLimit = 10;
 
     IERC20 public tokenAddress;
     address public reserveAddress;
-     
+
+    struct Train {
+        uint256 id;
+        uint8 level;
+        uint8 rarity;
+        bool fuel;
+        uint8 status;
+    }
+    
+    Train[] public trains;
+
+    uint256 COUNTER;
+
     constructor(address _token, address _reserve)ERC721("Ctrain", "CTR"){
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
     }        
-           
-
-    function getMintingPrice(uint256 _mintAmount) public view returns (uint256) {
-        return  _mintAmount *_price;
-    }
-
-    function createToken(uint256 _mintAmount) public whenNotPaused {
+        
+    function create(uint256 _mintAmount, uint256 _price, string memory tokenURI) public whenNotPaused {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
-        if(presale == true) {
-            _price = 420000000000000000000; // 30% presale discount
-        } else {
-            _price = 510000000000000000000; // 15% public sale
-        }
         uint256 _mintingPrice = _price * _mintAmount;
         uint256 ownerMintedCount = balanceOf(msg.sender);
         require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
-
+        tokenAddress.transferFrom(msg.sender, reserveAddress, _mintingPrice);
         for (uint256 i = 1; i <= _mintAmount; i++) {
+            uint8 randRarity = uint8(_createRandomNum(100));
+            Train memory newTrain = Train(COUNTER, 1, randRarity, false, 1);
+            trains.push(newTrain);
             uint256 newItemId = _tokenIds.current();
-            tokenAddress.transferFrom(msg.sender, reserveAddress, _mintingPrice);
             _mint(msg.sender, newItemId);
+            string memory uniqueURI = string(abi.encodePacked(tokenURI, i));
+            _setTokenURI(newItemId, uniqueURI);
             _tokenIds.increment();
         }
     }
 
-    function endPresale() public onlyOwner {
-        presale = false;
+    // Getters
+    function getTrains() public view returns (Train[] memory) {
+        return trains;
+    }
+
+    function getOwnerTrains(address _owner) public view returns (Train[] memory) {
+        Train[] memory result = new Train[](balanceOf(_owner));
+        uint256 counter = 0;
+            for (uint256 i = 0; i < trains.length; i++) {
+                if (ownerOf(i) == _owner) {
+                    result[counter] = trains[i];
+                    counter++;
+                }
+            }
+        return result;
+    }
+
+    // Helpers
+    function _createRandomNum(uint256 _mod) internal view returns (uint256) {
+        uint256 randomNum = uint256(
+        keccak256(abi.encodePacked(block.timestamp, msg.sender))
+        );
+        return randomNum % _mod;
     }
    
     function setNftPerAddressLimit(uint256 _limit) public onlyOwner {
