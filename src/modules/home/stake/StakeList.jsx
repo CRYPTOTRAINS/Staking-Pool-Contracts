@@ -32,7 +32,7 @@ export const StakeList = () => {
   
 // ================ pool one ======================
   async function stakeOne() {
-    const amount = formInput;
+    const amount = ethers.utils.parseEther(formInput.amount);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
@@ -63,7 +63,7 @@ export const StakeList = () => {
 
  // ======================== pool two ======================
  async function stakeTwo() {
-  const {amount} = formInput;
+  const amount = ethers.utils.parseEther(formInput.amount);
   const amt = JSON.stringify(amount*1000000000000000000)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -93,7 +93,7 @@ export const StakeList = () => {
 
  // ======================== pool three ======================
  async function stakeThree() {
-  const {amount} = formInput;
+  const amount = ethers.utils.parseEther(formInput.amount);
   const amt = JSON.stringify(amount*1000000000000000000)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
@@ -123,7 +123,7 @@ export const StakeList = () => {
 
  // ======================== pool four ======================
  async function stakeFour() {
-  const {amount} = formInput;
+  const amount = ethers.utils.parseEther(formInput.amount);
   const amt = JSON.stringify(amount*1000000000000000000)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();

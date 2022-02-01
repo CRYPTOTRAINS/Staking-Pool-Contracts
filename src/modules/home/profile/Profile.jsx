@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import './Profile.css';
 import { useEffect, useState } from 'react';
 import { connectWallet, getCurrentWalletConnected } from "../../../utils/wallet";
@@ -22,22 +21,20 @@ const Profile = () => {
 
 
   async function updateBalance() {
-  //   const web3Modal = new Web3Modal({
-  //     network: "mainnet",
-  //     cacheProvider: true,
-  //   })
+    const web3Modal = new Web3Modal({
+      network: "mainnet",
+      cacheProvider: true,
+    })
 
-  //   const connection = await web3Modal.connect()
-  //   const provider = new ethers.providers.Web3Provider(connection)
-  //   const signer = provider.getSigner()
-  //   const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-  //  const address = await getCurrentWalletConnected();
-  //   const data = await contract.balanceOf(address);
-  //   const number = data.toNumber()
-  //   const numberToWei = number * 1000000000000000000
-  //   setBalance(numberToWei);
-  //     return data.toNumber();
-  
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection)
+    const signer = provider.getSigner()
+    const contract = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+    const {address} = await getCurrentWalletConnected();
+    const data = await contract.balanceOf(address);
+    const amount = ethers.utils.formatEther(data, {commify: true});
+    setBalance(parseFloat(amount).toFixed(2));
+    return (parseFloat(amount).toFixed(2))
       
   }
 

@@ -10,6 +10,7 @@ import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import { useState } from 'react';
+// import Big from 'big.js';
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
@@ -19,14 +20,16 @@ export const Presale = () => {
 
   async function createToken() {
     const no = formNumber;
+    
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
     console.log(num);
-    // const price = await contract.getMintingPrice(no);
-    const amount = JSON.stringify(num*60000000000000000000);
+    const price = await contract.getMintingPrice(no);
+    const amount = ethers.utils.parseEther(price);
+    // const amount = new Big(JSON.stringify(num*600000000000000000000));
     console.log(amount);
     
     try {
