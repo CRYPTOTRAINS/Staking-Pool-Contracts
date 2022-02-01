@@ -29,8 +29,6 @@ export const Presale = () => {
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
     
-    
-    const price = await contract.getMintingPrice(no);
    // console.log((price).toLocaleString("fullwide", { useGrouping: false }));
     // console.log(price);
     
