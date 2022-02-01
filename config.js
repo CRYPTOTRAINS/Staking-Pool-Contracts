@@ -1,5 +1,5 @@
 
-    export const enmtaddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3"
-    export const staketokenaddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512"
-    export const ctrainaddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"
+    export const enmtaddress = "0x1d0736234677B9920c7Ea943368F7694906520ec"
+    export const staketokenaddress = "0x9fC44e608f315e2feEeeb49D22624b4233046AB4"
+    export const ctrainaddress = "0x7Be8E8Fbf45987cd8C65548Ff5cd8716d39196fA"
       
