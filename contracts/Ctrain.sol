@@ -94,5 +94,4 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     function unpause() public onlyOwner {
         _unpause();
     }
-
 }
