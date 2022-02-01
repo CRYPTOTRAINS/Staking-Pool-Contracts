@@ -11,7 +11,7 @@ import button from '../../../assets/images/botondebanco.png';
 import BackArrow from '../../common/BackArrow/BackArrow';
 import { useEffect, useState } from 'react';
 import unstake from '../../../assets/images/unstake-web.png';
-import StakingAddress from "../../../contracts/contract-address.json";
+import StakingAddress from "../../../contracts/stakeToken-address.json";
 import StakingArtifact from "../../../contracts/StakeToken.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";

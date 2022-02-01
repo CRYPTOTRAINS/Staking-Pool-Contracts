@@ -53,21 +53,6 @@ export const Presale = () => {
     }
   }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <main>
       <img className="bg" src={backgroundImage} alt="background" />
