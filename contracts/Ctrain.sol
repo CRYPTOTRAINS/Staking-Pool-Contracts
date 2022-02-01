@@ -33,15 +33,29 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     Train[] public trains;
 
     uint256 COUNTER;
+    uint256 private _startOfPresale;
 
     constructor(address _token, address _reserve)ERC721("Ctrain", "CTR"){
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
-    }        
+        _startOfPresale = block.timestamp;
+    }    
         
-    function create(uint256 _mintAmount, uint256 _price, string memory tokenURI) public whenNotPaused {
+    function create(uint256 _mintAmount, string memory tokenURI) public whenNotPaused {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
+
+        uint256 timePresale = _startOfPresale + 180;
+        uint256 timePublicSale = _startOfPresale + 300;
+        uint256 _price;
+        if(block.timestamp <=  timePresale) {
+            _price = 420*10e18;
+        } else if (block.timestamp > timePresale && block.timestamp <= timePublicSale) {
+            _price = 510*10e18;
+        } else {
+            _price = 600*10e18;
+        }
+        
         uint256 _mintingPrice = _price * _mintAmount;
         uint256 ownerMintedCount = balanceOf(msg.sender);
         require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
@@ -94,4 +108,5 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     function unpause() public onlyOwner {
         _unpause();
     }
+
 }
