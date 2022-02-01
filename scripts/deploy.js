@@ -10,7 +10,7 @@ async function main() {
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
     const ENMT = await ethers.getContractFactory("ENMT");
-    const totalSupply = 30000000000000000000000000..toLocaleString("fullwide", { useGrouping: false });
+    const totalSupply = (30000000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     const enmt =await ENMT.deploy("Mad", "mad", 18, "0x77d715A989AfaFBCAEF671CEDBe010faDD0dBeAD", `${totalSupply}`);
     
 
