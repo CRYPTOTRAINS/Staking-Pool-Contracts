@@ -11,7 +11,7 @@ async function main() {
 
     const ENMT = await ethers.getContractFactory("ENMT");
     const totalSupply = 30000000000000000000000000..toLocaleString("fullwide", { useGrouping: false });
-    const enmt =await ENMT.deploy("CTRAIN", "CTR", 18, "0x77d715A989AfaFBCAEF671CEDBe010faDD0dBeAD", `${totalSupply}`);
+    const enmt =await ENMT.deploy("Mad", "mad", 18, "0x77d715A989AfaFBCAEF671CEDBe010faDD0dBeAD", `${totalSupply}`);
     
 
     const StakeToken = await ethers.getContractFactory("StakeToken");

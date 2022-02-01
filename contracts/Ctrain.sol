@@ -45,8 +45,8 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
 
-        uint256 timePresale = _startOfPresale + 180;
-        uint256 timePublicSale = _startOfPresale + 300;
+        uint256 timePresale = _startOfPresale + 3600;
+        uint256 timePublicSale = _startOfPresale + 7200;
         uint256 _price;
         if(block.timestamp <=  timePresale) {
             _price = 420*10e18;

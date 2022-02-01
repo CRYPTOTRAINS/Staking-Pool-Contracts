@@ -11,8 +11,7 @@ import CtrainArtifact from "../../../contracts/Ctrain.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
-import { useEffect, useState } from 'react';
-import Web3Modal from "web3modal"
+import { useState } from 'react';
 import moment from "moment";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
@@ -20,34 +19,6 @@ const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 export const Presale = () => {
   const [status, setStatus] = useState("");
   const [formNumber, updateFormNumber] = useState({no:0});
-
-  useEffect(() => {
-    (async() => {
-      presaleTimeGone();
-    }) ()
-  }, []);
-
-  async function presaleTimeGone() {
-    // const web3Modal = new Web3Modal({
-    //   network: "mainnet",
-    //   cacheProvider: true,
-    // })
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
-
-    // const connection = await web3Modal.connect();
-    // const provider = new ethers.providers.Web3Provider(connection);
-    // const signer = provider.getSigner();
-    // const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
-    const presaleStart = await contract.startPresale();
-    const blockTime = await presaleStart.wait();
-    const time = moment.unix(blockTime) // convert blocktime to actual time
-    const timeGone = moment(time).startOf('hour').fromNow();
-    console.log(timeGone);
-    return timeGone;
-  }
 
   async function createToken() {
     const no = formNumber;
@@ -58,14 +29,13 @@ export const Presale = () => {
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
    
-    
     const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
-    
+    console.log(price);
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
       await tx.wait();
       const tokenUri = "https";
-      const transaction = await contract.create(num, price,tokenUri);
+      const transaction = await contract.create(num, tokenUri);
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
           console.log("failed transaction");
