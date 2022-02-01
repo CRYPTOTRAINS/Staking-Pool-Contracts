@@ -79,9 +79,9 @@ export const Presale = () => {
       <section className="presale-main">
         <article className="presale-img">
           <div className="presale-main-items">
-            <p className="quantity">QUANTITY: </p>
-            <input placeholder="E.g 2" required className="no"
-                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  />
+            <p className="quantity">QUANTITY:  <input placeholder="E.g 2" required className="no"
+                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
+           
             <button className="approve">
               <img src={approve} onClick={createToken} onKeyDown={createToken} alt="approve button" />
             </button>
