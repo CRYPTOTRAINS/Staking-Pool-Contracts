@@ -29,7 +29,7 @@ export const Presale = () => {
     const num = no.no;
    
     const price = (num * 6000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
-    console.log(price);
+    
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
       await tx.wait();

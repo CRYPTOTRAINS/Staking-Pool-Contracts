@@ -444,8 +444,8 @@
       ]
     },
     "/home/ggr/blockchain/Staking-Pool-Contracts/contracts/Ctrain.sol": {
-      "lastModificationDate": 1643833345876,
-      "contentHash": "fef7634ca6a991b95ca6ec03b01bd067",
+      "lastModificationDate": 1643842044120,
+      "contentHash": "83468b6380f29439f81bb3fd0f7267e9",
       "sourceName": "contracts/Ctrain.sol",
       "solcConfig": {
         "version": "0.8.4",
