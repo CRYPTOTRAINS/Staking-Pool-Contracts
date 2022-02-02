@@ -12,7 +12,6 @@ import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import { useState } from 'react';
-// import moment from "moment";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
@@ -55,7 +54,8 @@ export const Presale = () => {
   
   return (
     <main>
-    
+<div id="flipdown" className="flipdown"></div>
+
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
       <p>{status}</p>
