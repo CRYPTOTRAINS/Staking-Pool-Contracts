@@ -11,6 +11,11 @@
   padding-top: 2rem;
 }
 
+.no {
+  width: 12%;
+  height: 25px;
+}
+
 .time-cards {
   display: flex;
   justify-content: center;

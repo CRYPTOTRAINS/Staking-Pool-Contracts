@@ -10,14 +10,15 @@ async function main() {
     console.log("Account balance:", (await deployer.getBalance()).toString());
 
     const ENMT = await ethers.getContractFactory("ENMT");
-    const enmt =await ENMT.deploy("CTRAIN", "CTR", 18, "0x70997970c51812dc3a010c7d01b50e0d17dc79c8", 30000000);
+    const totalSupply = (30000000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
+    const enmt =await ENMT.deploy("Mad", "mad", 18, "0x77d715A989AfaFBCAEF671CEDBe010faDD0dBeAD", `${totalSupply}`);
     
 
     const StakeToken = await ethers.getContractFactory("StakeToken");
     const staketoken = await StakeToken.deploy(enmt.address, enmt.address);
 
     const Ctrain = await ethers.getContractFactory("Ctrain");
-    const ctrain = await Ctrain.deploy(enmt.address,"0x3c44cdddb6a900fa2b585dd299e03d12fa4293bc")
+    const ctrain = await Ctrain.deploy(enmt.address,"0x8Eea93cb015d764CbbFe6c21170fe3c0E81eC373")
 
     console.log("ENMT address:", enmt.address);
     console.log("StakeToken address:", staketoken.address);

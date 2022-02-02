@@ -12,7 +12,6 @@ import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import { useState } from 'react';
-// import Big from 'big.js';
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
@@ -28,17 +27,16 @@ export const Presale = () => {
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
-    
    
-    const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
- 
-    console.log(price);
+    const price = (num * 6000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
       await tx.wait();
       const tokenUri = "https";
-      const transaction = await contract.create(num, price,tokenUri);
+      const fee = (num * 5300000000000000).toLocaleString("fullwide", { useGrouping: false });
+      console.log(fee);
+      const transaction = await contract.create(num, tokenUri, { value: fee });
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
           console.log("failed transaction");
@@ -56,23 +54,10 @@ export const Presale = () => {
     }
   }
   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <main>
+<div id="flipdown" className="flipdown"></div>
+
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
       <p>{status}</p>
@@ -97,9 +82,9 @@ export const Presale = () => {
       <section className="presale-main">
         <article className="presale-img">
           <div className="presale-main-items">
-            <p className="quantity">QUANTITY: </p>
-            <input placeholder="E.g 2" required className="no"
-                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  />
+            <p className="quantity">QUANTITY:  <input placeholder="E.g 2" required className="no"
+                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
+           
             <button className="approve">
               <img src={approve} onClick={createToken} onKeyDown={createToken} alt="approve button" />
             </button>
