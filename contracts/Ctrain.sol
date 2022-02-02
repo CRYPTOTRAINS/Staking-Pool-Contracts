@@ -18,7 +18,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     Counters.Counter private _tokenIds;
      
     uint256 public nftPerAddressLimit = 10;
-    uint256 private _totalPresaleSupply = 10; //3000
+    uint256 private _totalPresaleSupply = 3000;
 
     IERC20 public tokenAddress;
     address public reserveAddress;
@@ -51,8 +51,8 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 fee = _mintAmount * 5300000000000000;
         require(msg.value == fee, "Please send along $2 for each NFT to complete minting");
 
-        uint256 timePresale = _startOfPresale + 360; // 3600;
-        uint256 timePublicSale = _startOfPresale + 360; //7200;
+        uint256 timePresale = _startOfPresale + 3600;
+        uint256 timePublicSale = _startOfPresale + 7200;
         uint256 _price;
         if(block.timestamp <=  timePresale) {
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
@@ -63,6 +63,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
             _price = 510000000000000000000;
+            whitelistedAddresses.push(msg.sender);
         } else {
             _price = 600000000000000000000;
         }
