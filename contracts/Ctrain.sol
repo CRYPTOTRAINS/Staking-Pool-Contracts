@@ -18,7 +18,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     Counters.Counter private _tokenIds;
      
     uint256 public nftPerAddressLimit = 10;
-    uint256 private _totalSupply = 10;
+    uint256 private _totalPresaleSupply = 10; //3000
 
     IERC20 public tokenAddress;
     address public reserveAddress;
@@ -47,17 +47,21 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     function create(uint256 _mintAmount, string memory tokenURI) public payable whenNotPaused {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
-        require(_mintAmount <= _totalSupply, "Token is sold out");
 
-        uint256 fee = 5300000000000000;
+        uint256 fee = _mintAmount * 5300000000000000;
         require(msg.value == fee, "Please send along $2 for each NFT to complete minting");
 
-        uint256 timePresale = _startOfPresale + 3600;
-        uint256 timePublicSale = _startOfPresale + 7200;
+        uint256 timePresale = _startOfPresale + 360; // 3600;
+        uint256 timePublicSale = _startOfPresale + 360; //7200;
         uint256 _price;
         if(block.timestamp <=  timePresale) {
+            require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
+             _totalPresaleSupply -= _mintAmount;
             _price = 420000000000000000000;
+             whitelistedAddresses.push(msg.sender);
         } else if (block.timestamp > timePresale && block.timestamp <= timePublicSale) {
+            require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
+             _totalPresaleSupply -= _mintAmount;
             _price = 510000000000000000000;
         } else {
             _price = 600000000000000000000;
@@ -67,8 +71,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 ownerMintedCount = balanceOf(msg.sender);
         require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
         tokenAddress.transferFrom(msg.sender, reserveAddress, _mintingPrice);
-        _totalSupply -= _mintAmount;
-        whitelistedAddresses.push(msg.sender);
+    
         for (uint256 i = 1; i <= _mintAmount; i++) {
             uint8 randRarity = uint8(_createRandomNum(100));
             Train memory newTrain = Train(COUNTER, 1, randRarity, false, 1);
@@ -86,8 +89,8 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         return trains;
     }
 
-    function totalSupply() public view returns(uint256) {
-        return _totalSupply;
+    function totalPresaleSupply() public view returns(uint256) {
+        return _totalPresaleSupply;
     }
 
      function isWhitelisted(address _user) public view returns (bool) {
