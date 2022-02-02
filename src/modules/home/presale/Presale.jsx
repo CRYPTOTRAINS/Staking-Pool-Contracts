@@ -55,6 +55,7 @@ export const Presale = () => {
   
   return (
     <main>
+    
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
       <p>{status}</p>
