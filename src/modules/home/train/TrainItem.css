@@ -6,7 +6,6 @@
   font-size: 0.9rem;
 }
 
-
 .train {
   display: flex;
   justify-content: center;
@@ -144,6 +143,12 @@
   background-size: contain;
   width: 7rem;
   height: 4rem;
+}
+
+@media (max-width: 599px) {
+  .purchase {
+    justify-content: center;
+  }
 }
 
 /* .v-separator
