@@ -34,7 +34,8 @@ export const Presale = () => {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
       await tx.wait();
       const tokenUri = "https";
-      const transaction = await contract.create(num, tokenUri);
+      const fee = (5300000000000000).toLocaleString("fullwide", { useGrouping: false });
+      const transaction = await contract.create(num, tokenUri, { value: fee });
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
           console.log("failed transaction");
