@@ -18,9 +18,12 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     Counters.Counter private _tokenIds;
      
     uint256 public nftPerAddressLimit = 10;
+    uint256 private _totalSupply = 10;
 
     IERC20 public tokenAddress;
     address public reserveAddress;
+
+    address[] private whitelistedAddresses;
 
     struct Train {
         uint256 id;
@@ -39,11 +42,15 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
         _startOfPresale = block.timestamp;
-    }    
-        
-    function create(uint256 _mintAmount, string memory tokenURI) public whenNotPaused {
+    }
+    
+    function create(uint256 _mintAmount, string memory tokenURI) public payable whenNotPaused {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
+        require(_mintAmount <= _totalSupply, "Token is sold out");
+
+        uint256 fee = 5300000000000000;
+        require(msg.value == fee, "Please send along $2 for each NFT to complete minting");
 
         uint256 timePresale = _startOfPresale + 3600;
         uint256 timePublicSale = _startOfPresale + 7200;
@@ -60,6 +67,8 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 ownerMintedCount = balanceOf(msg.sender);
         require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
         tokenAddress.transferFrom(msg.sender, reserveAddress, _mintingPrice);
+        _totalSupply -= _mintAmount;
+        whitelistedAddresses.push(msg.sender);
         for (uint256 i = 1; i <= _mintAmount; i++) {
             uint8 randRarity = uint8(_createRandomNum(100));
             Train memory newTrain = Train(COUNTER, 1, randRarity, false, 1);
@@ -75,6 +84,23 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     // Getters
     function getTrains() public view returns (Train[] memory) {
         return trains;
+    }
+
+    function totalSupply() public view returns(uint256) {
+        return _totalSupply;
+    }
+
+     function isWhitelisted(address _user) public view returns (bool) {
+        for (uint i = 0; i < whitelistedAddresses.length; i++) {
+            if (whitelistedAddresses[i] == _user) {
+                    return true;
+                }
+            }
+            return false;
+    }
+
+    function allWhitelistedAddresses() public view returns(address[] memory) {
+        return whitelistedAddresses;
     }
 
     function getOwnerTrains(address _owner) public view returns (Train[] memory) {
