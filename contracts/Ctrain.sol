@@ -49,11 +49,11 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 timePublicSale = _startOfPresale + 7200;
         uint256 _price;
         if(block.timestamp <=  timePresale) {
-            _price = 420*10e18;
+            _price = 420000000000000000000;
         } else if (block.timestamp > timePresale && block.timestamp <= timePublicSale) {
-            _price = 510*10e18;
+            _price = 510000000000000000000;
         } else {
-            _price = 600*10e18;
+            _price = 600000000000000000000;
         }
         
         uint256 _mintingPrice = _price * _mintAmount;
