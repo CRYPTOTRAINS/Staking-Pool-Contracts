@@ -47,7 +47,7 @@ export const TrainList = () => {
         {/*=============TRAIN ONE ======================*/}
         <main className="train">
           <p className="sno">#1</p>
-          <img src={sell} className='sell' alt="sell" />
+          <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={common} alt="common train" />
           </article>
@@ -144,7 +144,7 @@ export const TrainList = () => {
         {/*=============TRAIN TWO ======================*/}
         <main className="train">
           <p className="sno">#2</p>
-          <img src={sell} className='sell' alt="sell" />
+          <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={rare} alt="rare train" />
           </article>
@@ -241,7 +241,7 @@ export const TrainList = () => {
         {/*=============TRAIN THREE ======================*/}
         <main className="train">
           <p className="sno">#3</p>
-          <img src={sell} className='sell' alt="sell" />
+          <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={epic} alt="epic train" />
           </article>
@@ -338,7 +338,7 @@ export const TrainList = () => {
         {/*=============TRAIN FOUR ======================*/}
         <main className="train">
           <p className="sno">#4</p>
-          <img src={sell} className='sell' alt="sell" />
+          <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={legendary} alt="legendary train" />
           </article>

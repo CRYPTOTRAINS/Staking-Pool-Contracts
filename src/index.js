@@ -9,6 +9,7 @@ import { TrainList } from './modules/home/train/TrainList';
 import { Presale } from './modules/home/presale/Presale';
 import { MarketList } from './modules/home/marketplace/MarketPlaceList';
 import backgroundImage from './assets/images/background.png';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
   <React.StrictMode>
