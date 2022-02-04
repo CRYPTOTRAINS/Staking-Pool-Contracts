@@ -1,0 +1,203 @@
+.title {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.trainList {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  justify-items: center;
+  align-items: center;
+}
+
+@media (min-width: 600px) and (max-width: 769px) {
+  .trainList {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (max-width: 599px) {
+  .trainList {
+    grid-template-columns: auto;
+  }
+}
+
+.sno {
+  text-align: left;
+  margin-left: 1rem;
+  color: #df5832;
+  font-weight: bolder;
+  font-size: 0.9rem;
+}
+
+.train {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  margin: 0 0.3rem 2rem 0.3rem;
+  background-color: #f1e5bb;
+  box-shadow: 3px 3px rgb(107, 106, 106);
+  padding: 1rem 0;
+  position: relative;
+  /* z-index: -10; */
+}
+
+.sell {
+  position: relative;
+  display: flex;
+  width: 15%;
+  align-self: flex-end;
+  margin-right: 1rem;
+  top: -2.6rem;
+}
+
+.trainImage {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+}
+
+.bullet {
+  position: relative;
+  top: -0.1rem;
+}
+
+.bullet img {
+  width: 70%;
+  /* z-index: 1; */
+}
+
+.trainImage img {
+  width: 60%;
+}
+
+.trainContainer {
+  display: flex;
+  align-self: center;
+  background-color: #f8f8f0;
+  width: 96%;
+  border-top-left-radius: 4px;
+  box-shadow: -2px -2px rgb(192, 189, 189);
+  justify-content: space-evenly;
+  position: relative;
+  top: -0.3rem;
+  /* z-index: -4; */
+  text-align: left;
+}
+
+.tableData {
+  font-size: 0.7rem;
+}
+
+.icon {
+  position: relative;
+  top: -3px;
+  margin-right: 2px;
+}
+
+.icon img {
+  width: 1rem;
+}
+
+.imageIcon {
+  display: flex;
+  justify-content: center;
+}
+
+.imageIcon img {
+  width: 2rem;
+}
+
+.value {
+  color: black;
+  font-weight: bold;
+}
+
+.trainButton {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sendButton {
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.dispatch {
+  background-image: url('../../../assets/images/dispatch_button.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 8rem;
+  height: 2.4rem;
+}
+
+.reward {
+  background-image: url('../../../assets/images/reward_button.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 8rem;
+  height: 2.4rem;
+}
+
+.trainButton img {
+  width: 100%;
+}
+
+.trainButton img:active {
+  cursor: pointer; 
+  transform: translateY(1px);
+}
+
+.purchase {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1rem;
+}
+
+.purchaseButton {
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket .ticketImage {
+  background-image: url('../../../assets/images/ticket.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 6rem;
+  height: 6rem;
+}
+
+.ticket .buyTicketImage {
+  background-image: url('../../../assets/images/buy_tickets_button.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 7rem;
+  height: 4rem;
+}
+
+.box .boxImage {
+  background-image: url('../../../assets/images/box.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 6rem;
+  height: 6rem;
+}
+
+.box .unboxImage {
+  background-image: url('../../../assets/images/unbox_train_button.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 7rem;
+  height: 4rem;
+}
+
+@media (max-width: 599px) {
+  .purchase {
+    justify-content: center;
+  }
+}
