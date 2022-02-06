@@ -30,7 +30,10 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint8 level;
         uint8 rarity;
         bool fuel;
-        uint8 status;
+        uint8 acceleration;
+        uint8 speed;
+        uint8 brakes;
+        uint8 loads;
     }
     
     Train[] public trains;
@@ -38,13 +41,19 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     uint256 COUNTER;
     uint256 private _startOfPresale;
 
+    event RestrictedTransfer(
+        address _sender,
+        address _receiver,
+        uint256 _id
+    );
+
     constructor(address _token, address _reserve)ERC721("Ctrain", "CTR"){
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
         _startOfPresale = block.timestamp;
     }
     
-    function create(uint256 _mintAmount, string memory tokenURI) public payable whenNotPaused {
+    function create(uint256 _mintAmount) public payable whenNotPaused {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
 
@@ -52,15 +61,15 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 timePublicSale = _startOfPresale + 7200;
         uint256 _price;
         if(block.timestamp <=  timePresale) {
+            require(isWhitelisted(msg.sender), "You are not a whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
             _price = 420000000000000000000;
-             whitelistedAddresses.push(msg.sender);
         } else if (block.timestamp > timePresale && block.timestamp <= timePublicSale) {
+            require(isWhitelisted(msg.sender), "You are not a whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
             _price = 510000000000000000000;
-            whitelistedAddresses.push(msg.sender);
         } else {
             _price = 600000000000000000000;
         }
@@ -74,14 +83,38 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     
         for (uint256 i = 1; i <= _mintAmount; i++) {
             uint8 randRarity = uint8(_createRandomNum(100));
-            Train memory newTrain = Train(COUNTER, 1, randRarity, false, 1);
+            uint8 acceleration = uint8(_createRandomNum(100));
+            uint8 speed = uint8(_createRandomNum(100));
+            uint8 brakes = uint8(_createRandomNum(100));
+            uint8 loads = uint8(_createRandomNum(100));
+            Train memory newTrain = Train(COUNTER, 1, randRarity, false, acceleration, speed, brakes, loads);
             trains.push(newTrain);
             uint256 newItemId = _tokenIds.current();
             _mint(msg.sender, newItemId);
-            string memory uniqueURI = string(abi.encodePacked(tokenURI, i));
-            _setTokenURI(newItemId, uniqueURI);
             _tokenIds.increment();
         }
+    }
+
+    function whitelistUsers(address[] calldata _users) public onlyOwner {
+        delete whitelistedAddresses;
+        whitelistedAddresses = _users;
+    }
+
+    function withdraw() external payable onlyOwner {
+        address payable _reserve = payable(reserveAddress);
+        _reserve.transfer(address(this).balance);
+    }
+
+    function transferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+        require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
+        _transfer(_from, _to, _tokenId);
+        emit RestrictedTransfer(_from, _to,  _tokenId);
+    }
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+        require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
+        safeTransferFrom(_from, _to, _tokenId, "");
+        emit RestrictedTransfer(_from, _to,  _tokenId);
     }
 
     // Getters
@@ -139,3 +172,8 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     }
 
 }
+
+/* ["0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", 
+"0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB", 
+"0x617F2E2fD72FD9D5503197092aC168c91465E7f2"]
+*/
