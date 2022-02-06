@@ -25,9 +25,18 @@ import dispatch from '../../../assets/images/dispatch_button.png';
 import reward from '../../../assets/images/reward_button.png';
 import sell from '../../../assets/images/sell.png';
 
+import ModalRoot from '../../common/Modal/ModalRoot';
+import ModalService from '../../../services/ModalService';
+import DispatchModal from '../TrainModals/DispatchModal';
+
 export const TrainList = () => {
+  const addModal = () => {
+    ModalService.open(DispatchModal);
+  };
+
   return (
     <>
+      <ModalRoot />
       <section className="purchase">
         <article className="ticket">
           <div className="ticket-image"></div>
@@ -47,7 +56,7 @@ export const TrainList = () => {
         {/*=============TRAIN ONE ======================*/}
         <main className="train">
           <p className="sno">#1</p>
-          <img src={sell} className='sell' alt="sell" />
+          <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={common} alt="common train" />
           </article>
@@ -137,14 +146,18 @@ export const TrainList = () => {
             </Table>
           </section>
           <section className="train-button">
-            <img src={dispatch} alt="dispatch button" />
-            <img src={reward} alt="reward button" />
+            <button className="dispatch" onClick={addModal}>
+              <img src={dispatch} alt="dispatch button" />
+            </button>
+            <button className="dispatch" onClick={() => console.log('clicked')}>
+              <img src={reward} alt="reward button" />
+            </button>
           </section>
         </main>
         {/*=============TRAIN TWO ======================*/}
         <main className="train">
           <p className="sno">#2</p>
-          <img src={sell} className='sell' alt="sell" />
+          <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={rare} alt="rare train" />
           </article>
@@ -234,14 +247,18 @@ export const TrainList = () => {
             </Table>
           </section>
           <section className="train-button">
-            <img src={dispatch} alt="dispatch button" />
-            <img src={reward} alt="reward button" />
+            <button className="dispatch">
+              <img src={dispatch} alt="dispatch button" />
+            </button>
+            <button className="dispatch">
+              <img src={reward} alt="reward button" />
+            </button>
           </section>
         </main>
         {/*=============TRAIN THREE ======================*/}
         <main className="train">
           <p className="sno">#3</p>
-          <img src={sell} className='sell' alt="sell" />
+          <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={epic} alt="epic train" />
           </article>
@@ -331,14 +348,18 @@ export const TrainList = () => {
             </Table>
           </section>
           <section className="train-button">
-            <img src={dispatch} alt="dispatch button" />
-            <img src={reward} alt="reward button" />
+            <button className="dispatch">
+              <img src={dispatch} alt="dispatch button" />
+            </button>
+            <button className="dispatch">
+              <img src={reward} alt="reward button" />
+            </button>
           </section>
         </main>
         {/*=============TRAIN FOUR ======================*/}
         <main className="train">
           <p className="sno">#4</p>
-          <img src={sell} className='sell' alt="sell" />
+          <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={legendary} alt="legendary train" />
           </article>
@@ -428,8 +449,12 @@ export const TrainList = () => {
             </Table>
           </section>
           <section className="train-button">
-            <img src={dispatch} alt="dispatch button" />
-            <img src={reward} alt="reward button" />
+            <button className="dispatch">
+              <img src={dispatch} alt="dispatch button" />
+            </button>
+            <button className="dispatch">
+              <img src={reward} alt="reward button" />
+            </button>
           </section>
         </main>
       </div>
