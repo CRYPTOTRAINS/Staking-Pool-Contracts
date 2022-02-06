@@ -247,10 +247,10 @@ export const TrainList = () => {
             </Table>
           </section>
           <section className="train-button">
-            <button className="dispatch">
+            <button className="dispatch" onClick={addModal}>
               <img src={dispatch} alt="dispatch button" />
             </button>
-            <button className="dispatch">
+            <button className="dispatch" onClick={() => console.log('clicked')}>
               <img src={reward} alt="reward button" />
             </button>
           </section>
@@ -348,10 +348,10 @@ export const TrainList = () => {
             </Table>
           </section>
           <section className="train-button">
-            <button className="dispatch">
+            <button className="dispatch" onClick={addModal}>
               <img src={dispatch} alt="dispatch button" />
             </button>
-            <button className="dispatch">
+            <button className="dispatch" onClick={() => console.log('clicked')}>
               <img src={reward} alt="reward button" />
             </button>
           </section>
@@ -449,10 +449,10 @@ export const TrainList = () => {
             </Table>
           </section>
           <section className="train-button">
-            <button className="dispatch">
+            <button className="dispatch" onClick={addModal}>
               <img src={dispatch} alt="dispatch button" />
             </button>
-            <button className="dispatch">
+            <button className="dispatch" onClick={() => console.log('clicked')}>
               <img src={reward} alt="reward button" />
             </button>
           </section>

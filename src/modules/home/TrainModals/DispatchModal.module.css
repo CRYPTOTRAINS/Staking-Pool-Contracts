@@ -1,3 +1,29 @@
+.dispatchContainer {
+    margin-bottom: 1rem;
+}
+
 .dispatchFooter img {
-    width: 100%;
+  width: 100%;
+}
+
+.captcha {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin: 4rem auto 2rem auto;
+  background-image: linear-gradient(to right, #8b898b, #e9e8e9);
+  width: max-content;
+  display: flex;
+  align-self: center;
+  padding: 0 2rem;
+}
+
+.captchaInput {
+  width: 80%;
+  margin: 0 0.2rem;
+  background-color: #f0e5bc;
+  height: 2.6rem;
+  padding: 0 0.5rem;
+  font-weight: bold;
+  border-radius: 3px;
+  border: solid 1px gray;
 }
