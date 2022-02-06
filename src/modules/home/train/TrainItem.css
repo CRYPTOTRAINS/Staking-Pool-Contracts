@@ -152,6 +152,11 @@
   height: 4rem;
 }
 
+.station-button {
+  background-color: transparent;
+  border: 0;
+}
+
 @media (max-width: 599px) {
   .purchase {
     justify-content: center;

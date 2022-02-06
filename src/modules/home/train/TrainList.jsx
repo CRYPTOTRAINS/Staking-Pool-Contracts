@@ -28,10 +28,17 @@ import sell from '../../../assets/images/sell.png';
 import ModalRoot from '../../common/Modal/ModalRoot';
 import ModalService from '../../../services/ModalService';
 import DispatchModal from '../TrainModals/DispatchModal';
+import FuelModal from '../TrainModals/FuelModal';
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export const TrainList = () => {
   const addModal = () => {
     ModalService.open(DispatchModal);
+  };
+
+  const addFuelModal = () => {
+    ModalService.open(FuelModal);
   };
 
   return (
@@ -124,7 +131,15 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
-                      <img src={station} alt="station" />
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to Buy more Fuel</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addFuelModal}>
+                          <img src={station} alt="station" />
+                        </button>
+                      </OverlayTrigger>
                     </span>
                   </td>
                 </tr>
@@ -225,7 +240,15 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
-                      <img src={station} alt="station" />
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to Buy more Fuel</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addFuelModal}>
+                          <img src={station} alt="station" />
+                        </button>
+                      </OverlayTrigger>
                     </span>
                   </td>
                 </tr>
@@ -326,7 +349,15 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
-                      <img src={station} alt="station" />
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to Buy more Fuel</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addFuelModal}>
+                          <img src={station} alt="station" />
+                        </button>
+                      </OverlayTrigger>
                     </span>
                   </td>
                 </tr>
@@ -427,7 +458,15 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
-                      <img src={station} alt="station" />
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to Buy more Fuel</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addFuelModal}>
+                          <img src={station} alt="station" />
+                        </button>
+                      </OverlayTrigger>
                     </span>
                   </td>
                 </tr>

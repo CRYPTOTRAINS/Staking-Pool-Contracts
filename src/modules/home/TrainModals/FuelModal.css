@@ -1,0 +1,27 @@
+.close {
+  background-color: transparent;
+  border: 0;
+  width: fit-content;
+  align-self: flex-end;
+}
+.close::after {
+  content: '\00d7';
+  padding: 0.5rem;
+  font-size: 2rem;
+}
+
+img.buy-fuel {
+  display: flex;
+  margin-right: 3rem;
+  padding-left: 0;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #6b6b6b;
+}
+
+.buy-button {
+  margin-bottom: 1rem;
+}
