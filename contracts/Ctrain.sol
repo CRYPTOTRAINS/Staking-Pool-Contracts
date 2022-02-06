@@ -61,15 +61,15 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 timePublicSale = _startOfPresale + 7200;
         uint256 _price;
         if(block.timestamp <=  timePresale) {
+            require(isWhitelisted(msg.sender), "You are not a whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
             _price = 420000000000000000000;
-             whitelistedAddresses.push(msg.sender);
         } else if (block.timestamp > timePresale && block.timestamp <= timePublicSale) {
+            require(isWhitelisted(msg.sender), "You are not a whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
             _price = 510000000000000000000;
-            whitelistedAddresses.push(msg.sender);
         } else {
             _price = 600000000000000000000;
         }
@@ -100,9 +100,9 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         whitelistedAddresses = _users;
     }
 
-    function withdrawFromContract() public onlyOwner {
-        uint256 contractBalance = tokenAddress.balanceOf(address(this));
-        tokenAddress.transferFrom(address(this), reserveAddress, contractBalance);
+    function withdraw() external payable onlyOwner {
+        address payable _reserve = payable(reserveAddress);
+        _reserve.transfer(address(this).balance);
     }
 
     function transferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
@@ -168,3 +168,8 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     }
 
 }
+
+/* ["0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", 
+"0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB", 
+"0x617F2E2fD72FD9D5503197092aC168c91465E7f2"]
+*/
