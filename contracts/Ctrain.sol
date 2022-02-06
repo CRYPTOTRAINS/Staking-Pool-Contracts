@@ -30,7 +30,10 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint8 level;
         uint8 rarity;
         bool fuel;
-        uint8 status;
+        uint8 acceleration;
+        uint8 speed;
+        uint8 brakes;
+        uint8 loads;
     }
     
     Train[] public trains;
@@ -80,7 +83,11 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     
         for (uint256 i = 1; i <= _mintAmount; i++) {
             uint8 randRarity = uint8(_createRandomNum(100));
-            Train memory newTrain = Train(COUNTER, 1, randRarity, false, 1);
+            uint8 acceleration = uint8(_createRandomNum(100));
+            uint8 speed = uint8(_createRandomNum(100));
+            uint8 brakes = uint8(_createRandomNum(100));
+            uint8 loads = uint8(_createRandomNum(100));
+            Train memory newTrain = Train(COUNTER, 1, randRarity, false, acceleration, speed, brakes, loads);
             trains.push(newTrain);
             uint256 newItemId = _tokenIds.current();
             _mint(msg.sender, newItemId);
