@@ -106,10 +106,14 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     }
 
     function transferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+        require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
+        _transfer(_from, _to, _tokenId);
         emit RestrictedTransfer(_from, _to,  _tokenId);
     }
 
     function safeTransferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+        require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
+        safeTransferFrom(_from, _to, _tokenId, "");
         emit RestrictedTransfer(_from, _to,  _tokenId);
     }
 
