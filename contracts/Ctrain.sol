@@ -38,13 +38,19 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     uint256 COUNTER;
     uint256 private _startOfPresale;
 
+    event RestrictedTransfer(
+        address _sender,
+        address _receiver,
+        uint256 _id
+    );
+
     constructor(address _token, address _reserve)ERC721("Ctrain", "CTR"){
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
         _startOfPresale = block.timestamp;
     }
     
-    function create(uint256 _mintAmount, string memory tokenURI) public payable whenNotPaused {
+    function create(uint256 _mintAmount) public payable whenNotPaused {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
 
@@ -78,10 +84,26 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
             trains.push(newTrain);
             uint256 newItemId = _tokenIds.current();
             _mint(msg.sender, newItemId);
-            string memory uniqueURI = string(abi.encodePacked(tokenURI, i));
-            _setTokenURI(newItemId, uniqueURI);
             _tokenIds.increment();
         }
+    }
+
+    function whitelistUsers(address[] calldata _users) public onlyOwner {
+        delete whitelistedAddresses;
+        whitelistedAddresses = _users;
+    }
+
+    function withdrawFromContract() public onlyOwner {
+        uint256 contractBalance = tokenAddress.balanceOf(address(this));
+        tokenAddress.transferFrom(address(this), reserveAddress, contractBalance);
+    }
+
+    function transferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+        emit RestrictedTransfer(_from, _to,  _tokenId);
+    }
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+        emit RestrictedTransfer(_from, _to,  _tokenId);
     }
 
     // Getters
