@@ -29,6 +29,7 @@ import ModalRoot from '../../common/Modal/ModalRoot';
 import ModalService from '../../../services/ModalService';
 import DispatchModal from '../TrainModals/DispatchModal';
 import FuelModal from '../TrainModals/FuelModal';
+import BuyTicketModal from '../TrainModals/BuyTicketModal';
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
@@ -41,13 +42,17 @@ export const TrainList = () => {
     ModalService.open(FuelModal);
   };
 
+  const addBuyTicketModal = () => {
+    ModalService.open(BuyTicketModal);
+  }
+
   return (
     <>
       <ModalRoot />
       <section className="purchase">
         <article className="ticket">
           <div className="ticket-image"></div>
-          <button className="purchase-button">
+          <button className="purchase-button" onClick={addBuyTicketModal}>
             <div className="buy-ticket-image"></div>
           </button>
         </article>
