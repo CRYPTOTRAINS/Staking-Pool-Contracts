@@ -16,6 +16,11 @@ img.buy-fuel {
   padding-left: 0;
 }
 
+img.buy-ticket {
+  width: 60%;
+  margin: 5rem auto 0 auto;
+}
+
 .price {
   font-size: 1.4rem;
   font-weight: bold;
