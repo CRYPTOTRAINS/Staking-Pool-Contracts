@@ -1,3 +1,8 @@
+.modal {
+  width: 70% !important;
+  margin: auto !important;
+}
+
 .close {
   background-color: transparent;
   border: 0;
@@ -17,8 +22,8 @@ img.buy-fuel {
 }
 
 img.buy-ticket {
-  width: 60%;
-  margin: 5rem auto 0 auto;
+  width: 70%;
+  margin: 5rem auto 3rem auto;
 }
 
 .price {
@@ -29,6 +34,21 @@ img.buy-ticket {
 
 .buy-button {
   margin: auto;
-  width: 18rem;
+  width: 12rem;
+  margin-top: 0;
   margin-bottom: 1rem;
+}
+
+button.buy-button {
+  margin: 0;
+  padding: 0;
+}
+
+select {
+  margin: auto !important;
+  width: 80% !important;
+  margin-top: 1rem !important;
+  height: 1.8rem !important;
+  padding-bottom: 0.2rem !important;
+  font-size: 0.8rem !important;
 }
