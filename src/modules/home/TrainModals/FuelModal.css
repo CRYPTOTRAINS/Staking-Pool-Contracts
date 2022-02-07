@@ -23,5 +23,7 @@ img.buy-fuel {
 }
 
 .buy-button {
+  margin: auto;
+  width: 18rem;
   margin-bottom: 1rem;
 }
