@@ -30,6 +30,7 @@ import ModalService from '../../../services/ModalService';
 import DispatchModal from '../TrainModals/DispatchModal';
 import FuelModal from '../TrainModals/FuelModal';
 import BuyTicketModal from '../TrainModals/BuyTicketModal';
+import RepairModal from '../TrainModals/RepairModal';
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
@@ -44,7 +45,11 @@ export const TrainList = () => {
 
   const addBuyTicketModal = () => {
     ModalService.open(BuyTicketModal);
-  }
+  };
+
+  const addRepairModal = () => {
+    ModalService.open(RepairModal);
+  };
 
   return (
     <>
@@ -158,7 +163,15 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
-                      <img src={mechanic} alt="mechanic" />
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to repair train</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addRepairModal}>
+                          <img src={mechanic} alt="mechanic" />
+                        </button>
+                      </OverlayTrigger>
                     </span>
                   </td>
                 </tr>
