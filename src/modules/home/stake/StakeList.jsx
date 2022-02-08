@@ -51,14 +51,12 @@ export const StakeList = () => {
               } else {
                 setStatus("Transaction successful");
               }
-        
-        
         }catch(error) {
             if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
               return;
             }
             console.error(error.message);
-            setStatus(console.error(error.message));
+            //setStatus(console.error(error.message));
         }
  }
 
@@ -203,20 +201,19 @@ export const StakeList = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-    // console.log(stakes);
-    // console.log(stake);
-    // const index = stake.Index;
+   
     const num = index.index;
-    console.log(num);
-    // const amt = amount.toLocaleString("fullwide", { useGrouping: false });
-    const amt = (amount.amount).toLocaleString("fullwide", { useGrouping: false });
+
+    const object = stakes[num];
     
-    console.log(amt)
-    //console.log(amt)
+    const amt = (amount.amount);
 
     try{
-      const transaction = await contract.withdrawStakePoolOne(amt, num);
-      const receipt = await transaction.wait();
+      if(object.Pool == "Bullet Branch") {
+        console.log(object.Pool);
+        const transaction = await contract.withdrawStakePoolOne(amt, num);
+      
+        const receipt = await transaction.wait();
       
             if (receipt.status === 0) {
               setStatus("Transaction failed");
@@ -224,18 +221,51 @@ export const StakeList = () => {
             } else {
               setStatus("Transaction successful");
             }
+       
+      } else if(object.Pool == "Rail X Branch") {
+        console.log(object.Pool);
+        const transaction = await contract.withdrawStakePoolTwo(amt, num);
+        const receipt = await transaction.wait();
+            if (receipt.status === 0) {
+              setStatus("Transaction failed");
+              throw new Error("Transaction failed");
+            } else {
+              setStatus("Transaction successful");
+            }
+        
+      } else if(object.Pool == "North Star Branch") {
+        console.log(object.Pool);
+        const transaction = await contract.withdrawStakePoolThree(amt, num);
+        const receipt = await transaction.wait();
+            if (receipt.status === 0) {
+              setStatus("Transaction failed");
+              throw new Error("Transaction failed");
+            } else {
+              setStatus("Transaction successful");
+            }
+      } else {
+        const transaction = await contract.withdrawStakePoolFour(amt, num);
+        const receipt = await transaction.wait();
+            if (receipt.status === 0) {
+              setStatus("Transaction failed");
+              throw new Error("Transaction failed");
+            } else {
+              setStatus("Transaction successful");
+            }
+      }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
         return;
       }
       console.error(error.message);
       setStatus(console.error(error.message));
+      console.log(status)
     }
+  
   }
 
   return (
     <>
-    <p className="status">{status}</p>
       <h2 className="title">POOLS</h2>
       <div className="stake-list">
         {/*=============POOL ONE ======================*/}
@@ -341,7 +371,7 @@ export const StakeList = () => {
 
       </div>
       <BackArrow />
-      
+      <h3>{status}</h3>
       <h2 className="stake-title">Your Stakes</h2>
       {stakes.length === 0 ? (
         <div className='no-stake'>You do not have any Stake Yet, Choose from above to Place Your Stake</div>
@@ -370,11 +400,9 @@ export const StakeList = () => {
                 <input placeholder="amount" required className="input"
                 onChange={e => updateFormInput({...formInput, amount: e.target.value})}  onInput={e => updateIndexInput({...indexInput, index: stake.Index})}/>
                     <img src={unstake} className="unstake-button" onClick={withdraw} onKeyDown={withdraw} alt="boton de banco" />
-                
               </div>
             ))
           }
-        
       </div>
        )}
     </>

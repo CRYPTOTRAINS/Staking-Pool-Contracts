@@ -93,7 +93,6 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         emit Staked(msg.sender, amount);
     }
 
-
     function calculateStakeRewardPoolOne(Stake memory _current_stake) internal view returns(uint256){
         return (((block.timestamp - _current_stake.since) / rewardsDurationPoolOne) * _current_stake.amount)/rewardPerCyclePoolOne;
     }
