@@ -22,6 +22,7 @@ import moment from "moment";
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 export const StakeList = () => {
   const [stakes, setStakes] = useState([]);
+  const [indexInput, updateIndexInput] = useState({index:0});
   const [formInput, updateFormInput] = useState({amount:0});
   const [status, setStatus] = useState("");
   
@@ -189,21 +190,32 @@ export const StakeList = () => {
       } else {
         stake.Pool = "Stellar Branch"
       }
-
+      
       return stake;
     }))
 
     setStakes(stakes);
   }
-  
+
   async function withdraw() {
     const amount = formInput;
+    const index = indexInput;
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-    let index = 0;
+    // console.log(stakes);
+    // console.log(stake);
+    // const index = stake.Index;
+    const num = index.index;
+    console.log(num);
+    // const amt = amount.toLocaleString("fullwide", { useGrouping: false });
+    const amt = (amount.amount).toLocaleString("fullwide", { useGrouping: false });
+    
+    console.log(amt)
+    //console.log(amt)
+
     try{
-      const transaction = await contract.withdrawStakePoolOne(amount, index);
+      const transaction = await contract.withdrawStakePoolOne(amt, num);
       const receipt = await transaction.wait();
       
             if (receipt.status === 0) {
@@ -338,7 +350,8 @@ export const StakeList = () => {
           
           {
             stakes.map((stake, i) => (
-              <div  className="stake" key={i}>
+              <div  className="stake" key={stake.Index}>
+                {/* {console.log(key)} */}
                 <section className="item-container">
                 
                   <article className="item">
@@ -350,12 +363,12 @@ export const StakeList = () => {
                   <article className="item">
                     Start Time: <span>{stake.Start} </span> 
                   </article>
-                  {/* <article className="item">
+                  <article className="item">
                     Stake Count: <span>{stake.Index}</span> 
-                  </article> */}
+                  </article>
                 </section>
                 <input placeholder="amount" required className="input"
-                onChange={e => updateFormInput({...formInput, amount: e.target.value})}  />
+                onChange={e => updateFormInput({...formInput, amount: e.target.value})}  onInput={e => updateIndexInput({...indexInput, index: stake.Index})}/>
                     <img src={unstake} className="unstake-button" onClick={withdraw} onKeyDown={withdraw} alt="boton de banco" />
                 
               </div>
