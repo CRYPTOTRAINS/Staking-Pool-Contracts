@@ -26,7 +26,7 @@ export const StakeList = () => {
   const [status, setStatus] = useState("");
   
   useEffect(() => {
-    fetchMyStakes()
+    fetchMyStakes();
   }, []);
 
   
@@ -64,16 +64,18 @@ export const StakeList = () => {
  // ======================== pool two ======================
  async function stakeTwo() {
   const amount = ethers.utils.parseEther(formInput.amount);
-  const amt = JSON.stringify(amount*1000000000000000000)
+  // const amt = JSON.stringify(amount*1000000000000000000)
+  // const amt = (num * 6000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
   const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amt);  ////
+              const tx = await token.approve(StakingAddress.StakeToken, amount);  ////
               await tx.wait();                                              ///////
-          const transaction = await contract.stakePoolTwo(amt);
+          const transaction = await contract.stakePoolTwo(amount);
           const receipt = await transaction.wait();
+          
             if (receipt.status === 0) {
               console.log("failed transaction");
               setStatus("Transaction failed");
@@ -159,17 +161,25 @@ export const StakeList = () => {
     const provider = new ethers.providers.Web3Provider(connection)
     const signer = provider.getSigner()
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-    const data = await contract.fetchMyStakes()
+    const data = await contract.fetchMyStakes();
+    
+    let counter = 0;
     const stakes = await Promise.all(data.map(async i => {
       const time = moment.unix(i.since) // convert blocktime to actual time
       //Selective pool display
       const pool = i.pool.toNumber();
       
       let stake = {
-        Amount: i.amount.toNumber(),
+        //Amount: i.amount.toNumber(),
+        Amount: i.amount.toLocaleString("fullwide", { useGrouping: false }),
         Start: time.toString(),
         Pool: i.pool.toNumber(),
+        Index: counter,
       }
+      
+      counter++;
+      
+
       if(pool == 1) {
         stake.Pool = "Bullet Branch"
       } else if(pool == 2) {
@@ -180,10 +190,10 @@ export const StakeList = () => {
         stake.Pool = "Stellar Branch"
       }
 
-      return stake
+      return stake;
     }))
 
-    setStakes(stakes)
+    setStakes(stakes);
   }
   
   async function withdraw() {
@@ -191,9 +201,9 @@ export const StakeList = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-    let index = 0
+    let index = 0;
     try{
-      const transaction = await contract.withdrawStakePoolOne(amount, index)
+      const transaction = await contract.withdrawStakePoolOne(amount, index);
       const receipt = await transaction.wait();
       
             if (receipt.status === 0) {
@@ -341,7 +351,7 @@ export const StakeList = () => {
                     Start Time: <span>{stake.Start} </span> 
                   </article>
                   {/* <article className="item">
-                    Stake Pool: <span>{stake.Pool}</span> 
+                    Stake Count: <span>{stake.Index}</span> 
                   </article> */}
                 </section>
                 <input placeholder="amount" required className="input"
