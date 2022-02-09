@@ -40,12 +40,11 @@ export const StakeList = () => {
     const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); 
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amount);  
-              await tx.wait();                                              
+            const tx = await token.approve(StakingAddress.StakeToken, amount);  
+            await tx.wait();                                              
             const transaction = await contract.stakePoolOne(amount);
             const receipt = await transaction.wait();
               if (receipt.status === 0) {
-                console.log("failed transaction");
                 setStatus("Transaction failed");
                 throw new Error("Transaction failed");
               } else {
@@ -77,7 +76,6 @@ export const StakeList = () => {
           const receipt = await transaction.wait();
           
             if (receipt.status === 0) {
-              console.log("failed transaction");
               setStatus("Transaction failed");
               throw new Error("Transaction failed");
             } else {
@@ -85,10 +83,10 @@ export const StakeList = () => {
             }
       }catch(error) {
           if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+            setStatus("Transaction rejected by user");
             return;
           }
-          console.error(error.message);
-          setStatus(console.error(error.message));
+          setStatus(error.data.message);
       }
 }
  
@@ -106,7 +104,6 @@ export const StakeList = () => {
           const transaction = await contract.stakePoolThree(amt);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
-              console.log("failed transaction");
               setStatus("Transaction failed");
               throw new Error("Transaction failed");
             } else {
@@ -114,10 +111,10 @@ export const StakeList = () => {
             }
       }catch(error) {
           if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+            setStatus("Transaction rejected by user");
             return;
           }
-          console.error(error.message);
-          setStatus(console.error(error.message));
+          setStatus(error.data.message);
       }
 }
 
@@ -145,8 +142,7 @@ export const StakeList = () => {
           if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
             return;
           }
-          console.error(error.message);
-          setStatus(console.error(error.message));
+          setStatus(error.data.message);
       }
 }
   async function fetchMyStakes() {
@@ -219,7 +215,7 @@ export const StakeList = () => {
               setStatus("Transaction failed");
               throw new Error("Transaction failed");
             } else {
-              setStatus("Transaction successful");
+              setStatus("Withdrawal successful");
             }
        
       } else if(object.Pool == "Rail X Branch") {
@@ -257,8 +253,7 @@ export const StakeList = () => {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
         return;
       }
-      console.error(error.message);
-      setStatus(console.error(error.message));
+      setStatus(error.data.message);
     }
   
   }
