@@ -33,6 +33,7 @@ export const StakeList = () => {
   
 // ================ pool one ======================
   async function stakeOne() {
+
     const amount = ethers.utils.parseEther(formInput.amount);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -41,7 +42,6 @@ export const StakeList = () => {
     try {
               const tx = await token.approve(StakingAddress.StakeToken, amount);  
               await tx.wait();                                              
-              
             const transaction = await contract.stakePoolOne(amount);
             const receipt = await transaction.wait();
               if (receipt.status === 0) {
@@ -53,6 +53,7 @@ export const StakeList = () => {
               }
         }catch(error) {
             if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+              setStatus("Transaction rejected by user");
               return;
             }
             console.error(error.message);
@@ -91,7 +92,6 @@ export const StakeList = () => {
       }
 }
  
-
  // ======================== pool three ======================
  async function stakeThree() {
   const amount = ethers.utils.parseEther(formInput.amount);
@@ -149,8 +149,8 @@ export const StakeList = () => {
           setStatus(console.error(error.message));
       }
 }
- 
   async function fetchMyStakes() {
+   
     const web3Modal = new Web3Modal({
       network: "mainnet",
       cacheProvider: true,
@@ -259,7 +259,6 @@ export const StakeList = () => {
       }
       console.error(error.message);
       setStatus(console.error(error.message));
-      console.log(status)
     }
   
   }
