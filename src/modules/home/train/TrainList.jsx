@@ -192,7 +192,7 @@ export const TrainList = () => {
             <button className="dispatch" onClick={addModal}>
               <img src={dispatch} alt="dispatch button" />
             </button>
-            <button className="dispatch" onClick={() => console.log('clicked')}>
+            <button className="dispatch" onClick={addWinnerModal}>
               <img src={reward} alt="reward button" />
             </button>
           </section>
@@ -309,7 +309,7 @@ export const TrainList = () => {
             <button className="dispatch" onClick={addModal}>
               <img src={dispatch} alt="dispatch button" />
             </button>
-            <button className="dispatch" onClick={() => console.log('clicked')}>
+            <button className="dispatch" onClick={addWinnerModal}>
               <img src={reward} alt="reward button" />
             </button>
           </section>
@@ -426,7 +426,7 @@ export const TrainList = () => {
             <button className="dispatch" onClick={addModal}>
               <img src={dispatch} alt="dispatch button" />
             </button>
-            <button className="dispatch" onClick={() => console.log('clicked')}>
+            <button className="dispatch" onClick={addWinnerModal}>
               <img src={reward} alt="reward button" />
             </button>
           </section>
@@ -529,7 +529,7 @@ export const TrainList = () => {
                         overlay={(props) => <Tooltip {...props}>Click to repair train</Tooltip>}
                         placement="bottom"
                       >
-                        <button className="station-button" onClick={addWinnerModal}>
+                        <button className="station-button" onClick={addRepairModal}>
                           <img src={mechanic} alt="mechanic" />
                         </button>
                       </OverlayTrigger>
@@ -543,7 +543,7 @@ export const TrainList = () => {
             <button className="dispatch" onClick={addModal}>
               <img src={dispatch} alt="dispatch button" />
             </button>
-            <button className="dispatch" onClick={() => console.log('clicked')}>
+            <button className="dispatch" onClick={addWinnerModal}>
               <img src={reward} alt="reward button" />
             </button>
           </section>
