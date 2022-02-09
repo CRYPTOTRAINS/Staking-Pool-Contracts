@@ -101,6 +101,11 @@
 
 .train-button img {
   width: 100%;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.train-button img:hover {
+  width: 102%;
 }
 
 .train-button img:active {
@@ -131,9 +136,14 @@
 .ticket .buy-ticket-image {
   background-image: url('../../../assets/images/buy_tickets_button.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 70%;
   width: 7rem;
   height: 4rem;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.ticket .buy-ticket-image:hover {
+  background-size: 102% 72%;
 }
 
 .box .box-image {
@@ -147,9 +157,14 @@
 .box .unbox-image {
   background-image: url('../../../assets/images/unbox_train_button.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 70%;
   width: 7rem;
   height: 4rem;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.box .unbox-image:hover {
+  background-size: 102% 72%;
 }
 
 .station-button {

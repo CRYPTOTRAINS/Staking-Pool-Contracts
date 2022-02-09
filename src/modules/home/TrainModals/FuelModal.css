@@ -57,10 +57,11 @@ img.winner {
   animation: zoom-in-zoom-out 2s ease-out infinite;
 }
 
-.congrats {
+.cong {
   font-weight: bolder;
   font-size: 2.2rem;
   font-family: 'Saira Extra Condensed', sans-serif;
+  color: #545861;
 }
 
 .position {
