@@ -55,7 +55,6 @@ export const StakeList = () => {
               setStatus("Transaction rejected by user");
               return;
             }
-            // console.error(error.message);
             setStatus(error.data.message);
         }
  }
@@ -166,7 +165,7 @@ export const StakeList = () => {
       
       let stake = {
         //Amount: i.amount.toNumber(),
-        Amount: i.amount.toLocaleString("fullwide", { useGrouping: false }),
+        Amount: i.amount.toLocaleString("fullwide", { useGrouping: false })/10e17,
         Start: time.toString(),
         Pool: i.pool.toNumber(),
         Index: counter,
