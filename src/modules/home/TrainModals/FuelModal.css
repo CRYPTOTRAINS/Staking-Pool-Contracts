@@ -54,6 +54,7 @@ img.unbox-train {
 img.winner {
   width: 40%;
   margin: auto;
+  animation: zoom-in-zoom-out 2s ease-out infinite;
 }
 
 .congrats {
@@ -228,6 +229,18 @@ select.select-train {
 .third img,
 .fourth img {
   width: 70%;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
 }
 
 @media (max-with: 480px) {
