@@ -370,7 +370,7 @@ export const StakeList = () => {
 
       </div>
       <BackArrow />
-      <h3>{status}</h3>
+      <h5 className="status">{status}</h5>
       <h2 className="stake-title">Your Stakes</h2>
       {stakes.length === 0 ? (
         <div className='no-stake'>You do not have any Stake Yet, Choose from above to Place Your Stake</div>
