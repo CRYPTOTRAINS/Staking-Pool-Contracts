@@ -26,6 +26,11 @@ img.buy-ticket {
   margin: 5rem auto 3rem auto;
 }
 
+img.unbox-train {
+  width: 60%;
+  margin: 4rem auto 0 auto;
+}
+
 .price {
   font-size: 1.4rem;
   font-weight: bold;
@@ -51,4 +56,84 @@ select {
   height: 1.8rem !important;
   padding-bottom: 0.2rem !important;
   font-size: 0.8rem !important;
+}
+
+.pills {
+  position: relative;
+}
+
+.pill-common,
+.pill-rare,
+.pill-epic,
+.pill-legendary {
+  position: absolute;
+  background-color: #ec725b;
+  color: #ffffff;
+  padding: 0.4rem;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 0.7rem;
+  box-shadow: 2px 2px 1px rgb(80, 80, 80);
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.pill-common:hover,
+.pill-rare:hover,
+.pill-epic:hover,
+.pill-legendary:hover {
+  padding: 0.4rem;
+  font-size: 0.75rem;
+  box-shadow: 2.4px 2.4px 1.2px rgb(80, 80, 80);
+  cursor: pointer;
+}
+
+.pill-common {
+  top: 5.4rem;
+  left: 6.5rem;
+}
+
+.pill-rare {
+  top: 3.4rem;
+  left: 10.7rem;
+}
+
+.pill-epic {
+  top: 2.4rem;
+  left: 15.5rem;
+}
+
+.pill-legendary {
+  top: 2.9rem;
+  left: 21.5rem;
+}
+
+@media (max-with: 480px) {
+  .modal {
+    width: 100% !important;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .modal {
+    width: 100% !important;
+  }
+  .pill-common {
+    top: 4.3rem;
+    left: 4rem;
+  }
+
+  .pill-rare {
+    top: 2.9rem;
+    left: 7rem;
+  }
+
+  .pill-epic {
+    top: 2rem;
+    left: 10.8rem;
+  }
+
+  .pill-legendary {
+    top: 2.5rem;
+    left: 15rem;
+  }
 }

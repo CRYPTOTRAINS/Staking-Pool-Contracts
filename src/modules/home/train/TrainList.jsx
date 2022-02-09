@@ -31,6 +31,7 @@ import DispatchModal from '../TrainModals/DispatchModal';
 import FuelModal from '../TrainModals/FuelModal';
 import BuyTicketModal from '../TrainModals/BuyTicketModal';
 import RepairModal from '../TrainModals/RepairModal';
+import UnboxModal from '../TrainModals/UnboxModal';
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
@@ -51,6 +52,10 @@ export const TrainList = () => {
     ModalService.open(RepairModal);
   };
 
+  const addUnboxModal = () => {
+    ModalService.open(UnboxModal);
+  };
+
   return (
     <>
       <ModalRoot />
@@ -63,7 +68,7 @@ export const TrainList = () => {
         </article>
         <article className="box">
           <div className="box-image"></div>
-          <button className="purchase-button">
+          <button className="purchase-button" onClick={addUnboxModal}>
             <div className="unbox-image"></div>
           </button>
         </article>
