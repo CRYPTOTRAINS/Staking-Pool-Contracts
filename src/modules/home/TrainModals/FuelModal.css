@@ -11,8 +11,13 @@
   padding-top: 28rem;
   padding-bottom: 1rem;
 }
+.close-button,
+.winner-button {
+  margin-bottom: 1rem;
+}
 
-.close-button .close-image {
+.close-button .close-image,
+.winner-button .winner-image {
   width: 9rem;
   border: 0;
   background-color: transparent;
@@ -46,9 +51,44 @@ img.unbox-train {
   margin: 4rem auto 0 auto;
 }
 
-.price {
+img.winner {
+  width: 40%;
+  margin: auto;
+}
+
+.congrats {
+  font-weight: bolder;
+  font-size: 2.2rem;
+  font-family: 'Saira Extra Condensed', sans-serif;
+}
+
+.position {
   font-size: 1.4rem;
   font-weight: bold;
+  color: #545861;
+  margin-bottom: 0.5rem;
+}
+
+.gain-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.gain {
+  color: #129214;
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: bolder;
   color: #6b6b6b;
 }
 

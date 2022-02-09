@@ -32,6 +32,7 @@ import FuelModal from '../TrainModals/FuelModal';
 import BuyTicketModal from '../TrainModals/BuyTicketModal';
 import RepairModal from '../TrainModals/RepairModal';
 import UnboxModal from '../TrainModals/UnboxModal';
+import WinnerModal from '../TrainModals/WinnerModal';
 import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
@@ -54,6 +55,10 @@ export const TrainList = () => {
 
   const addUnboxModal = () => {
     ModalService.open(UnboxModal);
+  };
+
+  const addWinnerModal = () => {
+    ModalService.open(WinnerModal);
   };
 
   return (
@@ -285,7 +290,15 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
-                      <img src={mechanic} alt="mechanic" />
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to repair train</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addRepairModal}>
+                          <img src={mechanic} alt="mechanic" />
+                        </button>
+                      </OverlayTrigger>
                     </span>
                   </td>
                 </tr>
@@ -394,7 +407,15 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
-                      <img src={mechanic} alt="mechanic" />
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to repair train</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addRepairModal}>
+                          <img src={mechanic} alt="mechanic" />
+                        </button>
+                      </OverlayTrigger>
                     </span>
                   </td>
                 </tr>
@@ -503,7 +524,15 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
-                      <img src={mechanic} alt="mechanic" />
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to repair train</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addWinnerModal}>
+                          <img src={mechanic} alt="mechanic" />
+                        </button>
+                      </OverlayTrigger>
                     </span>
                   </td>
                 </tr>
