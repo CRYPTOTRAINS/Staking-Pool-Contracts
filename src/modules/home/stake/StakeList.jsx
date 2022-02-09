@@ -253,9 +253,8 @@ export const StakeList = () => {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
         return;
       }
-      setStatus(`${object.Pool}:${error.data.message}`);
+      setStatus(`${object.Pool}: ${error.data.message}`);
     }
-  
   }
 
   return (
