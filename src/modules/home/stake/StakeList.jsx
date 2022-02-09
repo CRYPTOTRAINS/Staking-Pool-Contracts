@@ -56,8 +56,8 @@ export const StakeList = () => {
               setStatus("Transaction rejected by user");
               return;
             }
-            console.error(error.message);
-            //setStatus(console.error(error.message));
+            // console.error(error.message);
+            setStatus(error.data.message);
         }
  }
 
