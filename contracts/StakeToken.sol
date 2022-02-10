@@ -18,16 +18,22 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     IERC20 public rewardsToken;
     IERC20 public stakingToken;
     //=========== Pool Durations =========================
-    uint256 public rewardsDurationPoolOne = 12 days;
-    uint256 public rewardsDurationPoolTwo = 28 days;
-    uint256 public rewardsDurationPoolThree = 44 days;
-    uint256 public rewardsDurationPoolFour = 60 days;
+    uint256 public rewardsDurationPoolOne = 2 minutes; // 12 days;
+    uint256 public rewardsDurationPoolTwo = 2 minutes; // 28 days;
+    uint256 public rewardsDurationPoolThree = 2 minutes; //44 days;
+    uint256 public rewardsDurationPoolFour = 2 minutes; //60 days;
 
     // =========== Reward per cycle per pool ==============
-    uint256 internal rewardPerCyclePoolOne = 32876; 
-    uint256 internal rewardPerCyclePoolTwo = 12657;
-    uint256 internal rewardPerCyclePoolThree = 295342;
-    uint256 internal rewardPerCyclePoolFour = 493150;
+
+    // pool 1 : 30
+    // pool 2 : 8
+    // pool 3 : 3
+    // pool 4 : 2
+
+    uint256 internal rewardPerCyclePoolOne = 30; // 32876; 
+    uint256 internal rewardPerCyclePoolTwo = 8;  // 12657;
+    uint256 internal rewardPerCyclePoolThree = 3; // 295342;
+    uint256 internal rewardPerCyclePoolFour = 2;  //493150;
     
     uint256 private _totalSupply;
 
@@ -78,6 +84,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     function stakePoolOne(uint256 amount) external nonReentrant whenNotPaused {
         require(amount >= 50000000000000000000 , "Cannot stake below 50");
         require(amount <= 500000000000000000000000, "Cannot stake more than 500000");
+
         _totalSupply = _totalSupply.add(amount);
         _balances[msg.sender] = _balances[msg.sender].add(amount);
 
@@ -93,43 +100,46 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         emit Staked(msg.sender, amount);
     }
 
+
+    // function calculateStakeRewardPoolOne(Stake memory _current_stake) internal view returns(uint256){
+    //     return (((block.timestamp - _current_stake.since) / rewardsDurationPoolOne) * _current_stake.amount)/rewardPerCyclePoolOne;
+    // }
+
+// ======= new =================
     function calculateStakeRewardPoolOne(Stake memory _current_stake) internal view returns(uint256){
-        return (((block.timestamp - _current_stake.since) / rewardsDurationPoolOne) * _current_stake.amount)/rewardPerCyclePoolOne;
+        return _current_stake.amount/rewardPerCyclePoolOne;
     }
 
     function withdrawStakePoolOne(uint256 amount, uint256 index) public returns(uint256){
-        uint256 amt = amount / 1000000000000000000;
         require(amount > 0, "Cannot withdraw 0");
-        _totalSupply = _totalSupply.sub(amt);
-        _balances[msg.sender] = _balances[msg.sender].sub(amt);
+        _totalSupply = _totalSupply.sub(amount);
+        _balances[msg.sender] = _balances[msg.sender].sub(amount);
 
         uint256 user_index = stakes[msg.sender];
         Stake memory current_stake = stakeholders[user_index].address_stakes[index];
-        require(current_stake.amount >= amt, "Staking: Cannot withdraw more than you have staked");
+        require(current_stake.amount >= amount, "Staking: Cannot withdraw more than you have staked");
         
         require (block.timestamp >= (current_stake.since + rewardsDurationPoolOne), "Token locked. Wait till after rewards duration for this pool.");
          uint256 reward = calculateStakeRewardPoolOne(current_stake);
           
-         current_stake.amount = current_stake.amount - amt;
+         current_stake.amount = current_stake.amount - amount;
          if(current_stake.amount == 0){
              delete stakeholders[user_index].address_stakes[index];
          }else {
              stakeholders[user_index].address_stakes[index].amount = current_stake.amount;    
          }
-        uint totalPayable = amt+reward;
+        uint totalPayable = amount+reward;
         stakingToken.safeTransfer(msg.sender, totalPayable);
-        emit Withdrawn(msg.sender, amt);
+        emit Withdrawn(msg.sender, amount);
 
         return amount+reward;
      }
 
-
-
      // ============== STAKING POOL TWO ======================
     
     function stakePoolTwo(uint256 amount) external nonReentrant whenNotPaused {
-        require(amount >= 100, "Cannot stake below 100");
-        require(amount <= 500000, "Cannot stake more than 625000");
+        require(amount >= 100000000000000000000, "Cannot stake below 100");
+        require(amount <= 625000000000000000000000, "Cannot stake more than 625000");
         _totalSupply = _totalSupply.add(amount);
         _balances[msg.sender] = _balances[msg.sender].add(amount);
 
@@ -168,7 +178,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
          }else {
              stakeholders[user_index].address_stakes[index].amount = current_stake.amount;    
          }
-        uint totalPayable = amount+reward;
+        uint totalPayable = (amount+reward) * 1000;
         stakingToken.safeTransfer(msg.sender, totalPayable);
         emit Withdrawn(msg.sender, amount);
 
@@ -179,8 +189,8 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     // ============== STAKING POOL THREE ======================
     
     function stakePoolThree(uint256 amount) external nonReentrant whenNotPaused {
-        require(amount >= 250, "Cannot stake below 250");
-        require(amount <= 750000, "Cannot stake more than 750000");
+        require(amount >= 250000000000000000000, "Cannot stake below 250");
+        require(amount <= 750000000000000000000000, "Cannot stake more than 750000");
         _totalSupply = _totalSupply.add(amount);
         _balances[msg.sender] = _balances[msg.sender].add(amount);
 
@@ -219,7 +229,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
          }else {
              stakeholders[user_index].address_stakes[index].amount = current_stake.amount;    
          }
-        uint totalPayable = amount+reward;
+        uint totalPayable = (amount+reward) * 1000;
         stakingToken.safeTransfer(msg.sender, totalPayable);
         emit Withdrawn(msg.sender, amount);
 
@@ -230,8 +240,8 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     // ============== STAKING POOL FOUR ======================
     
     function stakePoolFour(uint256 amount) external nonReentrant whenNotPaused {
-        require(amount >= 300, "Cannot stake below 300");
-        require(amount <= 1000000, "Cannot stake more than 1000000");
+        require(amount >= 300000000000000000000, "Cannot stake below 300");
+        require(amount <= 1000000000000000000000000, "Cannot stake more than 1000000");
         _totalSupply = _totalSupply.add(amount);
         _balances[msg.sender] = _balances[msg.sender].add(amount);
 
@@ -270,7 +280,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
          }else {
              stakeholders[user_index].address_stakes[index].amount = current_stake.amount;    
          }
-        uint totalPayable = amount+reward;
+        uint totalPayable = (amount+reward) * 1000;
         stakingToken.safeTransfer(msg.sender, totalPayable);
         emit Withdrawn(msg.sender, amount);
 
@@ -286,6 +296,16 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
          }
      }
 
+    function TokenWithdraw(uint256 _amount) external onlyOwner {
+      stakingToken.transfer(_owner, _amount);
+    }
+
     event Staked(address indexed user, uint256 amount);
     event Withdrawn(address indexed user, uint256 amount);
 }
+
+
+// pool one : 50 = 1.666666
+// pool two : 100 = 12.83
+// pool three : 250 = 74.86
+// pool four : 300 = 150
