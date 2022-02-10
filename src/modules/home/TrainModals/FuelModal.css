@@ -35,6 +35,11 @@
   font-size: 2rem;
 }
 
+.close:hover::after {
+  color: #ec725b;
+  font-size: 2.02rem;
+}
+
 img.buy-fuel {
   display: flex;
   margin-right: 3rem;
@@ -62,6 +67,7 @@ img.winner {
   font-size: 2.2rem;
   font-family: 'Saira Extra Condensed', sans-serif;
   color: #545861;
+  animation: zoom-in-zoom-out 2s ease-out infinite;
 }
 
 .position {

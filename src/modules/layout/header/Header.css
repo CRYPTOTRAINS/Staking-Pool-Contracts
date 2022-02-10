@@ -14,6 +14,14 @@
   left: 1rem;
 }
 
+img.logo {
+  transition: transform 0.7s ease-in-out;
+}
+
+img.logo:hover {
+  transform: rotate(360deg);
+}
+
 .link-container {
   padding-top: 1.2rem;
   display: flex;

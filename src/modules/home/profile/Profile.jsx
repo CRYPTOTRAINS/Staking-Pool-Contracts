@@ -6,6 +6,8 @@ import Web3Modal from 'web3modal';
 import { ethers } from 'ethers';
 import ENMTAddress from '../../../contracts/ENMT-address.json';
 import ENMTArtifact from '../../../contracts/ENMT.json';
+import Tooltip from 'react-bootstrap/Tooltip';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 const Profile = () => {
   const [walletAddress, setWallet] = useState('');
@@ -91,9 +93,15 @@ const Profile = () => {
             </div>
           )}
         </div>
-        <div className="user-profile">
-          <div className="invisible">user</div>
-        </div>
+        <OverlayTrigger
+          delay={{ hide: 450, show: 300 }}
+          overlay={(props) => <Tooltip {...props}>Click to View Profile</Tooltip>}
+          placement="bottom"
+        >
+          <div className="user-profile">
+            <div className="invisible">user</div>
+          </div>
+        </OverlayTrigger>
       </div>
     </main>
   );
