@@ -34,6 +34,10 @@
   background-position: center center;
   width: max-content;
   height: 4rem;
+  border: 0;
+  border-color: transparent;
+  padding: 0;
+  margin: 0;
 }
 
 .profile .user-profile:hover {

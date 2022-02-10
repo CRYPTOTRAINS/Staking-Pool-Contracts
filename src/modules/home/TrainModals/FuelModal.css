@@ -219,6 +219,144 @@ select.select-train {
   font-size: 1.2rem;
 }
 
+.profile-modal {
+  padding: 0 1rem;
+}
+
+.info {
+  display: flex;
+  align-content: center;
+  position: relative;
+}
+
+.info img.user-icon {
+  width: 10%;
+}
+
+.info .info-text {
+  position: absolute;
+  top: 0.5rem;
+  left: 3rem;
+  font-size: 1.8rem;
+  font-family: 'Saira Extra Condensed', sans-serif;
+  font-weight: bolder;
+  color: #ec725b;
+}
+
+.account-details {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.account-details .account-text {
+  position: relative;
+  font-weight: bolder;
+  color: #ec725b;
+  font-family: 'Saira Extra Condensed', sans-serif;
+  font-size: 1.4rem;
+}
+
+.account-details .logout-button,
+.deposit-button,
+.withdraw-button {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+}
+
+.account-details .logout {
+  background-image: url('../../../assets/images/logout.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.account-details .logout span {
+  visibility: hidden;
+  font-size: 1.6rem;
+}
+
+.address-balance {
+  background-color: #f0e5ba;
+  margin: 1rem 0;
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.5rem 1rem;
+}
+
+.address-balance .hr {
+  width: 99%;
+}
+
+.address,
+.balance {
+  font-weight: bold;
+  color: #7d7e81;
+}
+
+.address span,
+.balance span {
+  color: black;
+  padding-left: 4rem;
+}
+
+.deposit-withdraw {
+  margin-bottom: 1rem;
+}
+
+.deposit span,
+.withdraw span {
+  visibility: hidden;
+}
+
+.deposit-withdraw .deposit {
+  background-image: url('../../../assets/images/deposit.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  width: 8rem;
+  height: 2rem;
+  margin-right: 1rem;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.deposit-withdraw .withdraw {
+  background-image: url('../../../assets/images/withdraw.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  width: 8rem;
+  height: 2rem;
+  margin-left: 1rem;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.deposit-withdraw .withdraw:hover,
+.deposit-withdraw .deposit:hover,
+.account-details .logout:hover {
+  background-size: 104% 108%;
+}
+
+.transaction-table thead {
+  color: #ec725b;
+  text-align: left;
+}
+
+.transaction-table tbody {
+  background-color: #efe5ba;
+}
+
+.no-transaction {
+  width: 100%;
+  padding: 1rem;
+  color: #eac43c;
+  font-weight: bold;
+}
+
 @keyframes run {
   0% {
     left: 0;
@@ -295,6 +433,10 @@ select.select-train {
   .close-button {
     padding-top: 20rem;
   }
+
+  .info .info-text {
+    font-size: 1.2rem;
+  }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
@@ -340,5 +482,9 @@ select.select-train {
 
   .close-button {
     padding-top: 20rem;
+  }
+
+  .info .info-text {
+    font-size: 1.2rem;
   }
 }
