@@ -31,7 +31,8 @@
   background-image: url('../../../assets/images/user.png');
   background-repeat: no-repeat;
   background-size: contain;
-  width: 15rem;
+  background-position: center center;
+  width: max-content;
   height: 4rem;
 }
 
@@ -60,6 +61,10 @@
   color: rgb(26, 112, 26);
 }
 
+.invisible {
+  font-size: 2rem;
+}
+
 @media (max-width: 769px) {
   .profile {
     justify-content: center;
@@ -72,10 +77,6 @@
   .user {
     justify-content: center;
     padding: 0 1rem;
-  }
-
-  .invisible {
-    font-size: 2rem;
   }
 
   .profile .user-profile {
