@@ -76,8 +76,8 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     
     // ============= STAKING POOL ONE ======================= 
     function stakePoolOne(uint256 amount) external nonReentrant whenNotPaused {
-        require(amount >= 50 , "Cannot stake below 50");
-        require(amount <= 500000, "Cannot stake more than 500000");
+        require(amount >= 50000000000000000000 , "Cannot stake below 50");
+        require(amount <= 500000000000000000000000, "Cannot stake more than 500000");
         _totalSupply = _totalSupply.add(amount);
         _balances[msg.sender] = _balances[msg.sender].add(amount);
 
@@ -92,7 +92,6 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         stakingToken.safeTransferFrom(msg.sender, address(this), amount);
         emit Staked(msg.sender, amount);
     }
-
 
     function calculateStakeRewardPoolOne(Stake memory _current_stake) internal view returns(uint256){
         return (((block.timestamp - _current_stake.since) / rewardsDurationPoolOne) * _current_stake.amount)/rewardPerCyclePoolOne;

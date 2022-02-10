@@ -11,7 +11,7 @@ async function main() {
 
     const ENMT = await ethers.getContractFactory("ENMT");
     const totalSupply = (30000000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
-    const enmt =await ENMT.deploy("Mad", "mad", 18, "0x77d715A989AfaFBCAEF671CEDBe010faDD0dBeAD", `${totalSupply}`);
+    const enmt =await ENMT.deploy("Mad", "mad", 18, "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266", `${totalSupply}`);
     
 
     const StakeToken = await ethers.getContractFactory("StakeToken");
@@ -48,7 +48,7 @@ async function main() {
     }
   
     fs.writeFileSync(
-      contractsDir + "/contract-address.json",
+      contractsDir + "/ENMT-address.json",
       JSON.stringify({ ENMT: enmt.address }, undefined, 2)
     );
   

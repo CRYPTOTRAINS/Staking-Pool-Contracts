@@ -34,7 +34,6 @@ export const Presale = () => {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
       await tx.wait();
       const fee = (num * 5300000000000000).toLocaleString("fullwide", { useGrouping: false });
-      console.log(fee);
       const transaction = await contract.create(num, { value: fee });
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
