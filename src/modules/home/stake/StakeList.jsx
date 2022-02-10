@@ -33,7 +33,6 @@ export const StakeList = () => {
   
 // ================ pool one ======================
   async function stakeOne() {
-
     const amount = ethers.utils.parseEther(formInput.amount);
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
@@ -62,8 +61,6 @@ export const StakeList = () => {
  // ======================== pool two ======================
  async function stakeTwo() {
   const amount = ethers.utils.parseEther(formInput.amount);
-  // const amt = JSON.stringify(amount*1000000000000000000)
-  // const amt = (num * 6000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
@@ -92,15 +89,14 @@ export const StakeList = () => {
  // ======================== pool three ======================
  async function stakeThree() {
   const amount = ethers.utils.parseEther(formInput.amount);
-  const amt = JSON.stringify(amount*1000000000000000000)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-  const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
+  const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amt);  ////
-              await tx.wait();                                              ///////
-          const transaction = await contract.stakePoolThree(amt);
+              const tx = await token.approve(StakingAddress.StakeToken, amount);
+              await tx.wait();
+          const transaction = await contract.stakePoolThree(amount);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
               setStatus("Transaction failed");
@@ -121,15 +117,14 @@ export const StakeList = () => {
  // ======================== pool four ======================
  async function stakeFour() {
   const amount = ethers.utils.parseEther(formInput.amount);
-  const amt = JSON.stringify(amount*1000000000000000000)
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contract = new ethers.Contract(StakingAddress.StakeToken, StakingArtifact.abi, signer);
-  const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer); // ////
+  const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     try {
-              const tx = await token.approve(StakingAddress.StakeToken, amt);  ////
-              await tx.wait();                                              ///////
-          const transaction = await contract.stakePoolFour(amt);
+              const tx = await token.approve(StakingAddress.StakeToken, amount);
+              await tx.wait();
+          const transaction = await contract.stakePoolFour(amount);
           const receipt = await transaction.wait();
             if (receipt.status === 0) {
               setStatus("Transaction failed");
