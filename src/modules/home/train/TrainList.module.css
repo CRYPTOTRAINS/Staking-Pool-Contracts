@@ -1,3 +1,27 @@
+.title {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.trainList {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  justify-items: center;
+  align-items: center;
+}
+
+@media (min-width: 600px) and (max-width: 769px) {
+  .trainList {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (max-width: 599px) {
+  .trainList {
+    grid-template-columns: auto;
+  }
+}
+
 .sno {
   text-align: left;
   margin-left: 1rem;
@@ -16,6 +40,7 @@
   box-shadow: 3px 3px rgb(107, 106, 106);
   padding: 1rem 0;
   position: relative;
+  /* z-index: -10; */
 }
 
 .sell {
@@ -27,7 +52,7 @@
   top: -2.6rem;
 }
 
-.train-image {
+.trainImage {
   display: grid;
   justify-items: center;
   align-items: center;
@@ -36,18 +61,18 @@
 .bullet {
   position: relative;
   top: -0.1rem;
-  z-index: 1;
 }
 
 .bullet img {
   width: 70%;
+  /* z-index: 1; */
 }
 
-.train-image img {
+.trainImage img {
   width: 60%;
 }
 
-.train-container {
+.trainContainer {
   display: flex;
   align-self: center;
   background-color: #f8f8f0;
@@ -57,10 +82,11 @@
   justify-content: space-evenly;
   position: relative;
   top: -0.3rem;
+  /* z-index: -4; */
   text-align: left;
 }
 
-.table-data {
+.tableData {
   font-size: 0.7rem;
 }
 
@@ -74,12 +100,12 @@
   width: 1rem;
 }
 
-.image-icon {
+.imageIcon {
   display: flex;
   justify-content: center;
 }
 
-.image-icon img {
+.imageIcon img {
   width: 2rem;
 }
 
@@ -88,22 +114,40 @@
   font-weight: bold;
 }
 
-.train-button {
+.trainButton {
   display: flex;
   justify-content: space-evenly;
-  padding: 0.6rem 0;
+}
+
+.sendButton {
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .dispatch {
-  background-color: transparent;
-  border: 0;
+  background-image: url('../../../assets/images/dispatch_button.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 8rem;
+  height: 2.4rem;
 }
 
-.train-button img {
+.reward {
+  background-image: url('../../../assets/images/reward_button.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 8rem;
+  height: 2.4rem;
+}
+
+.trainButton img {
   width: 100%;
 }
 
-.train-button img:active {
+.trainButton img:active {
+  cursor: pointer; 
   transform: translateY(1px);
 }
 
@@ -113,14 +157,14 @@
   padding-top: 1rem;
 }
 
-.purchase-button {
+.purchaseButton {
   background-color: transparent;
   border: 0;
   display: flex;
   justify-content: center;
 }
 
-.ticket .ticket-image {
+.ticket .ticketImage {
   background-image: url('../../../assets/images/ticket.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -128,7 +172,7 @@
   height: 6rem;
 }
 
-.ticket .buy-ticket-image {
+.ticket .buyTicketImage {
   background-image: url('../../../assets/images/buy_tickets_button.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -136,7 +180,7 @@
   height: 4rem;
 }
 
-.box .box-image {
+.box .boxImage {
   background-image: url('../../../assets/images/box.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -144,7 +188,7 @@
   height: 6rem;
 }
 
-.box .unbox-image {
+.box .unboxImage {
   background-image: url('../../../assets/images/unbox_train_button.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -157,14 +201,3 @@
     justify-content: center;
   }
 }
-
-/* .v-separator
-{
-    content: "";
-    display: inline-block;
-    width: 0px;
-    height: 190px;
-    border-right: 1px solid #fafafa;
-    border-left: 1px solid #b4b4b4;
-    padding: 0;
-} */
