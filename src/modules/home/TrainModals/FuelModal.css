@@ -1,0 +1,490 @@
+.modal {
+  width: 70% !important;
+  margin: auto !important;
+}
+
+.dispatching .close-button {
+  padding: 28rem auto 1rem auto !important;
+}
+
+.close-button {
+  padding-top: 28rem;
+  padding-bottom: 1rem;
+}
+.close-button,
+.winner-button {
+  margin-bottom: 1rem;
+}
+
+.close-button .close-image,
+.winner-button .winner-image {
+  width: 9rem;
+  border: 0;
+  background-color: transparent;
+}
+
+.close {
+  background-color: transparent;
+  border: 0;
+  width: fit-content;
+  align-self: flex-end;
+}
+.close::after {
+  content: '\00d7';
+  padding: 0.5rem;
+  font-size: 2rem;
+}
+
+.close:hover::after {
+  color: #ec725b;
+  font-size: 2.02rem;
+}
+
+img.buy-fuel {
+  display: flex;
+  margin-right: 3rem;
+  padding-left: 0;
+}
+
+img.buy-ticket {
+  width: 70%;
+  margin: 5rem auto 3rem auto;
+}
+
+img.unbox-train {
+  width: 60%;
+  margin: 4rem auto 0 auto;
+}
+
+img.winner {
+  width: 40%;
+  margin: auto;
+  animation: zoom-in-zoom-out 2s ease-out infinite;
+}
+
+.cong {
+  font-weight: bolder;
+  font-size: 2.2rem;
+  font-family: 'Saira Extra Condensed', sans-serif;
+  color: #545861;
+  animation: zoom-in-zoom-out 2s ease-out infinite;
+}
+
+.position {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #545861;
+  margin-bottom: 0.5rem;
+}
+
+.gain-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+}
+
+.gain {
+  color: #129214;
+  font-weight: bold;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+.price {
+  font-size: 1.4rem;
+  font-weight: bolder;
+  color: #6b6b6b;
+}
+
+.buy-button {
+  margin: auto;
+  width: 16rem;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+button.buy-button {
+  margin: 0;
+  padding: 0;
+}
+
+select.select-train {
+  margin: auto !important;
+  width: 80% !important;
+  margin-top: 1rem !important;
+  height: 1.8rem !important;
+  padding-bottom: 0.2rem !important;
+  font-size: 0.8rem !important;
+}
+
+.pills {
+  position: relative;
+}
+
+.pill-common,
+.pill-rare,
+.pill-epic,
+.pill-legendary {
+  position: absolute;
+  background-color: #ec725b;
+  color: #ffffff;
+  padding: 0.4rem;
+  border-radius: 3px;
+  font-weight: bold;
+  font-size: 0.7rem;
+  box-shadow: 2px 2px 1px rgb(80, 80, 80);
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.pill-common:hover,
+.pill-rare:hover,
+.pill-epic:hover,
+.pill-legendary:hover {
+  padding: 0.4rem;
+  font-size: 0.75rem;
+  box-shadow: 2.4px 2.4px 1.2px rgb(80, 80, 80);
+  cursor: pointer;
+}
+
+.pill-common {
+  top: 5.4rem;
+  left: 6.5rem;
+}
+
+.pill-rare {
+  top: 3.4rem;
+  left: 10.7rem;
+}
+
+.pill-epic {
+  top: 2.4rem;
+  left: 15.5rem;
+}
+
+.pill-legendary {
+  top: 2.9rem;
+  left: 21.5rem;
+}
+
+.dispatching {
+  position: relative;
+  /* background-color: black; */
+}
+
+.dispatching-text {
+  background-color: #ec725b;
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.first,
+.second,
+.third,
+.fourth {
+  position: absolute;
+  width: 100%;
+  animation: linear infinite;
+  animation-name: run;
+}
+
+.first {
+  animation-duration: 5s;
+}
+
+.second {
+  top: 10rem;
+  animation-duration: 3s;
+}
+
+.third {
+  top: 17rem;
+  animation-duration: 5s;
+}
+
+.fourth {
+  top: 24rem;
+  animation-duration: 3s;
+}
+
+.dispatch-first-name {
+  position: relative;
+  top: -4rem;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.profile-modal {
+  padding: 0 1rem;
+}
+
+.info {
+  display: flex;
+  align-content: center;
+  position: relative;
+}
+
+.info img.user-icon {
+  width: 10%;
+}
+
+.info .info-text {
+  position: absolute;
+  top: 0.5rem;
+  left: 3rem;
+  font-size: 1.8rem;
+  font-family: 'Saira Extra Condensed', sans-serif;
+  font-weight: bolder;
+  color: #ec725b;
+}
+
+.account-details {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.account-details .account-text {
+  position: relative;
+  font-weight: bolder;
+  color: #ec725b;
+  font-family: 'Saira Extra Condensed', sans-serif;
+  font-size: 1.4rem;
+}
+
+.account-details .logout-button,
+.deposit-button,
+.withdraw-button {
+  border: 0;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  width: fit-content;
+}
+
+.account-details .logout {
+  background-image: url('../../../assets/images/logout.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.account-details .logout span {
+  visibility: hidden;
+  font-size: 1.6rem;
+}
+
+.address-balance {
+  background-color: #f0e5ba;
+  margin: 1rem 0;
+  text-align: left;
+  vertical-align: middle;
+  padding: 0.5rem 1rem;
+}
+
+.address-balance .hr {
+  width: 99%;
+}
+
+.address,
+.balance {
+  font-weight: bold;
+  color: #7d7e81;
+}
+
+.address span,
+.balance span {
+  color: black;
+  padding-left: 4rem;
+}
+
+.deposit-withdraw {
+  margin-bottom: 1rem;
+}
+
+.deposit span,
+.withdraw span {
+  visibility: hidden;
+}
+
+.deposit-withdraw .deposit {
+  background-image: url('../../../assets/images/deposit.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  width: 8rem;
+  height: 2rem;
+  margin-right: 1rem;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.deposit-withdraw .withdraw {
+  background-image: url('../../../assets/images/withdraw.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center center;
+  width: 8rem;
+  height: 2rem;
+  margin-left: 1rem;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.deposit-withdraw .withdraw:hover,
+.deposit-withdraw .deposit:hover,
+.account-details .logout:hover {
+  background-size: 104% 108%;
+}
+
+.transaction-table thead {
+  color: #ec725b;
+  text-align: left;
+}
+
+.transaction-table tbody {
+  background-color: #efe5ba;
+}
+
+.no-transaction {
+  width: 100%;
+  padding: 1rem;
+  color: #eac43c;
+  font-weight: bold;
+}
+
+@keyframes run {
+  0% {
+    left: 0;
+  }
+  50% {
+    left: calc(50% - 100px);
+  }
+  100% {
+    left: 0;
+  }
+}
+
+.first img,
+.second img,
+.third img,
+.fourth img {
+  width: 70%;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(1.2, 1.2);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@media (max-with: 480px) {
+  .modal {
+    width: 100% !important;
+  }
+
+  .pill-common {
+    top: 4.3rem;
+    left: 4rem;
+  }
+
+  .pill-rare {
+    top: 2.9rem;
+    left: 7rem;
+  }
+
+  .pill-epic {
+    top: 2rem;
+    left: 10.8rem;
+  }
+
+  .pill-legendary {
+    top: 2.5rem;
+    left: 15rem;
+  }
+
+  .dispatch-first-name {
+    top: -3rem;
+    font-size: 0.9rem;
+  }
+
+  .second {
+    top: 8rem;
+  }
+
+  .third {
+    top: 12.8rem;
+  }
+
+  .fourth {
+    top: 17.6rem;
+  }
+
+  .close-button {
+    padding-top: 20rem;
+  }
+
+  .info .info-text {
+    font-size: 1.2rem;
+  }
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+  .modal {
+    width: 100% !important;
+  }
+  .pill-common {
+    top: 4.3rem;
+    left: 4rem;
+  }
+
+  .pill-rare {
+    top: 2.9rem;
+    left: 7rem;
+  }
+
+  .pill-epic {
+    top: 2rem;
+    left: 10.8rem;
+  }
+
+  .pill-legendary {
+    top: 2.5rem;
+    left: 15rem;
+  }
+
+  .dispatch-first-name {
+    top: -3rem;
+    font-size: 0.9rem;
+  }
+
+  .second {
+    top: 8rem;
+  }
+
+  .third {
+    top: 12.8rem;
+  }
+
+  .fourth {
+    top: 17.6rem;
+  }
+
+  .close-button {
+    padding-top: 20rem;
+  }
+
+  .info .info-text {
+    font-size: 1.2rem;
+  }
+}

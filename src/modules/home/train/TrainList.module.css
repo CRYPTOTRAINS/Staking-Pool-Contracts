@@ -1,3 +1,27 @@
+.title {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.trainList {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  justify-items: center;
+  align-items: center;
+}
+
+@media (min-width: 600px) and (max-width: 769px) {
+  .trainList {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (max-width: 599px) {
+  .trainList {
+    grid-template-columns: auto;
+  }
+}
+
 .sno {
   text-align: left;
   margin-left: 1rem;
@@ -16,6 +40,7 @@
   box-shadow: 3px 3px rgb(107, 106, 106);
   padding: 1rem 0;
   position: relative;
+  /* z-index: -10; */
 }
 
 .sell {
@@ -27,7 +52,7 @@
   top: -2.6rem;
 }
 
-.train-image {
+.trainImage {
   display: grid;
   justify-items: center;
   align-items: center;
@@ -36,18 +61,18 @@
 .bullet {
   position: relative;
   top: -0.1rem;
-  z-index: 1;
 }
 
 .bullet img {
   width: 70%;
+  /* z-index: 1; */
 }
 
-.train-image img {
+.trainImage img {
   width: 60%;
 }
 
-.train-container {
+.trainContainer {
   display: flex;
   align-self: center;
   background-color: #f8f8f0;
@@ -57,10 +82,11 @@
   justify-content: space-evenly;
   position: relative;
   top: -0.3rem;
+  /* z-index: -4; */
   text-align: left;
 }
 
-.table-data {
+.tableData {
   font-size: 0.7rem;
 }
 
@@ -74,12 +100,12 @@
   width: 1rem;
 }
 
-.image-icon {
+.imageIcon {
   display: flex;
   justify-content: center;
 }
 
-.image-icon img {
+.imageIcon img {
   width: 2rem;
 }
 
@@ -88,27 +114,40 @@
   font-weight: bold;
 }
 
-.train-button {
+.trainButton {
   display: flex;
   justify-content: space-evenly;
-  padding: 0.6rem 0;
+}
+
+.sendButton {
+  background-color: transparent;
+  border: 0;
+  display: flex;
+  justify-content: center;
 }
 
 .dispatch {
-  background-color: transparent;
-  border: 0;
+  background-image: url('../../../assets/images/dispatch_button.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 8rem;
+  height: 2.4rem;
 }
 
-.train-button img {
+.reward {
+  background-image: url('../../../assets/images/reward_button.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 8rem;
+  height: 2.4rem;
+}
+
+.trainButton img {
   width: 100%;
-  transition: all 0.3s ease-in 0.1s;
 }
 
-.train-button img:hover {
-  width: 102%;
-}
-
-.train-button img:active {
+.trainButton img:active {
+  cursor: pointer; 
   transform: translateY(1px);
 }
 
@@ -118,14 +157,14 @@
   padding-top: 1rem;
 }
 
-.purchase-button {
+.purchaseButton {
   background-color: transparent;
   border: 0;
   display: flex;
   justify-content: center;
 }
 
-.ticket .ticket-image {
+.ticket .ticketImage {
   background-image: url('../../../assets/images/ticket.png');
   background-repeat: no-repeat;
   background-size: contain;
@@ -133,90 +172,28 @@
   height: 6rem;
 }
 
-.ticket .ticket-image:hover {
-  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
-.ticket .buy-ticket-image {
+.ticket .buyTicketImage {
   background-image: url('../../../assets/images/buy_tickets_button.png');
   background-repeat: no-repeat;
-  background-size: 100% 70%;
+  background-size: contain;
   width: 7rem;
   height: 4rem;
-  transition: all 0.3s ease-in 0.1s;
 }
 
-.ticket .buy-ticket-image:hover {
-  background-size: 102% 72%;
-}
-
-.box .box-image {
+.box .boxImage {
   background-image: url('../../../assets/images/box.png');
   background-repeat: no-repeat;
   background-size: contain;
   width: 6rem;
   height: 6rem;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  transform-origin: bottom;
-  animation-name: bounce-1;
-  animation-timing-function: linear;
 }
 
-.box .unbox-image {
+.box .unboxImage {
   background-image: url('../../../assets/images/unbox_train_button.png');
   background-repeat: no-repeat;
-  background-size: 100% 70%;
+  background-size: contain;
   width: 7rem;
   height: 4rem;
-  transition: all 0.3s ease-in 0.1s;
-}
-
-.box .unbox-image:hover {
-  background-size: 102% 72%;
-}
-
-.station-button {
-  background-color: transparent;
-  border: 0;
-}
-
-@keyframes shake {
-  10%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%,
-  80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%,
-  50%,
-  70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%,
-  60% {
-    transform: translate3d(4px, 0, 0);
-  }
-}
-
-@keyframes bounce-1 {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }
 
 @media (max-width: 599px) {

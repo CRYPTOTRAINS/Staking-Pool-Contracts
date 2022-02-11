@@ -1,10 +1,10 @@
 import './BuyCTrainButton.css';
 // import buy_train from '../../../assets/images/button_buy.png'
 
-const BuyCTrainButton = ({ handleOnClick, cTrainValue }) => {
+const BuyCTrainButton = ({ handleOnClick, cTrainValue, ...rest }) => {
   return (
-    <button className="buy-button" onClick={handleOnClick} onKeyDown={handleOnClick}>
-      <div className='buy-train-image'>
+    <button className="buy-cbutton" onClick={handleOnClick} onKeyDown={handleOnClick} {...rest}>
+      <div className="buy-train-image">
         <div className="cTrainValue">{cTrainValue}</div>
       </div>
     </button>

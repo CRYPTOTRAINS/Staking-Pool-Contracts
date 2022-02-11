@@ -14,13 +14,34 @@
   margin-right: 0.6rem;
 }
 
+.user {
+  display: flex;
+}
+
 .profile .account-img {
-  background-image: url('../../../assets/images/profile.png');
+  background-image: url('../../../assets/images/account.png');
+  background-repeat: no-repeat;
+  background-size: 100% 100%; /* previously contain */
+  width: 15rem;
+  /* height: 4rem; */
+  margin-left: 0.6rem;
+}
+
+.profile .user-profile {
+  background-image: url('../../../assets/images/user.png');
   background-repeat: no-repeat;
   background-size: contain;
-  width: 15rem;
+  background-position: center center;
+  width: max-content;
   height: 4rem;
-  margin-left: 0.6rem;
+  border: 0;
+  border-color: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.profile .user-profile:hover {
+  cursor: pointer;
 }
 
 .coins {
@@ -31,17 +52,37 @@
 
 .accounts {
   position: relative;
-  top: 1.5rem;
+  top: 1.2rem;
   right: 3rem;
   cursor: pointer;
+  text-align: right;
+}
+
+.accounts:hover {
+  font-weight: bold;
+  color: rgb(26, 112, 26);
+}
+
+.invisible {
+  font-size: 2rem;
 }
 
 @media (max-width: 769px) {
   .profile {
     justify-content: center;
+    flex-direction: column;
   }
   .profile .account-img,
   .profile .coin-img {
     margin: 0;
+  }
+  .user {
+    justify-content: center;
+    padding: 0 1rem;
+  }
+
+  .profile .user-profile {
+    background-position: center center;
+    width: max-content;
   }
 }

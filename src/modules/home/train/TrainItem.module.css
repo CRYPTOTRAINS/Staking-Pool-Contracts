@@ -16,6 +16,7 @@
   box-shadow: 3px 3px rgb(107, 106, 106);
   padding: 1rem 0;
   position: relative;
+  z-index: -10;
 }
 
 .sell {
@@ -36,11 +37,11 @@
 .bullet {
   position: relative;
   top: -0.1rem;
-  z-index: 1;
 }
 
 .bullet img {
   width: 70%;
+  z-index: 1;
 }
 
 .train-image img {
@@ -57,6 +58,7 @@
   justify-content: space-evenly;
   position: relative;
   top: -0.3rem;
+  z-index: -4;
   text-align: left;
 }
 
@@ -94,22 +96,8 @@
   padding: 0.6rem 0;
 }
 
-.dispatch {
-  background-color: transparent;
-  border: 0;
-}
-
 .train-button img {
-  width: 100%;
-  transition: all 0.3s ease-in 0.1s;
-}
-
-.train-button img:hover {
-  width: 102%;
-}
-
-.train-button img:active {
-  transform: translateY(1px);
+  width: 45%;
 }
 
 .purchase {
@@ -133,24 +121,12 @@
   height: 6rem;
 }
 
-.ticket .ticket-image:hover {
-  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  transform: translate3d(0, 0, 0);
-  backface-visibility: hidden;
-  perspective: 1000px;
-}
-
 .ticket .buy-ticket-image {
   background-image: url('../../../assets/images/buy_tickets_button.png');
   background-repeat: no-repeat;
-  background-size: 100% 70%;
+  background-size: contain;
   width: 7rem;
   height: 4rem;
-  transition: all 0.3s ease-in 0.1s;
-}
-
-.ticket .buy-ticket-image:hover {
-  background-size: 102% 72%;
 }
 
 .box .box-image {
@@ -159,64 +135,14 @@
   background-size: contain;
   width: 6rem;
   height: 6rem;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  transform-origin: bottom;
-  animation-name: bounce-1;
-  animation-timing-function: linear;
 }
 
 .box .unbox-image {
   background-image: url('../../../assets/images/unbox_train_button.png');
   background-repeat: no-repeat;
-  background-size: 100% 70%;
+  background-size: contain;
   width: 7rem;
   height: 4rem;
-  transition: all 0.3s ease-in 0.1s;
-}
-
-.box .unbox-image:hover {
-  background-size: 102% 72%;
-}
-
-.station-button {
-  background-color: transparent;
-  border: 0;
-}
-
-@keyframes shake {
-  10%,
-  90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-
-  20%,
-  80% {
-    transform: translate3d(2px, 0, 0);
-  }
-
-  30%,
-  50%,
-  70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-
-  40%,
-  60% {
-    transform: translate3d(4px, 0, 0);
-  }
-}
-
-@keyframes bounce-1 {
-  0% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0);
-  }
 }
 
 @media (max-width: 599px) {
@@ -224,3 +150,14 @@
     justify-content: center;
   }
 }
+
+/* .v-separator
+{
+    content: "";
+    display: inline-block;
+    width: 0px;
+    height: 190px;
+    border-right: 1px solid #fafafa;
+    border-left: 1px solid #b4b4b4;
+    padding: 0;
+} */

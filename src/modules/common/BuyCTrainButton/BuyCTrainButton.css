@@ -1,18 +1,38 @@
-.buy-button {
+.buy-cbutton {
   background-color: transparent;
   border: 0;
-  padding-top: 0.7rem;
+  border-radius: 12px;
+  padding: 0;
+  margin: 0;
 }
 
+/* .buy-button:hover {
+  border: solid 1px #ec725b;
+} */
+
 .cTrainValue {
- padding: 1rem;
- color: #ffffff;
- font-weight: bold;
- font-size: 0.8rem;
+  padding: 1rem;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+.cTrainValue:hover {
+  color: #bdcefe;
+  font-size: 1rem;
 }
 
 .buy-train-image {
   background-image: url('../../../assets/images/button_buy.png');
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  transition: all 0.3s ease-in 0.1s;
+}
+
+.buy-train-image:hover {
+  background-size: 101% 101%;
+}
+
+.buy-train-image:active {
+  transform: translateY(1px);
 }
