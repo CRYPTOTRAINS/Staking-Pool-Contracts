@@ -17,6 +17,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     
     IERC20 public rewardsToken;
     IERC20 public stakingToken;
+
     //=========== Pool Durations =========================
     uint256 public rewardsDurationPoolOne = 2 minutes; // 12 days;
     uint256 public rewardsDurationPoolTwo = 2 minutes; // 28 days;
@@ -25,15 +26,10 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
 
     // =========== Reward per cycle per pool ==============
 
-    // pool 1 : 30
-    // pool 2 : 8
-    // pool 3 : 3
-    // pool 4 : 2
-
-    uint256 internal rewardPerCyclePoolOne = 30; // 32876; 
-    uint256 internal rewardPerCyclePoolTwo = 8;  // 12657;
-    uint256 internal rewardPerCyclePoolThree = 3; // 295342;
-    uint256 internal rewardPerCyclePoolFour = 2;  //493150;
+    uint256 internal rewardPerCyclePoolOne = 30;
+    uint256 internal rewardPerCyclePoolTwo = 8; 
+    uint256 internal rewardPerCyclePoolThree = 3;
+    uint256 internal rewardPerCyclePoolFour = 2;
     
     uint256 private _totalSupply;
 
@@ -101,11 +97,6 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     }
 
 
-    // function calculateStakeRewardPoolOne(Stake memory _current_stake) internal view returns(uint256){
-    //     return (((block.timestamp - _current_stake.since) / rewardsDurationPoolOne) * _current_stake.amount)/rewardPerCyclePoolOne;
-    // }
-
-// ======= new =================
     function calculateStakeRewardPoolOne(Stake memory _current_stake) internal view returns(uint256){
         return _current_stake.amount/rewardPerCyclePoolOne;
     }
@@ -155,9 +146,8 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         emit Staked(msg.sender, amount);
     }
 
-
     function calculateStakeRewardPoolTwo(Stake memory _current_stake) internal view returns(uint256){
-        return (((block.timestamp - _current_stake.since) / rewardsDurationPoolTwo) * _current_stake.amount)/rewardPerCyclePoolTwo;
+        return _current_stake.amount/rewardPerCyclePoolTwo;
     }
 
     function withdrawStakePoolTwo(uint256 amount, uint256 index) public returns(uint256){
@@ -178,7 +168,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
          }else {
              stakeholders[user_index].address_stakes[index].amount = current_stake.amount;    
          }
-        uint totalPayable = (amount+reward) * 1000;
+        uint totalPayable = amount+reward;
         stakingToken.safeTransfer(msg.sender, totalPayable);
         emit Withdrawn(msg.sender, amount);
 
@@ -206,9 +196,8 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         emit Staked(msg.sender, amount);
     }
 
-
     function calculateStakeRewardPoolThree(Stake memory _current_stake) internal view returns(uint256){
-        return (((block.timestamp - _current_stake.since) / rewardsDurationPoolThree) * _current_stake.amount)/rewardPerCyclePoolThree;
+        return _current_stake.amount/rewardPerCyclePoolThree;
     }
 
     function withdrawStakePoolThree(uint256 amount, uint256 index) public returns(uint256){
@@ -229,7 +218,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
          }else {
              stakeholders[user_index].address_stakes[index].amount = current_stake.amount;    
          }
-        uint totalPayable = (amount+reward) * 1000;
+        uint totalPayable = amount+reward;
         stakingToken.safeTransfer(msg.sender, totalPayable);
         emit Withdrawn(msg.sender, amount);
 
@@ -257,9 +246,8 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
         emit Staked(msg.sender, amount);
     }
 
-
     function calculateStakeRewardPoolFour(Stake memory _current_stake) internal view returns(uint256){
-        return (((block.timestamp - _current_stake.since) / rewardsDurationPoolFour) * _current_stake.amount)/rewardPerCyclePoolFour;
+        return _current_stake.amount/rewardPerCyclePoolFour;
     }
 
     function withdrawStakePoolFour(uint256 amount, uint256 index) public returns(uint256){
@@ -280,7 +268,7 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
          }else {
              stakeholders[user_index].address_stakes[index].amount = current_stake.amount;    
          }
-        uint totalPayable = (amount+reward) * 1000;
+        uint totalPayable = amount+reward;
         stakingToken.safeTransfer(msg.sender, totalPayable);
         emit Withdrawn(msg.sender, amount);
 
