@@ -19,10 +19,10 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     IERC20 public stakingToken;
 
     //=========== Pool Durations =========================
-    uint256 public rewardsDurationPoolOne = 2 minutes; // 12 days;
-    uint256 public rewardsDurationPoolTwo = 2 minutes; // 28 days;
-    uint256 public rewardsDurationPoolThree = 2 minutes; //44 days;
-    uint256 public rewardsDurationPoolFour = 2 minutes; //60 days;
+    uint256 public rewardsDurationPoolOne = 12 days;
+    uint256 public rewardsDurationPoolTwo = 28 days;
+    uint256 public rewardsDurationPoolThree = 44 days;
+    uint256 public rewardsDurationPoolFour = 60 days;
 
     // =========== Reward per cycle per pool ==============
 
@@ -291,9 +291,3 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     event Staked(address indexed user, uint256 amount);
     event Withdrawn(address indexed user, uint256 amount);
 }
-
-
-// pool one : 50 = 1.666666
-// pool two : 100 = 12.83
-// pool three : 250 = 74.86
-// pool four : 300 = 150
