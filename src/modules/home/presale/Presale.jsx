@@ -162,13 +162,13 @@ export const Presale = () => {
       <section className="presale-main">
         <article className="presale-img">
           <div className="presale-main-items">
-            <p className="quantity">QUANTITY:  <input placeholder="E.g 2" required className="no"
+            <p className="quantity">QUANTITY:  <input placeholder="e.g 2" required className="no"
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
            
             <button className="approve">
               <img src={approve} onClick={createToken} onKeyDown={createToken} alt="approve button" />
             </button>
-            <p className="congrats">congrats your wallet is whitelisted</p>
+            <p className="congrats">{whitelist}</p>
             <div className="sales-progress">
               <p className="sales-progress-text">SALE PROGRESS</p>
               <img src={loading} alt="sales progress loading" />
