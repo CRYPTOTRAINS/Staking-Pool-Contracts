@@ -110,7 +110,7 @@ export const Presale = () => {
   return (
     <main>
 <div id="flipdown" className="flipdown"></div>
-    <p>{status}</p>
+    <h5 className='py-3'>{status}...</h5>
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
       <section className="time-cards">
