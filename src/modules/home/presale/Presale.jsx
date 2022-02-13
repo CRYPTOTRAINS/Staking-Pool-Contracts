@@ -12,6 +12,7 @@ import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import { useEffect, useState } from 'react';
+import { getCurrentWalletConnected } from '../../../utils/wallet';
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
@@ -32,7 +33,7 @@ export const Presale = () => {
   
   function timer() {
     // Set the date we're counting down to
-    const countDownDate = new Date("Feb 13, 2022 21:25:25").getTime();
+    const countDownDate = new Date("Feb 13, 2022 22:25:25").getTime();
 
     // Update the count down every 1 second
     const x = setInterval(function() {
@@ -98,7 +99,6 @@ export const Presale = () => {
       const transaction = await contract.create(num, { value: fee });
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
-          console.log("failed transaction");
           setStatus("Transaction failed");
           throw new Error("Transaction failed");
         } else {
@@ -106,9 +106,10 @@ export const Presale = () => {
         }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        setStatus("Transaction rejected by user...");
         return;
       }
-      setStatus(`${object.Pool}: ${error.data.message}`);
+      setStatus(`${error.object.message}`);
     }
   }
 
@@ -116,7 +117,7 @@ export const Presale = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
-
+   
     try {
       const transaction = await contract.isWhitelisted(address);
       const receipt = await transaction.wait();
@@ -130,7 +131,7 @@ export const Presale = () => {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
         return;
       }
-      setStatus(`${object.Pool}: ${error.data.message}`);
+      setStatus('');
     }
   }
    
