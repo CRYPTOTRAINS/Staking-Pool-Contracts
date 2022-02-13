@@ -12,7 +12,6 @@ import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
 import { useEffect, useState } from 'react';
-// import CountDown from './CountDown';
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
@@ -27,7 +26,7 @@ export const Presale = () => {
 
   function timer() {
     // Set the date we're counting down to
-    const countDownDate = new Date("Feb 13, 2022 21:15:25").getTime();
+    const countDownDate = new Date("Feb 13, 2022 21:25:25").getTime();
 
     // Update the count down every 1 second
     const x = setInterval(function() {
