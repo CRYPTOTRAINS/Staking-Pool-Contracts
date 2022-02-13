@@ -33,7 +33,7 @@ export const Presale = () => {
   
   function timer() {
     // Set the date we're counting down to
-    const countDownDate = new Date("Feb 13, 2022 22:25:25").getTime();
+    const countDownDate = new Date("Feb 14, 2022 00:52:00").getTime();
 
     // Update the count down every 1 second
     const x = setInterval(function() {
