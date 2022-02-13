@@ -103,8 +103,7 @@ export const Presale = () => {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
         return;
       }
-      console.error(error.message);
-      setStatus(console.error(error.message));
+      setStatus(`${object.Pool}: ${error.data.message}`);
     }
   }
   
