@@ -11,13 +11,61 @@ import CtrainArtifact from "../../../contracts/Ctrain.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+// import CountDown from './CountDown';
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
 export const Presale = () => {
   const [status, setStatus] = useState("");
   const [formNumber, updateFormNumber] = useState({no:0});
+  const [time, setTimer] = useState('');
+
+  useEffect(() => {
+   timer();
+  }, []);
+
+  function timer() {
+    // Set the date we're counting down to
+    const countDownDate = new Date("Jan 5, 2023 15:37:25").getTime();
+
+    // Update the count down every 1 second
+    const x = setInterval(function() {
+
+    // Get today's date and time
+    const now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    const distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    let time = {
+      Day: days,
+      Hour: hours,
+      Minute: minutes,
+      Second: seconds,
+    }
+    
+    setTimer(time);
+    
+    // // Display the result in the element with id="demo"
+    // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+    // + minutes + "m " + seconds + "s ";
+      // return days, hours, minutes, seconds;
+
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      return ("Expired");
+    }
+    return time;
+  }, 1000);
+  }
 
   async function createToken() {
     const no = formNumber;
@@ -61,19 +109,19 @@ export const Presale = () => {
       <p>{status}</p>
       <section className="time-cards">
         <article className="card days">
-          <p className="number">00</p>
+          <p className="number">{time.Day}</p>
           <p className="reminder">DAYS</p>
         </article>
         <article className="card days">
-          <p className="number">00</p>
+          <p className="number">{time.Hour}</p>
           <p className="reminder">HOURS</p>
         </article>
         <article className="card days">
-          <p className="number">00</p>
+          <p className="number">{time.Minute}</p>
           <p className="reminder">MINUTES</p>
         </article>
         <article className="card days">
-          <p className="number">00</p>
+          <p className="number">{time.Second}</p>
           <p className="reminder">SECONDS</p>
         </article>
       </section>

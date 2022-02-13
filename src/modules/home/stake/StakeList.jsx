@@ -368,9 +368,7 @@ export const StakeList = () => {
           {
             stakes.map((stake, i) => (
               <div  className="stake" key={stake.Index}>
-                {/* {console.log(key)} */}
                 <section className="item-container">
-                
                   <article className="item">
                     Name: <span>{stake.Pool}</span>
                   </article>
