@@ -48,8 +48,8 @@
   align-self: center;
 }
 
-.status{
-  color: orangered;
+.status {
+  color: green;
 }
 .stake {
   display: flex;
@@ -113,6 +113,14 @@
 
 .unstake-button img:active {
   transform: translateY(1px);
+}
+
+img.button {
+  transition: all 0.3s ease-in 0.1s;
+}
+
+img.button:hover {
+  width: 95%;
 }
 
 @media (min-width: 600px) and (max-width: 769px) {

@@ -11,13 +11,75 @@ import CtrainArtifact from "../../../contracts/Ctrain.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 import { ethers } from "ethers";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getCurrentWalletConnected } from '../../../utils/wallet';
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
 export const Presale = () => {
   const [status, setStatus] = useState("");
+  const [presaleStatus, setPresaleStatus] = useState("");
   const [formNumber, updateFormNumber] = useState({no:0});
+  const [time, setTimer] = useState('');
+  const [whitelist, setWhitelist] = useState("");
+
+  useEffect(() => {
+    (async () => {
+      const { address } = await getCurrentWalletConnected();
+      checkWhitelist(address);
+    })();
+   timer();
+  }, []);
+  
+  function timer() {
+    // Set the date we're counting down to
+    const countDownDate = new Date("Feb 13, 2022 22:25:25").getTime();
+
+    // Update the count down every 1 second
+    const x = setInterval(function() {
+
+    // Get today's date and time
+    const now = new Date().getTime();
+
+    // Find the distance between now and the count down date
+    const distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    let time = {
+      Day: days,
+      Hour: hours,
+      Minute: minutes,
+      Second: seconds,
+    }
+    
+    setTimer(time);
+
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      setPresaleStatus("Presale Period is over!");
+      let days = 0;
+      let hours = 0;
+      let minutes = 0;
+      let seconds = 0;
+
+      let time = {
+        Day: days,
+        Hour: hours,
+        Minute: minutes,
+        Second: seconds,
+      }
+
+      setTimer(time);
+    }
+      return time;
+    }, 1000);
+  }
 
   async function createToken() {
     const no = formNumber;
@@ -28,7 +90,7 @@ export const Presale = () => {
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
    
-    const price = (num * 6000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
+    const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
@@ -37,7 +99,6 @@ export const Presale = () => {
       const transaction = await contract.create(num, { value: fee });
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
-          console.log("failed transaction");
           setStatus("Transaction failed");
           throw new Error("Transaction failed");
         } else {
@@ -45,47 +106,70 @@ export const Presale = () => {
         }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        setStatus(`${error.message}`);
         return;
       }
-      console.error(error.message);
-      setStatus(console.error(error.message));
+      setStatus(`${error.message}`);
     }
   }
-  
+
+  async function checkWhitelist(address) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
+   
+    try {
+      const transaction = await contract.isWhitelisted(address);
+      const receipt = await transaction.wait();
+        if (receipt.status === 0) {
+          throw new Error("Transaction failed");
+        } else {
+          setWhitelist("Congrats, your wallet is whitelisted");
+        }
+
+    } catch(error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        return;
+      }
+      setStatus('');
+    }
+  }
+   
   return (
     <main>
-
+<div id="flipdown" className="flipdown"></div>
+    <h5 className='py-3'>{status}</h5>
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
-      <p>{status}</p>
+      <h5 className='py-3'>{presaleStatus}</h5>
       <section className="time-cards">
         <article className="card days">
-          <p className="number">00</p>
+          <p className="number">{time.Day}</p>
           <p className="reminder">DAYS</p>
         </article>
         <article className="card days">
-          <p className="number">00</p>
+          <p className="number">{time.Hour}</p>
           <p className="reminder">HOURS</p>
         </article>
         <article className="card days">
-          <p className="number">00</p>
+          <p className="number">{time.Minute}</p>
           <p className="reminder">MINUTES</p>
         </article>
         <article className="card days">
-          <p className="number">00</p>
+          <p className="number">{time.Second}</p>
           <p className="reminder">SECONDS</p>
         </article>
       </section>
       <section className="presale-main">
         <article className="presale-img">
           <div className="presale-main-items">
-            <p className="quantity">QUANTITY:  <input placeholder="E.g 2" required className="no"
+            <p className="quantity">QUANTITY:  <input placeholder="e.g 2" required className="no"
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
            
             <button className="approve">
-              <img src={approve} onClick={createToken} onKeyDown={createToken} alt="approve button" />
+              <img src={approve} className="approve" onClick={createToken} onKeyDown={createToken} alt="approve button" />
             </button>
-            <p className="congrats">congrats your wallet is whitelisted</p>
+            <p className="congrats">{whitelist}</p>
             <div className="sales-progress">
               <p className="sales-progress-text">SALE PROGRESS</p>
               <img src={loading} alt="sales progress loading" />

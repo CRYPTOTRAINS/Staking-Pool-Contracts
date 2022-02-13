@@ -5,12 +5,21 @@
   padding: 0.2rem 1.4rem;
   background-color: #f1e5bb;
   justify-content: space-between;
+  z-index: 10;
 }
 
 .logo {
   position: relative;
   width: 5%;
   left: 1rem;
+}
+
+img.logo {
+  transition: transform 0.7s ease-in-out;
+}
+
+img.logo:hover {
+  transform: rotate(360deg);
 }
 
 .link-container {
@@ -55,8 +64,11 @@
     background-color: #f1e5bb;
     position: sticky;
     top: 0;
+    z-index: 10;
   }
-  #hamburger { display: none; }
+  #hamburger {
+    display: none;
+  }
 
   #hamitems a {
     box-sizing: border-box;

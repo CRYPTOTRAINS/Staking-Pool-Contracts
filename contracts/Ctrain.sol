@@ -61,7 +61,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 timePublicSale = _startOfPresale + 7200;
         uint256 _price;
         if(block.timestamp <=  timePresale) {
-            require(isWhitelisted(msg.sender), "You are not a whitelisted for presale");
+            require(isWhitelisted(msg.sender), "You are not whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
             _price = 420000000000000000000;
@@ -82,11 +82,11 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         require(msg.value == fee, "Please send along $2 for each NFT to complete minting");
     
         for (uint256 i = 1; i <= _mintAmount; i++) {
-            uint8 randRarity = uint8(_createRandomNum(100));
-            uint8 acceleration = uint8(_createRandomNum(100));
-            uint8 speed = uint8(_createRandomNum(100));
-            uint8 brakes = uint8(_createRandomNum(100));
-            uint8 loads = uint8(_createRandomNum(100));
+            uint8 randRarity = uint8(_createRandomRarity(100));
+            uint8 acceleration = uint8(_createRandomAcceleration(100));
+            uint8 speed = uint8(_createRandomSpeed(100));
+            uint8 brakes = uint8(_createRandomBrakes(100));
+            uint8 loads = uint8(_createRandomLoads(100));
             Train memory newTrain = Train(COUNTER, 1, randRarity, false, acceleration, speed, brakes, loads);
             trains.push(newTrain);
             uint256 newItemId = _tokenIds.current();
@@ -126,7 +126,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         return _totalPresaleSupply;
     }
 
-     function isWhitelisted(address _user) public view returns (bool) {
+    function isWhitelisted(address _user) public view returns (bool) {
         for (uint i = 0; i < whitelistedAddresses.length; i++) {
             if (whitelistedAddresses[i] == _user) {
                     return true;
@@ -152,12 +152,6 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     }
 
     // Helpers
-    function _createRandomNum(uint256 _mod) internal view returns (uint256) {
-        uint256 randomNum = uint256(
-        keccak256(abi.encodePacked(block.timestamp, msg.sender))
-        );
-        return randomNum % _mod;
-    }
    
     function setNftPerAddressLimit(uint256 _limit) public onlyOwner {
         nftPerAddressLimit = _limit;
@@ -171,9 +165,39 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         _unpause();
     }
 
-}
+    function _createRandomRarity(uint256 _mod) internal view returns (uint256) {
+        uint256 randomNum = uint256(
+        keccak256(abi.encodePacked(block.timestamp, msg.sender))
+        );
+        return randomNum % _mod;
+    }
 
-/* ["0x4B20993Bc481177ec7E8f571ceCaE8A9e22C02db", 
-"0x78731D3Ca6b7E34aC0F824c42a7cC18A495cabaB", 
-"0x617F2E2fD72FD9D5503197092aC168c91465E7f2"]
-*/
+    function _createRandomAcceleration(uint256 _mod) internal view returns (uint256) {
+        uint256 randomNum = uint256(
+        keccak256(abi.encodePacked(block.timestamp, msg.sender))
+        );
+        return randomNum % _mod;
+    }
+
+     function _createRandomSpeed(uint256 _mod) internal view returns (uint256) {
+        uint256 randomNum = uint256(
+        keccak256(abi.encodePacked(block.timestamp, msg.sender))
+        );
+        return randomNum % _mod;
+    }
+
+    function _createRandomBrakes(uint256 _mod) internal view returns (uint256) {
+        uint256 randomNum = uint256(
+        keccak256(abi.encodePacked(block.timestamp, msg.sender))
+        );
+        return randomNum % _mod;
+    }
+
+    function _createRandomLoads(uint256 _mod) internal view returns (uint256) {
+        uint256 randomNum = uint256(
+        keccak256(abi.encodePacked(block.timestamp, msg.sender))
+        );
+        return randomNum % _mod;
+    }
+
+}
