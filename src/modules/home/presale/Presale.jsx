@@ -109,7 +109,7 @@ export const Presale = () => {
         setStatus(`${error.message}`);
         return;
       }
-      setStatus(`${error.object.message}`);
+      setStatus(`${error.message}`);
     }
   }
 
