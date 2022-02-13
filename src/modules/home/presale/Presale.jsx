@@ -28,7 +28,7 @@ export const Presale = () => {
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
     const num = no.no;
    
-    const price = (num * 6000000000000000000000).toLocaleString("fullwide", { useGrouping: false });
+    const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
