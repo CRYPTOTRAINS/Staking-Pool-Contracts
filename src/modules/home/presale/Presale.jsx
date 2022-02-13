@@ -20,11 +20,16 @@ export const Presale = () => {
   const [presaleStatus, setPresaleStatus] = useState("");
   const [formNumber, updateFormNumber] = useState({no:0});
   const [time, setTimer] = useState('');
+  const [whitelist, setWhitelist] = useState("");
 
   useEffect(() => {
+    (async () => {
+      const { address } = await getCurrentWalletConnected();
+      checkWhitelist(address);
+    })();
    timer();
   }, []);
-
+  
   function timer() {
     // Set the date we're counting down to
     const countDownDate = new Date("Feb 13, 2022 21:25:25").getTime();
@@ -107,8 +112,26 @@ export const Presale = () => {
     }
   }
 
-  async function checkWhitelist() {
-    
+  async function checkWhitelist(address) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
+
+    try {
+      const transaction = await contract.isWhitelisted(address);
+      const receipt = await transaction.wait();
+        if (receipt.status === 0) {
+          throw new Error("Transaction failed");
+        } else {
+          setWhitelist("Congrats, your wallet is whitelisted");
+        }
+
+    } catch(error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        return;
+      }
+      setStatus(`${object.Pool}: ${error.data.message}`);
+    }
   }
    
   return (
