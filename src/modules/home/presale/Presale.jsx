@@ -27,7 +27,7 @@ export const Presale = () => {
 
   function timer() {
     // Set the date we're counting down to
-    const countDownDate = new Date("Jan 5, 2023 15:37:25").getTime();
+    const countDownDate = new Date("Feb 13, 2022 21:15:25").getTime();
 
     // Update the count down every 1 second
     const x = setInterval(function() {
@@ -39,10 +39,10 @@ export const Presale = () => {
     const distance = countDownDate - now;
 
     // Time calculations for days, hours, minutes and seconds
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     let time = {
       Day: days,
@@ -52,16 +52,24 @@ export const Presale = () => {
     }
     
     setTimer(time);
-    
-    // // Display the result in the element with id="demo"
-    // document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-    // + minutes + "m " + seconds + "s ";
-      // return days, hours, minutes, seconds;
 
     // If the count down is finished, write some text
     if (distance < 0) {
       clearInterval(x);
-      return ("Expired");
+      setStatus("Presale Period Expired");
+      let days = 0;
+      let hours = 0;
+      let minutes = 0;
+      let seconds = 0;
+
+      let time = {
+        Day: days,
+        Hour: hours,
+        Minute: minutes,
+        Second: seconds,
+      }
+
+      setTimer(time);
     }
     return time;
   }, 1000);
@@ -103,10 +111,9 @@ export const Presale = () => {
   return (
     <main>
 <div id="flipdown" className="flipdown"></div>
-
+    <p>{status}</p>
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
-      <p>{status}</p>
       <section className="time-cards">
         <article className="card days">
           <p className="number">{time.Day}</p>
