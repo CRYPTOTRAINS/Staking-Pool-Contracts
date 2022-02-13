@@ -71,8 +71,8 @@ export const Presale = () => {
 
       setTimer(time);
     }
-    return time;
-  }, 1000);
+      return time;
+    }, 1000);
   }
 
   async function createToken() {
@@ -106,7 +106,11 @@ export const Presale = () => {
       setStatus(`${object.Pool}: ${error.data.message}`);
     }
   }
-  
+
+  async function checkWhitelist() {
+    
+  }
+   
   return (
     <main>
 <div id="flipdown" className="flipdown"></div>
