@@ -167,7 +167,7 @@ export const Presale = () => {
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
            
             <button className="approve">
-              <img src={approve} onClick={createToken} onKeyDown={createToken} alt="approve button" />
+              <img src={approve} className="approve" onClick={createToken} onKeyDown={createToken} alt="approve button" />
             </button>
             <p className="congrats">{whitelist}</p>
             <div className="sales-progress">
