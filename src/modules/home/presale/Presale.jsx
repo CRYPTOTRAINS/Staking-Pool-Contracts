@@ -106,7 +106,7 @@ export const Presale = () => {
         }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        setStatus("Transaction rejected by user...");
+        setStatus(`${error.message}`);
         return;
       }
       setStatus(`${error.object.message}`);
