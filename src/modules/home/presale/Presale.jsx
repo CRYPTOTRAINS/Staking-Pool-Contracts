@@ -17,6 +17,7 @@ const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
 export const Presale = () => {
   const [status, setStatus] = useState("");
+  const [presaleStatus, setPresaleStatus] = useState("");
   const [formNumber, updateFormNumber] = useState({no:0});
   const [time, setTimer] = useState('');
 
@@ -55,7 +56,7 @@ export const Presale = () => {
     // If the count down is finished, write some text
     if (distance < 0) {
       clearInterval(x);
-      setStatus("Presale Period Expired");
+      setPresaleStatus("Presale Period is over!");
       let days = 0;
       let hours = 0;
       let minutes = 0;
@@ -110,9 +111,10 @@ export const Presale = () => {
   return (
     <main>
 <div id="flipdown" className="flipdown"></div>
-    <h5 className='py-3'>{status}...</h5>
+    <h5 className='py-3'>{status}</h5>
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
+      <h5 className='py-3'>{presaleStatus}</h5>
       <section className="time-cards">
         <article className="card days">
           <p className="number">{time.Day}</p>
