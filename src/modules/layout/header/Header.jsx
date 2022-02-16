@@ -23,7 +23,7 @@ const Header = () => {
           <Link className="link-item" to="/Marketplace">
             Marketplace
           </Link>
-          <Link className="link-item" to="/Marketplace">
+          <Link className="link-item" to="/train">
             Trains
           </Link>
         </header>
