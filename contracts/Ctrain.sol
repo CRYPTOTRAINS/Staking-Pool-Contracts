@@ -13,11 +13,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     using SafeERC20 for IERC20;
 
-    // using Counters for Counters.Counter;
-
     address private _admin;
-   
-    // Counters.Counter private _tokenIds;
      
     uint256 public nftPerAddressLimit = 10;
     uint256 private _totalPresaleSupply = 3000;
@@ -79,30 +75,23 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 _mintingPrice = _price * _mintAmount;
         uint256 ownerMintedCount = balanceOf(msg.sender);
         require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
-        tokenAddress.transferFrom(msg.sender, reserveAddress, _mintingPrice);
-        uint256 fee = _mintAmount * 5300000000000000;
+        tokenAddress.transferFrom(msg.sender, address(this), _mintingPrice);
+        uint256 fee = _mintAmount * 5000000000000000;
         require(msg.value == fee, "Please send along $2 for each NFT to complete minting");
 
+        for (uint256 i = 1; i <= _mintAmount; i++) {
+            
             uint8 randRarity = uint8(_createRandomRarity(100));
             uint8 acceleration = uint8(_createRandomAcceleration(100));
             uint8 speed = uint8(_createRandomRarity(13));
             uint8 brakes = uint8(_createRandomRarity(7));
             uint8 loads = uint8(_createRandomAcceleration(7));
 
-        for (uint256 i = 1; i <= _mintAmount; i++) {
             Train memory newTrain = Train(COUNTER, 1, randRarity, false, acceleration, speed, brakes, loads);
             trains.push(newTrain);
             uint256 newItemId = COUNTER;
             _mint(msg.sender, newItemId);
             COUNTER++;
-
-            if (_mintAmount > 1) {
-                randRarity = uint8(_createRandomRarity(randRarity));
-                acceleration = uint8(_createRandomAcceleration(acceleration));
-                speed = uint8(_createRandomRarity(speed));
-                brakes = uint8(_createRandomRarity(brakes));
-                loads = uint8(_createRandomAcceleration(loads));
-            }
         }
     }
 
