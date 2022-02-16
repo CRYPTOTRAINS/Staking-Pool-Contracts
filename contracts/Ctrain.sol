@@ -13,9 +13,11 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     using SafeERC20 for IERC20;
 
-    using Counters for Counters.Counter;
+    // using Counters for Counters.Counter;
+
+    address private _admin;
    
-    Counters.Counter private _tokenIds;
+    // Counters.Counter private _tokenIds;
      
     uint256 public nftPerAddressLimit = 10;
     uint256 private _totalPresaleSupply = 3000;
@@ -38,7 +40,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     
     Train[] public trains;
 
-    uint256 COUNTER;
+    uint256 private COUNTER;
     uint256 private _startOfPresale;
 
     event RestrictedTransfer(
@@ -80,18 +82,27 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         tokenAddress.transferFrom(msg.sender, reserveAddress, _mintingPrice);
         uint256 fee = _mintAmount * 5300000000000000;
         require(msg.value == fee, "Please send along $2 for each NFT to complete minting");
-    
-        for (uint256 i = 1; i <= _mintAmount; i++) {
+
             uint8 randRarity = uint8(_createRandomRarity(100));
             uint8 acceleration = uint8(_createRandomAcceleration(100));
-            uint8 speed = uint8(_createRandomSpeed(100));
-            uint8 brakes = uint8(_createRandomBrakes(100));
-            uint8 loads = uint8(_createRandomLoads(100));
+            uint8 speed = uint8(_createRandomRarity(13));
+            uint8 brakes = uint8(_createRandomRarity(7));
+            uint8 loads = uint8(_createRandomAcceleration(7));
+
+        for (uint256 i = 1; i <= _mintAmount; i++) {
             Train memory newTrain = Train(COUNTER, 1, randRarity, false, acceleration, speed, brakes, loads);
             trains.push(newTrain);
-            uint256 newItemId = _tokenIds.current();
+            uint256 newItemId = COUNTER;
             _mint(msg.sender, newItemId);
-            _tokenIds.increment();
+            COUNTER++;
+
+            if (_mintAmount > 1) {
+                randRarity = uint8(_createRandomRarity(randRarity));
+                acceleration = uint8(_createRandomAcceleration(acceleration));
+                speed = uint8(_createRandomRarity(speed));
+                brakes = uint8(_createRandomRarity(brakes));
+                loads = uint8(_createRandomAcceleration(loads));
+            }
         }
     }
 
@@ -100,9 +111,13 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         whitelistedAddresses = _users;
     }
 
-    function withdraw() external payable onlyOwner {
+    function withdrawBNB() external payable onlyOwner {
         address payable _reserve = payable(reserveAddress);
         _reserve.transfer(address(this).balance);
+    }
+
+    function TokenWithdraw(uint256 _amount) external onlyOwner {
+      tokenAddress.transfer(_admin, _amount);
     }
 
     function transferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
@@ -126,7 +141,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         return _totalPresaleSupply;
     }
 
-    function isWhitelisted(address _user) public view returns (bool) {
+     function isWhitelisted(address _user) public view returns (bool) {
         for (uint i = 0; i < whitelistedAddresses.length; i++) {
             if (whitelistedAddresses[i] == _user) {
                     return true;
@@ -173,30 +188,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     }
 
     function _createRandomAcceleration(uint256 _mod) internal view returns (uint256) {
-        uint256 randomNum = uint256(
-        keccak256(abi.encodePacked(block.timestamp, msg.sender))
-        );
-        return randomNum % _mod;
-    }
-
-     function _createRandomSpeed(uint256 _mod) internal view returns (uint256) {
-        uint256 randomNum = uint256(
-        keccak256(abi.encodePacked(block.timestamp, msg.sender))
-        );
-        return randomNum % _mod;
-    }
-
-    function _createRandomBrakes(uint256 _mod) internal view returns (uint256) {
-        uint256 randomNum = uint256(
-        keccak256(abi.encodePacked(block.timestamp, msg.sender))
-        );
-        return randomNum % _mod;
-    }
-
-    function _createRandomLoads(uint256 _mod) internal view returns (uint256) {
-        uint256 randomNum = uint256(
-        keccak256(abi.encodePacked(block.timestamp, msg.sender))
-        );
+        uint256 randomNum = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp)));
         return randomNum % _mod;
     }
 
