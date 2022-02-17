@@ -62,16 +62,20 @@ export const TrainList = () => {
     const account = accounts[0];
 
     const data = await contract.getOwnerTrains(account);
-    let train = data[data.length-1];
     
-    const trainID = train.id.toString();
-    const trainLevel = train.level.toString();
-    const trainRarity = train.rarity.toString();
-    const trainFuel = train.fuel;
-    const trainAcceleration = train.acceleration;
-    const trainSpeed = train.speed;
-    const trainBrakes = train.brakes;
-    const trainLoads = train.loads;
+    const trains = await Promise.all(data.map(async i => {
+        let train = {
+          trainID = i.id.toString(),
+          trainLevel = i.level.toString(),
+          trainRarity = i.rarity.toString(),
+          trainFuel = i.fuel,
+          trainAcceleration = i.acceleration,
+          trainSpeed = train.speed,
+          trainBrakes = train.brakes,
+          trainLoads = train.loads,
+        }
+    }
+    
     
     setID(trainID);
     setLevel(trainLevel);
