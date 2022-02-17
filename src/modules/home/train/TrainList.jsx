@@ -1,5 +1,7 @@
 /* eslint-disable  jsx-a11y/no-noninteractive-element-interactions
  */
+/* eslint-disable  no-unused-vars
+ */
 import './TrainList.css';
 import './TrainItem.css';
 import Table from 'react-bootstrap/Table';
@@ -24,6 +26,8 @@ import legendary_bullet from '../../../assets/images/legendary_bullet.png';
 import dispatch from '../../../assets/images/dispatch_button.png';
 import reward from '../../../assets/images/reward_button.png';
 import sell from '../../../assets/images/sell.png';
+import { useEffect, useState } from "react";
+import { ethers } from "ethers";
 
 import ModalRoot from '../../common/Modal/ModalRoot';
 import ModalService from '../../../services/ModalService';
@@ -81,7 +85,7 @@ export const TrainList = () => {
       <h2 className="title">Your Trains</h2>
       <div className="train-list">
         {/*=============TRAIN ONE ======================*/}
-        <main className="train">
+        {/* <main className="train">
           <p className="sno">#1</p>
           <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
@@ -196,9 +200,9 @@ export const TrainList = () => {
               <img src={reward} alt="reward button" />
             </button>
           </section>
-        </main>
+        </main> */}
         {/*=============TRAIN TWO ======================*/}
-        <main className="train">
+        {/* <main className="train">
           <p className="sno">#2</p>
           <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
@@ -313,9 +317,9 @@ export const TrainList = () => {
               <img src={reward} alt="reward button" />
             </button>
           </section>
-        </main>
+        </main> */}
         {/*=============TRAIN THREE ======================*/}
-        <main className="train">
+        {/* <main className="train">
           <p className="sno">#3</p>
           <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
@@ -430,9 +434,9 @@ export const TrainList = () => {
               <img src={reward} alt="reward button" />
             </button>
           </section>
-        </main>
+        </main> */}
         {/*=============TRAIN FOUR ======================*/}
-        <main className="train">
+        {/* <main className="train">
           <p className="sno">#4</p>
           <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
@@ -547,7 +551,7 @@ export const TrainList = () => {
               <img src={reward} alt="reward button" />
             </button>
           </section>
-        </main>
+        </main> */}
       </div>
     </>
   );
