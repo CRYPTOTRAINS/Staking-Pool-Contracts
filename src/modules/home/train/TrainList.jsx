@@ -43,6 +43,47 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export const TrainList = () => {
+    const [name, setName] = useState([])
+    const [id, setID] = useState([])
+    const [dna, setDNA] = useState([])
+    const [rarity, setRarity] = useState([])
+    const [level, setLevel] = useState([])
+
+  useEffect(() => {
+    loadNFTs()
+  }, [])
+
+  async function loadNFTs() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
+    
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+
+    const data = await contract.getOwnerTrains(account);
+    let train = data[data.length-1];
+    
+    const trainID = train.id.toString();
+    const trainLevel = train.level.toString();
+    const trainRarity = train.rarity.toString();
+    const trainFuel = train.fuel;
+    const trainAcceleration = train.acceleration;
+    const trainSpeed = train.speed;
+    const trainBrakes = train.brakes;
+    const trainLoads = train.loads;
+    
+    setID(trainID);
+    setLevel(trainLevel);
+    setRarity(trainRarity);
+    setFuel(trainFuel);
+    setAcceleration(trainAcceleration);
+    setSpeed(trainSpeed);
+    setBrakes(trainBrakes);
+    setLoads(trainLoads);
+
+  }
+
   const addModal = () => {
     ModalService.open(DispatchModal);
   };
