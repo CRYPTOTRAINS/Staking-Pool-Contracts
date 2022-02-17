@@ -74,18 +74,10 @@ export const TrainList = () => {
           trainBrakes = train.brakes,
           trainLoads = train.loads,
         }
-    }
-    
-    
-    setID(trainID);
-    setLevel(trainLevel);
-    setRarity(trainRarity);
-    setFuel(trainFuel);
-    setAcceleration(trainAcceleration);
-    setSpeed(trainSpeed);
-    setBrakes(trainBrakes);
-    setLoads(trainLoads);
 
+        return train;
+    }));
+    setTrains(trains);
   }
 
   const addModal = () => {
