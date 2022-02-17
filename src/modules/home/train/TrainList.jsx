@@ -44,7 +44,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export const TrainList = () => {
   const [trains, setTrains] = useState([]);
-  const [status, setStatus] = useState("");
+  const [state, setState] = useState("");
 
   useEffect(() => {
     loadNFTs()
@@ -62,14 +62,14 @@ export const TrainList = () => {
     
     const trains = await Promise.all(data.map(async i => {
         let train = {
-          trainID = i.id.toString(),
-          trainLevel = i.level.toString(),
-          trainRarity = i.rarity.toString(),
-          trainFuel = i.fuel,
-          trainAcceleration = i.acceleration,
-          trainSpeed = train.speed,
-          trainBrakes = train.brakes,
-          trainLoads = train.loads,
+          trainID: i.id.toString(),
+          trainLevel: i.level.toString(),
+          trainRarity: i.rarity.toString(),
+          trainFuel: i.fuel,
+          trainAcceleration: i.acceleration,
+          trainSpeed: i.speed,
+          trainBrakes: i.brakes,
+          trainLoads: i.loads,
         }
 
         return train;
@@ -125,12 +125,12 @@ export const TrainList = () => {
         {trains.length === 0 ? (
           <div>You do not have any Box yet. Claim a Box</div>
           ) : (
-        <main className="train">
+        <main>
         
         {
            trains.map((train, i) => (    
-          <div>
-            <p className="sno">#1</p>
+          <div className="train" key={train.trainID}>
+            <p className="sno">{train.trainID}</p>
           <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
             <img src={common} alt="common train" />
@@ -147,14 +147,14 @@ export const TrainList = () => {
                       <img src={level} alt="level" />
                     </span>
                     <span className="level">Level:&nbsp;</span>
-                    <span className="value">0</span>
+                    <span className="value">{train.trainLevel}</span>
                   </td>
                   <td width={'60%'} className="table-data">
                     <span className="icon">
                       <img src={acceleration} alt="acceleration" />
                     </span>
                     <span className="acceleration">Acceleration:&nbsp;</span>
-                    <span className="value">20</span>
+                    <span className="value">{train.trainAcceleration}</span>
                   </td>
                 </tr>
                 <tr>
@@ -170,7 +170,7 @@ export const TrainList = () => {
                       <img src={speed} alt="speed" />
                     </span>
                     <span className="speed">Speed:&nbsp;</span>
-                    <span className="value">30.00</span>
+                    <span className="value">{train.trainSpeed}</span>
                   </td>
                 </tr>
                 <tr>
@@ -179,14 +179,14 @@ export const TrainList = () => {
                       <img src={load} alt="load" />
                     </span>
                     <span className="load">Loads:&nbsp;</span>
-                    <span className="value">2</span>
+                    <span className="value">{train.trainLoads}</span>
                   </td>
                   <td className="table-data">
                     <span className="icon">
                       <img src={brake} alt="brake" />
                     </span>
                     <span className="brake">Brakes:&nbsp;</span>
-                    <span className="value">16</span>
+                    <span className="value">{train.trainBrakes}</span>
                   </td>
                 </tr>
                 <tr>
@@ -195,7 +195,7 @@ export const TrainList = () => {
                       <img src={fuel} alt="fuel" />
                     </span>
                     <span className="fuel">Fuel:&nbsp;</span>
-                    <span className="value">No</span>
+                    <span className="value">{train.trainFuel}</span>
                   </td>
                   <td className="table-data">
                     <span className="image-icon">
