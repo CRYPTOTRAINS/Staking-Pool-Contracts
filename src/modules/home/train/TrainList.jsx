@@ -129,10 +129,10 @@ export const TrainList = () => {
         
         {
            trains.map((train, i) => (    
-        <div>
-          
-           
-        </div>
+          <div>
+            
+            
+          </div>
          ))
         }
         </main>
