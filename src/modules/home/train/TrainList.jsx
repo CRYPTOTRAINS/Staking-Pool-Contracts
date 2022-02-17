@@ -121,7 +121,11 @@ export const TrainList = () => {
       <h2 className="title">Your Trains</h2>
       <div className="train-list">
         {/*=============TRAIN ONE ======================*/}
-        {/* <main className="train">
+        <div>
+        {trains.length === 0 ? (
+          <div className='no-stake'>You do not have any Box yet. Claim a Box</div>
+        ) : (
+        <main className="train">
           <p className="sno">#1</p>
           <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
@@ -236,7 +240,8 @@ export const TrainList = () => {
               <img src={reward} alt="reward button" />
             </button>
           </section>
-        </main> */}
+        </main>
+        </div>
         {/*=============TRAIN TWO ======================*/}
         {/* <main className="train">
           <p className="sno">#2</p>
