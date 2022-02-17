@@ -133,7 +133,7 @@ export const TrainList = () => {
             <p className="sno">{train.trainID}</p>
           <img src={sell} className="sell" alt="sell" />
           <article className="train-image">
-            <img src={common} alt="common train" />
+            
           </article>
           <article className="bullet">
             <img src={common_bullet} alt="common train bullet" />
