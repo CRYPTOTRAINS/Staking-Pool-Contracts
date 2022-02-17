@@ -130,7 +130,120 @@ export const TrainList = () => {
         {
            trains.map((train, i) => (    
           <div>
-            
+            <p className="sno">#1</p>
+          <img src={sell} className="sell" alt="sell" />
+          <article className="train-image">
+            <img src={common} alt="common train" />
+          </article>
+          <article className="bullet">
+            <img src={common_bullet} alt="common train bullet" />
+          </article>
+          <section className="train-container">
+            <Table bordered hover>
+              <tbody>
+                <tr>
+                  <td className="table-data">
+                    <span className="icon">
+                      <img src={level} alt="level" />
+                    </span>
+                    <span className="level">Level:&nbsp;</span>
+                    <span className="value">0</span>
+                  </td>
+                  <td width={'60%'} className="table-data">
+                    <span className="icon">
+                      <img src={acceleration} alt="acceleration" />
+                    </span>
+                    <span className="acceleration">Acceleration:&nbsp;</span>
+                    <span className="value">20</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="table-data">
+                    <span className="icon">
+                      <img src={expo} alt="exp" />
+                    </span>
+                    <span className="expo">Exp:&nbsp;</span>
+                    <span className="value">0.00</span>
+                  </td>
+                  <td className="table-data">
+                    <span className="icon">
+                      <img src={speed} alt="speed" />
+                    </span>
+                    <span className="speed">Speed:&nbsp;</span>
+                    <span className="value">30.00</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="table-data">
+                    <span className="icon">
+                      <img src={load} alt="load" />
+                    </span>
+                    <span className="load">Loads:&nbsp;</span>
+                    <span className="value">2</span>
+                  </td>
+                  <td className="table-data">
+                    <span className="icon">
+                      <img src={brake} alt="brake" />
+                    </span>
+                    <span className="brake">Brakes:&nbsp;</span>
+                    <span className="value">16</span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="table-data">
+                    <span className="icon">
+                      <img src={fuel} alt="fuel" />
+                    </span>
+                    <span className="fuel">Fuel:&nbsp;</span>
+                    <span className="value">No</span>
+                  </td>
+                  <td className="table-data">
+                    <span className="image-icon">
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to Buy more Fuel</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addFuelModal}>
+                          <img src={station} alt="station" />
+                        </button>
+                      </OverlayTrigger>
+                    </span>
+                  </td>
+                </tr>
+                <tr>
+                  <td className="table-data">
+                    <span className="icon">
+                      <img src={status} alt="status" />
+                    </span>
+                    <span className="status">Status:&nbsp;</span>
+                    <span className="value">Perf</span>
+                  </td>
+                  <td className="table-data">
+                    <span className="image-icon">
+                      <OverlayTrigger
+                        delay={{ hide: 450, show: 300 }}
+                        overlay={(props) => <Tooltip {...props}>Click to repair train</Tooltip>}
+                        placement="bottom"
+                      >
+                        <button className="station-button" onClick={addRepairModal}>
+                          <img src={mechanic} alt="mechanic" />
+                        </button>
+                      </OverlayTrigger>
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
+          </section>
+          <section className="train-button">
+            <button className="dispatch" onClick={addModal}>
+              <img src={dispatch} alt="dispatch button" />
+            </button>
+            <button className="dispatch" onClick={addWinnerModal}>
+              <img src={reward} alt="reward button" />
+            </button>
+          </section>
             
           </div>
          ))
@@ -493,120 +606,3 @@ export const TrainList = () => {
     </>
   );
 };
-
-
-
-// <p className="sno">#1</p>
-//           <img src={sell} className="sell" alt="sell" />
-//           <article className="train-image">
-//             <img src={common} alt="common train" />
-//           </article>
-//           <article className="bullet">
-//             <img src={common_bullet} alt="common train bullet" />
-//           </article>
-//           <section className="train-container">
-//             <Table bordered hover>
-//               <tbody>
-//                 <tr>
-//                   <td className="table-data">
-//                     <span className="icon">
-//                       <img src={level} alt="level" />
-//                     </span>
-//                     <span className="level">Level:&nbsp;</span>
-//                     <span className="value">0</span>
-//                   </td>
-//                   <td width={'60%'} className="table-data">
-//                     <span className="icon">
-//                       <img src={acceleration} alt="acceleration" />
-//                     </span>
-//                     <span className="acceleration">Acceleration:&nbsp;</span>
-//                     <span className="value">20</span>
-//                   </td>
-//                 </tr>
-//                 <tr>
-//                   <td className="table-data">
-//                     <span className="icon">
-//                       <img src={expo} alt="exp" />
-//                     </span>
-//                     <span className="expo">Exp:&nbsp;</span>
-//                     <span className="value">0.00</span>
-//                   </td>
-//                   <td className="table-data">
-//                     <span className="icon">
-//                       <img src={speed} alt="speed" />
-//                     </span>
-//                     <span className="speed">Speed:&nbsp;</span>
-//                     <span className="value">30.00</span>
-//                   </td>
-//                 </tr>
-//                 <tr>
-//                   <td className="table-data">
-//                     <span className="icon">
-//                       <img src={load} alt="load" />
-//                     </span>
-//                     <span className="load">Loads:&nbsp;</span>
-//                     <span className="value">2</span>
-//                   </td>
-//                   <td className="table-data">
-//                     <span className="icon">
-//                       <img src={brake} alt="brake" />
-//                     </span>
-//                     <span className="brake">Brakes:&nbsp;</span>
-//                     <span className="value">16</span>
-//                   </td>
-//                 </tr>
-//                 <tr>
-//                   <td className="table-data">
-//                     <span className="icon">
-//                       <img src={fuel} alt="fuel" />
-//                     </span>
-//                     <span className="fuel">Fuel:&nbsp;</span>
-//                     <span className="value">No</span>
-//                   </td>
-//                   <td className="table-data">
-//                     <span className="image-icon">
-//                       <OverlayTrigger
-//                         delay={{ hide: 450, show: 300 }}
-//                         overlay={(props) => <Tooltip {...props}>Click to Buy more Fuel</Tooltip>}
-//                         placement="bottom"
-//                       >
-//                         <button className="station-button" onClick={addFuelModal}>
-//                           <img src={station} alt="station" />
-//                         </button>
-//                       </OverlayTrigger>
-//                     </span>
-//                   </td>
-//                 </tr>
-//                 <tr>
-//                   <td className="table-data">
-//                     <span className="icon">
-//                       <img src={status} alt="status" />
-//                     </span>
-//                     <span className="status">Status:&nbsp;</span>
-//                     <span className="value">Perf</span>
-//                   </td>
-//                   <td className="table-data">
-//                     <span className="image-icon">
-//                       <OverlayTrigger
-//                         delay={{ hide: 450, show: 300 }}
-//                         overlay={(props) => <Tooltip {...props}>Click to repair train</Tooltip>}
-//                         placement="bottom"
-//                       >
-//                         <button className="station-button" onClick={addRepairModal}>
-//                           <img src={mechanic} alt="mechanic" />
-//                         </button>
-//                       </OverlayTrigger>
-//                     </span>
-//                   </td>
-//                 </tr>
-//               </tbody>
-//             </Table>
-//           </section>
-//           <section className="train-button">
-//             <button className="dispatch" onClick={addModal}>
-//               <img src={dispatch} alt="dispatch button" />
-//             </button>
-//             <button className="dispatch" onClick={addWinnerModal}>
-//               <img src={reward} alt="reward button" />
-//             </button>
-//           </section>
