@@ -43,11 +43,8 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export const TrainList = () => {
-    const [name, setName] = useState([])
-    const [id, setID] = useState([])
-    const [dna, setDNA] = useState([])
-    const [rarity, setRarity] = useState([])
-    const [level, setLevel] = useState([])
+  const [trains, setTrains] = useState([]);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     loadNFTs()
