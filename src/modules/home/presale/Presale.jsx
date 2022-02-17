@@ -33,7 +33,7 @@ export const Presale = () => {
   
   function timer() {
     // Set the date we're counting down to
-    const countDownDate = new Date("Feb 14, 2022 11:52:00").getTime();
+    const countDownDate = new Date("Feb 18, 2022 11:52:00").getTime();
 
     // Update the count down every 1 second
     const x = setInterval(function() {
@@ -106,10 +106,10 @@ export const Presale = () => {
         }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        setStatus(`${error.message}`);
+        setStatus(`${error.data.message}`);
         return;
       }
-      setStatus(`${error.message}`);
+      setStatus(`${error.data.message}`);
     }
   }
 

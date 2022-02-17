@@ -123,7 +123,7 @@ export const TrainList = () => {
         {/*=============TRAIN ONE ======================*/}
         <div>
         {trains.length === 0 ? (
-          <div>You do not have any Box yet. Claim a Box</div>
+          <div className="title">You do not have any Box yet. </div>
           ) : (
         <main>
         
