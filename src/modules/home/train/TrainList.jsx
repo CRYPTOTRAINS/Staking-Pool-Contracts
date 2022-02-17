@@ -28,6 +28,8 @@ import reward from '../../../assets/images/reward_button.png';
 import sell from '../../../assets/images/sell.png';
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
+import CtrainAddress from "../../../contracts/ctrain-address.json";
+import CtrainArtifact from "../../../contracts/Ctrain.json";
 
 import ModalRoot from '../../common/Modal/ModalRoot';
 import ModalService from '../../../services/ModalService';
