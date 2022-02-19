@@ -15,6 +15,8 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
 
     address private _admin;
      
+    address marketPlaceAddress;
+
     uint256 public nftPerAddressLimit = 10;
     uint256 private _totalPresaleSupply = 3000;
 
@@ -45,10 +47,11 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 _id
     );
 
-    constructor(address _token, address _reserve)ERC721("Ctrain", "CTR"){
+    constructor(address _token, address _reserve, address _marketplaceAddress) ERC721("Ctrain", "CTR"){
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
         _startOfPresale = block.timestamp;
+        marketPlaceAddress = _marketplaceAddress;
     }
     
     function create(uint256 _mintAmount) public payable whenNotPaused {
@@ -93,6 +96,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
             _mint(msg.sender, newItemId);
             COUNTER++;
         }
+        setApprovalForAll(marketPlaceAddress, true);
     }
 
     function whitelistUsers(address[] calldata _users) public onlyOwner {
@@ -182,3 +186,4 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     }
 
 }
+
