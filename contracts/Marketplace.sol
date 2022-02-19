@@ -70,7 +70,7 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
       nftContract,
       tokenId,
       msg.sender,
-      address(0),
+      address(this),
       price,
       false
     );
@@ -92,7 +92,7 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
     
     coinAddress.safeTransferFrom(msg.sender, address(this), costToBuyer);
     coinAddress.safeTransferFrom(address(this), nftSeller, sellerAmount);
-    
+
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
     idToMarketItem[itemId].owner = msg.sender;
     idToMarketItem[itemId].sold = true;
@@ -108,7 +108,7 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
 
     MarketItem[] memory items = new MarketItem[](unsoldItemCount);
     for (uint i = 0; i < itemCount; i++) {
-      if (idToMarketItem[i + 1].owner == address(0)) {
+      if (idToMarketItem[i + 1].owner == address(this)) {
         uint currentId = i + 1;
         MarketItem storage currentItem = idToMarketItem[currentId];
         items[currentIndex] = currentItem;
@@ -165,8 +165,9 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
     }
     return items;
   }
+
+  function TokenWithdraw(uint256 _amount) external onlyOwner {
+      coinAddress.transfer(_owner, _amount);
+  }
+
 }
-
-
-// selling fee from the amount of CTRAIN NFT 15% 
-// Add a withderawal function to the marketpplace.
