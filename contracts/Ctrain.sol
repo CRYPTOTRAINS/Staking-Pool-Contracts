@@ -11,7 +11,7 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 
 
-contract CTRAIN is ERC721URIStorage, Pausable {
+contract Ctrain is ERC721URIStorage, Pausable {
 
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
