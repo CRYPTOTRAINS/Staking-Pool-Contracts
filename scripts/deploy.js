@@ -18,6 +18,9 @@ async function main() {
     const staketoken = await StakeToken.deploy(enmt.address, enmt.address);
 
     const Ctrain = await ethers.getContractFactory("Ctrain");
+    const ctrain = await Ctrain.deploy(enmt.address,"0x8Eea93cb015d764CbbFe6c21170fe3c0E81eC373");
+
+    const Ctrain = await ethers.getContractFactory("Ctrain");
     const ctrain = await Ctrain.deploy(enmt.address,"0x8Eea93cb015d764CbbFe6c21170fe3c0E81eC373")
 
     console.log("ENMT address:", enmt.address);

@@ -5,7 +5,6 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
-// import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
@@ -72,17 +71,15 @@ contract CTRAIN is ERC721URIStorage, Pausable {
             require(isWhitelisted(msg.sender), "You are not whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
-            // _price = 420000000000000000000;
-             _price = 1;
+            _price = 420000000000000000000;
         } else if (block.timestamp > timePresale && block.timestamp <= timePublicSale) {
             require(isWhitelisted(msg.sender), " You are not a whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
-            // _price = 510000000000000000000;
-            _price = 1;
+            _price = 510000000000000000000;
+    
         } else {
-            // _price = 600000000000000000000;
-            _price = 1;
+             _price = 600000000000000000000;
         }
         
        uint256 _mintingPrice = _price * _mintAmount;
@@ -124,20 +121,6 @@ contract CTRAIN is ERC721URIStorage, Pausable {
       require(msg.sender == owner, "You're unauthorized. Only owner!");
       tokenAddress.transfer(owner, _amount);
     }
-
-    // function transferFrom(address _from, address _to, uint256 _tokenId) public override {
-       
-    //     require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
-    //     _transfer(_from, _to, _tokenId);
-    //     emit RestrictedTransfer(_from, _to,  _tokenId);
-    // }
-
-    // function safeTransferFrom(address _from, address _to, uint256 _tokenId) public override {
-    //     require(msg.sender == owner, "You're unauthorized. Only owner!");
-    //     require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
-    //     safeTransferFrom(_from, _to, _tokenId, "");
-    //     emit RestrictedTransfer(_from, _to,  _tokenId);
-    // }
 
     // Getters
     function getTrains() public view returns (Train[] memory) {
