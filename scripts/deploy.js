@@ -17,11 +17,11 @@ async function main() {
     const StakeToken = await ethers.getContractFactory("StakeToken");
     const staketoken = await StakeToken.deploy(enmt.address, enmt.address);
 
+    const MarketPlace = await ethers.getContractFactory("MarketPlace");
+    const marketPlace = await MarketPlace.deploy();
+
     const Ctrain = await ethers.getContractFactory("Ctrain");
     const ctrain = await Ctrain.deploy(enmt.address,"0x8Eea93cb015d764CbbFe6c21170fe3c0E81eC373");
-
-    const MarketPlace = await ethers.getContractFactory("MarketPlace");
-    const ctrain = await Ctrain.deploy(enmt.address,"0x8Eea93cb015d764CbbFe6c21170fe3c0E81eC373")
 
     console.log("ENMT address:", enmt.address);
     console.log("StakeToken address:", staketoken.address);
