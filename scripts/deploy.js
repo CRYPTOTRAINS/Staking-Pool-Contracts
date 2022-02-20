@@ -31,6 +31,7 @@ async function main() {
     let config = `
     export const enmtaddress = "${enmt.address}"
     export const staketokenaddress = "${staketoken.address}"
+    export const marketPlaceaddress = "${marketPlace.address}"
     export const ctrainaddress = "${ctrain.address}"
       `
     let data = JSON.stringify(config)
