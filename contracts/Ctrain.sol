@@ -5,17 +5,22 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
+// import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract Ctrain is ERC721URIStorage, Pausable, Ownable {
+
+
+contract CTRAIN is ERC721URIStorage, Pausable {
+
+    using Counters for Counters.Counter;
+    Counters.Counter private _tokenIds;
+    address contractAddress;
+
     using SafeERC20 for IERC20;
 
     address private _admin;
-     
-    address marketPlaceAddress;
 
     uint256 public nftPerAddressLimit = 10;
     uint256 private _totalPresaleSupply = 3000;
@@ -39,6 +44,7 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
     Train[] public trains;
 
     uint256 private COUNTER;
+
     uint256 private _startOfPresale;
 
     event RestrictedTransfer(
@@ -47,40 +53,40 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         uint256 _id
     );
 
-    constructor(address _token, address _reserve, address _marketplaceAddress) ERC721("Ctrain", "CTR"){
+    constructor(address marketplaceAddress, address _token, address _reserve) ERC721("ctrain", "ctr") {
+        contractAddress = marketplaceAddress;
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
         _startOfPresale = block.timestamp;
-        marketPlaceAddress = _marketplaceAddress;
     }
-    
-    function create(uint256 _mintAmount) public payable whenNotPaused {
+
+    function createToken(uint256 _mintAmount) public {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
-
         uint256 timePresale = _startOfPresale + 3600;
         uint256 timePublicSale = _startOfPresale + 7200;
-        uint256 _price;
+       uint256 _price = 1;
         if(block.timestamp <=  timePresale) {
             require(isWhitelisted(msg.sender), "You are not whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
-            _price = 420000000000000000000;
+            // _price = 420000000000000000000;
+             _price = 1;
         } else if (block.timestamp > timePresale && block.timestamp <= timePublicSale) {
-            require(isWhitelisted(msg.sender), "You are not a whitelisted for presale");
+            require(isWhitelisted(msg.sender), " You are not a whitelisted for presale");
             require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
              _totalPresaleSupply -= _mintAmount;
-            _price = 510000000000000000000;
+            // _price = 510000000000000000000;
+            _price = 1;
         } else {
-            _price = 600000000000000000000;
+            // _price = 600000000000000000000;
+            _price = 1;
         }
         
-        uint256 _mintingPrice = _price * _mintAmount;
+       uint256 _mintingPrice = _price * _mintAmount;
         uint256 ownerMintedCount = balanceOf(msg.sender);
         require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
-        tokenAddress.transferFrom(msg.sender, address(this), _mintingPrice);
-        uint256 fee = _mintAmount * 5000000000000000;
-        require(msg.value == fee, "Please send along $2 for each NFT to complete minting");
+       tokenAddress.transferFrom(msg.sender, address(this), _mintingPrice);
 
         for (uint256 i = 1; i <= _mintAmount; i++) {
             
@@ -92,38 +98,39 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
 
             Train memory newTrain = Train(COUNTER, 1, randRarity, false, acceleration, speed, brakes, loads);
             trains.push(newTrain);
-            uint256 newItemId = COUNTER;
+            uint256 newItemId = _tokenIds.current();
             _mint(msg.sender, newItemId);
-            COUNTER++;
-        }
-        setApprovalForAll(marketPlaceAddress, true);
+            setApprovalForAll(contractAddress, true);
+            _tokenIds.increment();
+            
+       }
     }
 
-    function whitelistUsers(address[] calldata _users) public onlyOwner {
+    function whitelistUsers(address[] calldata _users) public {
         delete whitelistedAddresses;
         whitelistedAddresses = _users;
     }
 
-    function withdrawBNB() external payable onlyOwner {
-        address payable _reserve = payable(reserveAddress);
-        _reserve.transfer(address(this).balance);
-    }
+    // function withdrawBNB() external payable onlyOwner {
+    //     address payable _reserve = payable(reserveAddress);
+    //     _reserve.transfer(address(this).balance);
+    // }
 
-    function TokenWithdraw(uint256 _amount) external onlyOwner {
-      tokenAddress.transfer(_admin, _amount);
-    }
+    // function TokenWithdraw(uint256 _amount) external onlyOwner {
+    //   tokenAddress.transfer(_admin, _amount);
+    // }
 
-    function transferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
-        require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
-        _transfer(_from, _to, _tokenId);
-        emit RestrictedTransfer(_from, _to,  _tokenId);
-    }
+    // function transferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+    //     require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
+    //     _transfer(_from, _to, _tokenId);
+    //     emit RestrictedTransfer(_from, _to,  _tokenId);
+    // }
 
-    function safeTransferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
-        require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
-        safeTransferFrom(_from, _to, _tokenId, "");
-        emit RestrictedTransfer(_from, _to,  _tokenId);
-    }
+    // function safeTransferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+    //     require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
+    //     safeTransferFrom(_from, _to, _tokenId, "");
+    //     emit RestrictedTransfer(_from, _to,  _tokenId);
+    // }
 
     // Getters
     function getTrains() public view returns (Train[] memory) {
@@ -161,17 +168,17 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
 
     // Helpers
    
-    function setNftPerAddressLimit(uint256 _limit) public onlyOwner {
-        nftPerAddressLimit = _limit;
-    }
+    // function setNftPerAddressLimit(uint256 _limit) public onlyOwner {
+    //     nftPerAddressLimit = _limit;
+    // }
 
-    function pause() public onlyOwner {
-        _pause();
-    }
+    // function pause() public onlyOwner {
+    //     _pause();
+    // }
 
-    function unpause() public onlyOwner {
-        _unpause();
-    }
+    // function unpause() public onlyOwner {
+    //     _unpause();
+    // }
 
     function _createRandomRarity(uint256 _mod) internal view returns (uint256) {
         uint256 randomNum = uint256(
@@ -185,5 +192,5 @@ contract Ctrain is ERC721URIStorage, Pausable, Ownable {
         return randomNum % _mod;
     }
 
-}
 
+}

@@ -4,36 +4,24 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
-
-contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
+contract AzaniaMarket is ReentrancyGuard {
   using Counters for Counters.Counter;
-
   Counters.Counter private _itemIds;
-
   Counters.Counter private _itemsSold;
 
-  using SafeERC20 for IERC20;
-  
-  IERC20 public coinAddress;
+  address payable owner;
 
-  address private _owner;
-
-  constructor(address _coinAddress) {
-    _owner = msg.sender;
-    coinAddress = IERC20(_coinAddress);
+  constructor() {
+    owner = payable(msg.sender);
   }
 
   struct MarketItem {
     uint itemId;
     address nftContract;
     uint256 tokenId;
-    address seller;
-    address owner;
+    address payable seller;
+    address payable owner;
     uint256 price;
     bool sold;
   }
@@ -49,20 +37,24 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
     uint256 price,
     bool sold
   );
+
   
   /* Places an item for sale on the marketplace */
-  function createMarketItem(address nftContract, uint256 tokenId, uint256 price) public payable nonReentrant {
-    require(price > 0, "Price cannot be zero");
-
-    _itemIds.increment();
+  function sell(
+    address nftContract,
+    uint256 tokenId,
+    uint256 price
+  ) public payable nonReentrant {
+    require(price > 0, "Price must be at least 1 wei");
+    
     uint256 itemId = _itemIds.current();
   
     idToMarketItem[itemId] =  MarketItem(
       itemId,
       nftContract,
       tokenId,
-      msg.sender,
-      address(this),
+      payable(msg.sender),
+      payable(address(0)),
       price,
       false
     );
@@ -74,7 +66,7 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
       nftContract,
       tokenId,
       msg.sender,
-      address(this),
+      address(0),
       price,
       false
     );
@@ -82,23 +74,17 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
 
   /* Creates the sale of a marketplace item */
   /* Transfers ownership of the item, as well as funds between parties */
-  function createMarketSale(address nftContract, uint256 itemId, uint256 costToBuyer) public nonReentrant {
-    uint price = idToMarketItem[itemId].price;
+  function createMarketSale(
+    address nftContract,
+    uint256 itemId
+    ) public payable nonReentrant {
+    // uint price = idToMarketItem[itemId].price;
     uint tokenId = idToMarketItem[itemId].tokenId;
-    require(costToBuyer == price, "Please submit the asking price in order to complete the purchase");
+    // require(msg.value == price, "Please submit the asking price in order to complete the purchase");
 
-    // 15% of nft price == txn fee
-    uint256 txFee = (costToBuyer * 15)/100;
-
-    uint256 sellerAmount = costToBuyer - txFee;
-    
-    address nftSeller = idToMarketItem[itemId].seller;
-    
-    coinAddress.safeTransferFrom(msg.sender, address(this), costToBuyer);
-    coinAddress.safeTransferFrom(address(this), nftSeller, sellerAmount);
-
+    idToMarketItem[itemId].seller.transfer(msg.value);
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
-    idToMarketItem[itemId].owner = msg.sender;
+    idToMarketItem[itemId].owner = payable(msg.sender);
     idToMarketItem[itemId].sold = true;
     _itemsSold.increment();
     
@@ -112,7 +98,7 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
 
     MarketItem[] memory items = new MarketItem[](unsoldItemCount);
     for (uint i = 0; i < itemCount; i++) {
-      if (idToMarketItem[i + 1].owner == address(this)) {
+      if (idToMarketItem[i + 1].owner == address(0)) {
         uint currentId = i + 1;
         MarketItem storage currentItem = idToMarketItem[currentId];
         items[currentIndex] = currentItem;
@@ -169,9 +155,4 @@ contract CtrainMarket is ReentrancyGuard, Pausable, Ownable{
     }
     return items;
   }
-
-  function TokenWithdraw(uint256 _amount) external onlyOwner {
-      coinAddress.transfer(_owner, _amount);
-  }
-
 }
