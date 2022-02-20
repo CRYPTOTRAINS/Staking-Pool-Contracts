@@ -25,7 +25,7 @@ async function main() {
 
     console.log("ENMT address:", enmt.address);
     console.log("StakeToken address:", staketoken.address);
-    console.log("MarketPlace Address:", ctrain.address)
+    console.log("MarketPlace Address:", marketPlace.address)
     console.log("Ctrain Address:", ctrain.address);
 
     let config = `
