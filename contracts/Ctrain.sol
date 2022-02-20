@@ -20,7 +20,7 @@ contract CTRAIN is ERC721URIStorage, Pausable {
 
     using SafeERC20 for IERC20;
 
-    address private _admin;
+    address private owner;
 
     uint256 public nftPerAddressLimit = 10;
     uint256 private _totalPresaleSupply = 3000;
@@ -54,10 +54,12 @@ contract CTRAIN is ERC721URIStorage, Pausable {
     );
 
     constructor(address marketplaceAddress, address _token, address _reserve) ERC721("ctrain", "ctr") {
+        owner = msg.sender;
         contractAddress = marketplaceAddress;
         tokenAddress = IERC20(_token);
         reserveAddress = _reserve;
         _startOfPresale = block.timestamp;
+        
     }
 
     function createToken(uint256 _mintAmount) public {
@@ -107,26 +109,31 @@ contract CTRAIN is ERC721URIStorage, Pausable {
     }
 
     function whitelistUsers(address[] calldata _users) public {
+       require(msg.sender == owner, "You're unauthorized. Only owner!");
         delete whitelistedAddresses;
         whitelistedAddresses = _users;
     }
 
-    // function withdrawBNB() external payable onlyOwner {
-    //     address payable _reserve = payable(reserveAddress);
-    //     _reserve.transfer(address(this).balance);
-    // }
+    function withdrawBNB() external payable {
+        require(msg.sender == owner, "You're unauthorized. Only owner!");
+        address payable _reserve = payable(reserveAddress);
+        _reserve.transfer(address(this).balance);
+    }
 
-    // function TokenWithdraw(uint256 _amount) external onlyOwner {
-    //   tokenAddress.transfer(_admin, _amount);
-    // }
+    function TokenWithdraw(uint256 _amount) external {
+      require(msg.sender == owner, "You're unauthorized. Only owner!");
+      tokenAddress.transfer(owner, _amount);
+    }
 
-    // function transferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+    // function transferFrom(address _from, address _to, uint256 _tokenId) public override {
+       
     //     require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
     //     _transfer(_from, _to, _tokenId);
     //     emit RestrictedTransfer(_from, _to,  _tokenId);
     // }
 
-    // function safeTransferFrom(address _from, address _to, uint256 _tokenId) public override onlyOwner {
+    // function safeTransferFrom(address _from, address _to, uint256 _tokenId) public override {
+    //     require(msg.sender == owner, "You're unauthorized. Only owner!");
     //     require(msg.sender == ownerOf(_tokenId), "You're not the owner of this token");
     //     safeTransferFrom(_from, _to, _tokenId, "");
     //     emit RestrictedTransfer(_from, _to,  _tokenId);
@@ -168,17 +175,20 @@ contract CTRAIN is ERC721URIStorage, Pausable {
 
     // Helpers
    
-    // function setNftPerAddressLimit(uint256 _limit) public onlyOwner {
-    //     nftPerAddressLimit = _limit;
-    // }
+    function setNftPerAddressLimit(uint256 _limit) public {
+        require(msg.sender == owner, "You're unauthorized. Only owner!");
+        nftPerAddressLimit = _limit;
+    }
 
-    // function pause() public onlyOwner {
-    //     _pause();
-    // }
+    function pause() public {
+        require(msg.sender == owner, "You're unauthorized. Only owner!");
+        _pause();
+    }
 
-    // function unpause() public onlyOwner {
-    //     _unpause();
-    // }
+    function unpause() public {
+        require(msg.sender == owner, "You're unauthorized. Only owner!");
+        _unpause();
+    }
 
     function _createRandomRarity(uint256 _mod) internal view returns (uint256) {
         uint256 randomNum = uint256(
@@ -191,6 +201,4 @@ contract CTRAIN is ERC721URIStorage, Pausable {
         uint256 randomNum = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp)));
         return randomNum % _mod;
     }
-
-
 }
