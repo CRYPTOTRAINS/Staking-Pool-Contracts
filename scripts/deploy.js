@@ -40,6 +40,7 @@ async function main() {
     //  To save the contract's artifacts and address in the frontend directory
     saveFrontendFiles(enmt);
     saveFrontend(staketoken);
+    save(marketPlace);
     saveF(ctrain);
   }
 
@@ -83,6 +84,27 @@ async function main() {
     fs.writeFileSync(
       contractsDir + "/StakeToken.json",
       JSON.stringify(StakeTokenArtifact, null, 2)
+    );
+  }
+
+  function save(marketPlace) {
+    const fs = require("fs");
+    const contractsDir = __dirname + "/../src/contracts";
+  
+    if (!fs.existsSync(contractsDir)) {
+      fs.mkdirSync(contractsDir);
+    }
+  
+    fs.writeFileSync(
+      contractsDir + "/marketPlace-address.json",
+      JSON.stringify({ MarketPlace: marketPlace.address }, undefined, 2)
+    );
+  
+    const MarketPlaceArtifact = artifacts.readArtifactSync("MarketPlace");
+  
+    fs.writeFileSync(
+      contractsDir + "/MarketPlace.json",
+      JSON.stringify(MarketPlaceArtifact, null, 2)
     );
   }
 
