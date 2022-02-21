@@ -95,8 +95,8 @@ export const Presale = () => {
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
       await tx.wait();
-      const fee = (num * 5300000000000000).toLocaleString("fullwide", { useGrouping: false });
-      const transaction = await contract.create(num, { value: fee });
+      const fee = (num * 5000000000000000).toLocaleString("fullwide", { useGrouping: false });
+      const transaction = await contract.createToken(num, { value: fee });
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
           setStatus("Transaction failed");
@@ -106,10 +106,10 @@ export const Presale = () => {
         }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        setStatus(`${error.data.message}`);
+        setStatus(`${error}`);
         return;
       }
-      setStatus(`${error.data.message}`);
+      setStatus(`${error}`);
     }
   }
 
