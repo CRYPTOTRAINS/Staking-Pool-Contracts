@@ -303,9 +303,3 @@ contract StakeToken is ReentrancyGuard, Pausable, Ownable {
     event Staked(address indexed user, uint256 amount);
     event Withdrawn(address indexed user, uint256 amount);
 }
-
-
-// pool one : 50 = 1.666666
-// pool two : 100 = 12.83
-// pool three : 250 = 74.86
-// pool four : 300 = 150
