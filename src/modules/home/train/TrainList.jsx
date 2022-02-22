@@ -81,8 +81,17 @@ export const TrainList = () => {
   async function sell() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
+
+    try {
+
+    } catch(error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        setStatus(`${error.data.message}`);
+        return;
+      }
+      setStatus(`${error.data.message}`);
+    }
   }
 
   const addModal = () => {
