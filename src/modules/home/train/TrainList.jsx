@@ -30,7 +30,7 @@ import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import CtrainAddress from "../../../contracts/ctrain-address.json";
 import CtrainArtifact from "../../../contracts/Ctrain.json";
-
+import MarketPlaceAddress from "../../../contracts/marketPlace-address.json";
 import ModalRoot from '../../common/Modal/ModalRoot';
 import ModalService from '../../../services/ModalService';
 import DispatchModal from '../TrainModals/DispatchModal';
