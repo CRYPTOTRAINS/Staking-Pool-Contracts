@@ -28,18 +28,16 @@ export default function BuyTicketModal(props) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
+    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
 
     const num = no.no;
     const price = (num * 1000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     const tokenId = 0;
 
-    const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
-      await tx.wait();
-      console.log(price);
-
     try {
-      
+      const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
+      await tx.wait();
       const transaction = await contract.sell(CtrainAddress.Ctrain, tokenId, price);
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
