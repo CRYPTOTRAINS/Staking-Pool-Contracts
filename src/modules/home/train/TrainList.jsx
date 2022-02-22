@@ -30,8 +30,6 @@ import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import CtrainAddress from "../../../contracts/ctrain-address.json";
 import CtrainArtifact from "../../../contracts/Ctrain.json";
-import MarketPlaceAddress from "../../../contracts/marketPlace-address.json";
-import MarketPlaceArtifact from "../../../contracts/MarketPlace.json";
 import ModalRoot from '../../common/Modal/ModalRoot';
 import ModalService from '../../../services/ModalService';
 import DispatchModal from '../TrainModals/DispatchModal';
@@ -46,8 +44,6 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export const TrainList = () => {
   const [trains, setTrains] = useState([]);
-  const [state, setStatus] = useState("");
-  const [formNumber, updateFormNumber] = useState({no:0});
   // const [state, setState] = useState("");
 
   useEffect(() => {
@@ -79,40 +75,6 @@ export const TrainList = () => {
         return train;
     }));
     setTrains(trains);
-  }
-
-  async function sell() {
-    const no = formNumber;
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
-
-    const num = no.no;
-    const price = (num * 1000000000000000000).toLocaleString("fullwide", { useGrouping: false });
-
-    const tokenId = 0;
-
-    try {
-      const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
-      await tx.wait();
-
-      const transaction = await contract.sell(CtrainAddress.Ctrain, tokenId, price);
-      const receipt = await transaction.wait();
-        if (receipt.status === 0) {
-          setStatus("Transaction failed");
-          throw new Error("Transaction failed");
-        } else {
-          setStatus("Transaction successful");
-        }
-
-    } catch(error) {
-      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        setStatus(`${error.data.message}`);
-        return;
-      }
-      setStatus(`${error.data.message}`);
-    }
   }
 
   const addModal = () => {
