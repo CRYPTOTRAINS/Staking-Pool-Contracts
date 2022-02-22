@@ -168,7 +168,7 @@ export const TrainList = () => {
            trains.map((train, i) => (    
           <div className="train" key={train.trainID}>
             <p className="sno">{train.trainID}</p>
-          <img src={sell} className="sell" alt="sell" />
+          <img src={sell} className="sell" alt="sell" onClick={sell} onKeyDown={sell} />
           <article className="train-image">
             
           </article>
