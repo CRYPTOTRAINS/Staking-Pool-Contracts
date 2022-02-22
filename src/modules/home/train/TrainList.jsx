@@ -89,6 +89,7 @@ export const TrainList = () => {
 
     const num = no.no;
     const price = (num * 1000000000000000000).toLocaleString("fullwide", { useGrouping: false });
+    
     try {
       const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
 
