@@ -45,9 +45,9 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export const TrainList = () => {
   const [trains, setTrains] = useState([]);
-  const [status, setStatus] = useState("");
+  const [state, setStatus] = useState("");
   const [formNumber, updateFormNumber] = useState({no:0});
-  const [state, setState] = useState("");
+  // const [state, setState] = useState("");
 
   useEffect(() => {
     loadNFTs()
@@ -168,7 +168,7 @@ export const TrainList = () => {
            trains.map((train, i) => (    
           <div className="train" key={train.trainID}>
             <p className="sno">{train.trainID}</p>
-          <img src={sell} className="sell" alt="sell" onClick={sell} onKeyDown={sell} />
+          <img src={sell} className="sell" alt="sell" onClick={addBuyTicketModal} onKeyDown={addBuyTicketModal} />
           <article className="train-image">
             
           </article>
