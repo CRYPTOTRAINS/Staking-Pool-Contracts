@@ -8,19 +8,10 @@ export default function BuyTicketModal(props) {
     <Modal className="modal">
       <button className="close" onClick={props.close}></button>
       <img className="buy-ticket" src={buy_ticket} alt="buy ticket" />
-      {/* <div className="price">Price: 2 $CTRAIN per ticket</div> */}
-      <div className="select-train">
-        <select name="select-train" id="select-train" className="train-select">
-          <option selected value="volvo">
-            15 Tickets for 28 $CTRAIN
-          </option>
-          <option value="saab">Saab</option>
-          <option value="mercedes">Mercedes</option>
-          <option value="audi">Audi</option>
-        </select>
-      </div>
+      <p className="quantity">Price:  <input placeholder="600" required className="no"
+                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
       <div className="buy-button">
-        <BuyCTrainButton handleOnClick={props.close} cTrainValue={'Buy Tickets'} />
+        <BuyCTrainButton handleOnClick={props.close} cTrainValue={'Buy Train'} />
       </div>
     </Modal>
   );
