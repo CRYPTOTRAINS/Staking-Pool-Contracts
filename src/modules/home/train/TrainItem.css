@@ -25,6 +25,7 @@
   align-self: flex-end;
   margin-right: 1rem;
   top: -2.6rem;
+  cursor: pointer;
 }
 
 .train-image {
