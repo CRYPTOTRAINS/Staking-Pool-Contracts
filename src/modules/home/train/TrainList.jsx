@@ -77,6 +77,11 @@ export const TrainList = () => {
     setTrains(trains);
   }
 
+  async function sell() {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+  }
+
   const addModal = () => {
     ModalService.open(DispatchModal);
   };
