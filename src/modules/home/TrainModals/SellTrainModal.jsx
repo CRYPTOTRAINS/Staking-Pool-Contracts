@@ -17,9 +17,7 @@ import { useState } from "react";
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
 export default function BuyTicketModal(props) {
-  const [status, setStatus] = useState("");
   const [formNumber, updateFormNumber] = useState({no:0});
-
 
   async function sell() {
     
@@ -33,7 +31,7 @@ export default function BuyTicketModal(props) {
     const num = no.no;
     const price = (num * 1000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
-    const tokenId = 2;
+    const tokenId = 1;
 
     try {
       const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
@@ -41,18 +39,18 @@ export default function BuyTicketModal(props) {
       const transaction = await contract.sell(CtrainAddress.Ctrain, tokenId, price);
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
-          setStatus("Transaction failed");
+          alert("Transaction failed");
           throw new Error("Transaction failed");
         } else {
-          setStatus("Transaction successful");
+          alert("Transaction successful");
         }
 
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        // setStatus(`${error.data.message}`);
+        alert(`${error.message}`);
         return;
       }
-      // setStatus(`${error.data.message}`);
+      alert(`${error.message}`);
     }
   }
 
@@ -60,10 +58,10 @@ export default function BuyTicketModal(props) {
     <Modal className="modal">
       <button className="close" onClick={props.close}></button>
       {/* <img className="buy-ticket" src={buy_ticket} alt="buy ticket" /> */}
-      <p className="quantity">Price:  <input placeholder="600" required className="no"
+      <p className="quantity">Price:  <input placeholder="600" required className="nom"
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
       <div className="buy-button">
-        <BuyCTrainButton handleOnClick={props.close} cTrainValue={'Buy Train'} onClick={sell} onKeyDown={sell}  />
+        <BuyCTrainButton handleOnClick={props.close, sell} cTrainValue={'Buy Train'}   />
       </div>
     </Modal>
   );

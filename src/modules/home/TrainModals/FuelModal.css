@@ -3,6 +3,11 @@
   margin: auto !important;
 }
 
+.nom {
+  width: 22%;
+  height: 29px;
+}
+
 .dispatching .close-button {
   padding: 28rem auto 1rem auto !important;
 }
