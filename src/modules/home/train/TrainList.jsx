@@ -45,6 +45,8 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export const TrainList = () => {
   const [trains, setTrains] = useState([]);
+  const [status, setStatus] = useState("");
+  const [formNumber, updateFormNumber] = useState({no:0});
   const [state, setState] = useState("");
 
   useEffect(() => {
@@ -79,10 +81,14 @@ export const TrainList = () => {
   }
 
   async function sell() {
+    const no = formNumber;
+
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
 
+    const num = no.no;
+    const price = (num * 1000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     try {
 
     } catch(error) {
