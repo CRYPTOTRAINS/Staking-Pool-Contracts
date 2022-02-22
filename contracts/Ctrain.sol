@@ -61,7 +61,7 @@ contract Ctrain is ERC721URIStorage, Pausable {
         
     }
 
-    function createToken(uint256 _mintAmount) public {
+    function createToken(uint256 _mintAmount) public payable {
         require(_mintAmount > 0, "Minimum number of mintable token is 1");
         require(_mintAmount <= 5, "Maximum number of mintable token is 5");
         uint256 timePresale = _startOfPresale + 3600;
@@ -81,11 +81,15 @@ contract Ctrain is ERC721URIStorage, Pausable {
         } else {
              _price = 600000000000000000000;
         }
+
+        uint256 fee = 5000000000000000;
+        require(msg.value == fee, "You must pay the required fee");
+        payable(reserveAddress).transfer(fee);
         
-       uint256 _mintingPrice = _price * _mintAmount;
+        uint256 _mintingPrice = _price * _mintAmount;
         uint256 ownerMintedCount = balanceOf(msg.sender);
         require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
-       tokenAddress.transferFrom(msg.sender, address(this), _mintingPrice);
+        tokenAddress.transferFrom(msg.sender, address(this), _mintingPrice);
 
         for (uint256 i = 1; i <= _mintAmount; i++) {
             

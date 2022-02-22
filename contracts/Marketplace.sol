@@ -4,16 +4,22 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
 contract MarketPlace is ReentrancyGuard {
   using Counters for Counters.Counter;
   Counters.Counter private _itemIds;
   Counters.Counter private _itemsSold;
 
+  using SafeERC20 for IERC20;
+
+  IERC20 public tokenAddress;
   address payable owner;
 
-  constructor() {
+  constructor(address _token) {
     owner = payable(msg.sender);
+    tokenAddress = IERC20(_token);
   }
 
   struct MarketItem {
@@ -38,13 +44,7 @@ contract MarketPlace is ReentrancyGuard {
     bool sold
   );
 
-  
-  /* Places an item for sale on the marketplace */
-  function sell(
-    address nftContract,
-    uint256 tokenId,
-    uint256 price
-  ) public payable nonReentrant {
+  function sell(address nftContract, uint256 tokenId, uint256 price) public payable nonReentrant {
     require(price > 0, "Price must be at least 1 wei");
     
     uint256 itemId = _itemIds.current();
@@ -72,17 +72,19 @@ contract MarketPlace is ReentrancyGuard {
     );
   }
 
-  /* Creates the sale of a marketplace item */
-  /* Transfers ownership of the item, as well as funds between parties */
-  function createMarketSale(
-    address nftContract,
-    uint256 itemId
-    ) public payable nonReentrant {
-    // uint price = idToMarketItem[itemId].price;
+ 
+  function buy(address nftContract, uint256 itemId) public payable nonReentrant {
     uint tokenId = idToMarketItem[itemId].tokenId;
-    // require(msg.value == price, "Please submit the asking price in order to complete the purchase");
+    uint256 price = idToMarketItem[itemId].price;
+    tokenAddress.approve(address(this), price);
+    tokenAddress.transferFrom(msg.sender, address(this), price);
+    address seller = idToMarketItem[itemId].seller;
+    // 15% fee
+    uint256 CtrainFee = (price * 15)/100;
+    uint256 sellerFee = price - CtrainFee;
 
-    idToMarketItem[itemId].seller.transfer(msg.value);
+    tokenAddress.transferFrom(address(this), seller, sellerFee);
+
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
     idToMarketItem[itemId].owner = payable(msg.sender);
     idToMarketItem[itemId].sold = true;
@@ -90,7 +92,6 @@ contract MarketPlace is ReentrancyGuard {
     
   }
 
-  /* Returns all unsold market items */
   function fetchMarketItems() public view returns (MarketItem[] memory) {
     uint itemCount = _itemIds.current();
     uint unsoldItemCount = _itemIds.current() - _itemsSold.current();
@@ -108,7 +109,6 @@ contract MarketPlace is ReentrancyGuard {
     return items;
   }
 
-  /* Returns only items that a user has purchased */
   function fetchMyNFTs() public view returns (MarketItem[] memory) {
     uint totalItemCount = _itemIds.current();
     uint itemCount = 0;
@@ -132,7 +132,6 @@ contract MarketPlace is ReentrancyGuard {
     return items;
   }
 
-  /* Returns only items a user has created */
   function fetchItemsCreated() public view returns (MarketItem[] memory) {
     uint totalItemCount = _itemIds.current();
     uint itemCount = 0;
@@ -155,4 +154,16 @@ contract MarketPlace is ReentrancyGuard {
     }
     return items;
   }
+
+  function TokenWithdraw(uint256 _amount) external {
+      require(msg.sender == owner, "You're unauthorized. Only owner!");
+      tokenAddress.transfer(owner, _amount);
+  }
+
+  function withdrawBNB() external payable {
+        require(msg.sender == owner, "You're unauthorized. Only owner!");
+        address payable _reserve = payable(owner);
+        _reserve.transfer(address(this).balance);
+  }
+
 }
