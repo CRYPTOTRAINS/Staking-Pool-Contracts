@@ -37,6 +37,7 @@ import ModalService from '../../../services/ModalService';
 import DispatchModal from '../TrainModals/DispatchModal';
 import FuelModal from '../TrainModals/FuelModal';
 import BuyTicketModal from '../TrainModals/BuyTicketModal';
+import SellTrainModal from '../TrainModals/SellTrainModal';
 import RepairModal from '../TrainModals/RepairModal';
 import UnboxModal from '../TrainModals/UnboxModal';
 import WinnerModal from '../TrainModals/WinnerModal';
@@ -126,6 +127,10 @@ export const TrainList = () => {
     ModalService.open(BuyTicketModal);
   };
 
+  const addSellTrainModal = () => {
+    ModalService.open(SellTrainModal);
+  };
+
   const addRepairModal = () => {
     ModalService.open(RepairModal);
   };
@@ -168,7 +173,7 @@ export const TrainList = () => {
            trains.map((train, i) => (    
           <div className="train" key={train.trainID}>
             <p className="sno">{train.trainID}</p>
-          <img src={sell} className="sell" alt="sell" onClick={addBuyTicketModal} onKeyDown={addBuyTicketModal} />
+          <img src={sell} className="sell" alt="sell" onClick={addSellTrainModal} onKeyDown={addSellTrainModal} />
           <article className="train-image">
             
           </article>

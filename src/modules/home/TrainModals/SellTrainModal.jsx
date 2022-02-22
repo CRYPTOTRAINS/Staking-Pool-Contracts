@@ -8,7 +8,7 @@ export default function BuyTicketModal(props) {
     <Modal className="modal">
       <button className="close" onClick={props.close}></button>
       <img className="buy-ticket" src={buy_ticket} alt="buy ticket" />
-      <div className="price">Price: 2 $CTRAIN per ticket</div>
+      {/* <div className="price">Price: 2 $CTRAIN per ticket</div> */}
       <div className="select-train">
         <select name="select-train" id="select-train" className="train-select">
           <option selected value="volvo">
