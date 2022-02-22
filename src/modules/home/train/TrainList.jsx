@@ -119,13 +119,13 @@ export const TrainList = () => {
         </article>
       </section>
       <h2 className="title">Your Trains</h2>
-      <div className="train-list">
+      <div>
         {/*=============TRAIN ONE ======================*/}
         <div>
         {trains.length === 0 ? (
           <div className="title">You do not have any Box yet. </div>
           ) : (
-        <main>
+        <main className="train-list">
         
         {
            trains.map((train, i) => (    
