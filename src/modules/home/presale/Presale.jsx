@@ -106,10 +106,10 @@ export const Presale = () => {
         }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        setStatus(`${error}`);
+        setStatus(`${error.data.message}`);
         return;
       }
-      setStatus(`${error}`);
+      setStatus(`${error.data.message}`);
     }
   }
 
