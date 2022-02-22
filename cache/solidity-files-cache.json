@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\GGR\\Documents\\Blockchain\\Staking-Pool-Contracts\\contracts\\Ctrain.sol": {
-      "lastModificationDate": 1645399389555,
-      "contentHash": "bddc01a42fd0d684b46452fdcb50f1b8",
+      "lastModificationDate": 1645518904607,
+      "contentHash": "8257ee655073bbfe4d0cde3112d7a966",
       "sourceName": "contracts/Ctrain.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -631,8 +631,8 @@
       ]
     },
     "C:\\Users\\GGR\\Documents\\Blockchain\\Staking-Pool-Contracts\\contracts\\StakeToken.sol": {
-      "lastModificationDate": 1644999870616,
-      "contentHash": "98ea18b01c6d9294f62f72f1e82814e4",
+      "lastModificationDate": 1645402928961,
+      "contentHash": "a1433eb477ff1d703d9f993318b7beb9",
       "sourceName": "contracts/StakeToken.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -780,8 +780,8 @@
       ]
     },
     "C:\\Users\\GGR\\Documents\\Blockchain\\Staking-Pool-Contracts\\contracts\\Marketplace.sol": {
-      "lastModificationDate": 1645401005172,
-      "contentHash": "dcef2550882683130c4cac00855bc46e",
+      "lastModificationDate": 1645518851336,
+      "contentHash": "998ec23bf4ea330b184e3539c71699b2",
       "sourceName": "contracts/Marketplace.sol",
       "solcConfig": {
         "version": "0.8.4",
@@ -809,7 +809,9 @@
       "imports": [
         "@openzeppelin/contracts/utils/Counters.sol",
         "@openzeppelin/contracts/security/ReentrancyGuard.sol",
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol"
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/token/ERC20/ERC20.sol",
+        "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol"
       ],
       "versionPragmas": [
         "^0.8.4"
