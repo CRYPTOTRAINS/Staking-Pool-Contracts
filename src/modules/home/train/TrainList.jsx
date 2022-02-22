@@ -97,6 +97,13 @@ export const TrainList = () => {
       await tx.wait();
 
       const transaction = await contract.sell(CtrainAddress.Ctrain, tokenId, price);
+      const receipt = await transaction.wait();
+        if (receipt.status === 0) {
+          setStatus("Transaction failed");
+          throw new Error("Transaction failed");
+        } else {
+          setStatus("Transaction successful");
+        }
 
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
