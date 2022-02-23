@@ -83,7 +83,7 @@ contract Ctrain is ERC721URIStorage, Pausable {
              _price = 600000000000000000000;
         }
 
-        uint256 fee = 5000000000000000;
+        uint256 fee = 5400000000000000;
         require(msg.value == fee, "You must pay the required fee");
         payable(reserveAddress).transfer(fee);
         
