@@ -19,7 +19,6 @@ const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 export const Presale = () => {
   const [status, setStatus] = useState("");
   const [presaleStatus, setPresaleStatus] = useState("");
-  const [formNumber, updateFormNumber] = useState({no:0});
   const [time, setTimer] = useState('');
   const [whitelist, setWhitelist] = useState("");
 
@@ -82,20 +81,18 @@ export const Presale = () => {
   }
 
   async function createToken() {
-    const no = formNumber;
     
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
-    const num = no.no;
    
-    const price = (num * 600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
+    const price = (600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     try {
       const tx = await token.approve(CtrainAddress.Ctrain, price);
       await tx.wait();
-      const fee = (num * 5000000000000000).toLocaleString("fullwide", { useGrouping: false });
+      const fee = (5400000000000000).toLocaleString("fullwide", { useGrouping: false });
       const transaction = await contract.createToken(num, { value: fee });
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
@@ -163,8 +160,8 @@ export const Presale = () => {
       <section className="presale-main">
         <article className="presale-img">
           <div className="presale-main-items">
-            <p className="quantity">QUANTITY:  <input placeholder="e.g 2" required className="no"
-                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
+            {/* <p className="quantity">QUANTITY:  <input placeholder="e.g 2" required className="no"
+                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p> */}
            
             <button className="approve">
               <img src={approve} className="approve" onClick={createToken} onKeyDown={createToken} alt="approve button" />

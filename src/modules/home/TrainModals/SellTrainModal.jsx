@@ -31,7 +31,7 @@ export default function BuyTicketModal(props) {
     const price = (num * 1000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     const tokenId = 1;
-
+    
     try {
       const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
       await tx.wait();
