@@ -95,9 +95,9 @@ contract Ctrain is ERC721URIStorage, Pausable {
             
             uint8 randRarity = uint8(_createRandomRarity(100));
             uint8 acceleration = uint8(_createRandomAcceleration(100));
-            uint8 speed = uint8(_createRandomRarity(13));
-            uint8 brakes = uint8(_createRandomRarity(7));
-            uint8 loads = uint8(_createRandomAcceleration(7));
+            uint8 speed = uint8(_createRandomRarity(100));
+            uint8 brakes = uint8(_createRandomRarity(100));
+            uint8 loads = uint8(_createRandomAcceleration(100));
 
             Train memory newTrain = Train(COUNTER, 1, randRarity, false, acceleration, speed, brakes, loads);
             trains.push(newTrain);

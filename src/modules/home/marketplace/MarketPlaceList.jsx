@@ -1,5 +1,7 @@
 /* eslint-disable  jsx-a11y/no-noninteractive-element-interactions
  */
+/* eslint-disable  no-unused-vars
+ */
 import './MarketPlaceList.css';
 import './MarketPlaceItem.css';
 import Table from 'react-bootstrap/Table';
@@ -24,8 +26,55 @@ import legendary_bullet from '../../../assets/images/legendary_bullet.png';
 import BuyCTrainButton from '../../common/BuyCTrainButton/BuyCTrainButton';
 import search from '../../../assets/images/search.png';
 import reload from '../../../assets/images/reload.png';
+import { ethers } from 'ethers';
+import { useEffect, useState} from "react";
+import Web3Modal from "web3modal";
+import MarketPlaceAddress from "../../../contracts/marketPlace-address.json";
+import MarketPlaceArtifact from "../../../contracts/MarketPlace.json";
+import CtrainAddress from "../../../contracts/ctrain-address.json";
 
 export const MarketList = () => {
+
+  const [ctrains, setCtrains] = useState([]);
+  const [loadingState, setLoadingState] = useState('not-loaded');
+
+  useEffect(() => {
+    loadCtrains();
+  }, []);
+
+  async function loadCtrains() {
+    const web3Modal = new Web3Modal()
+    const connection = await web3Modal.connect()
+    const provider = new ethers.providers.Web3Provider(connection);
+    const marketContract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, provider);
+    const data = await marketContract.fetchMarketItems();
+
+    const ctrains = await Promise.all(data.map(async i => {
+      let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+      let ctrain = {
+        price,
+        itemId: i.itemId.toNumber(),
+        seller: i.seller,
+        owner: i.owner,
+      }
+      return ctrain;
+    }));
+
+    setCtrains(ctrains);
+    setLoadingState('loaded');
+  }
+
+  async function buyCtrain(ctrain) {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
+    const transaction = await contract.buy(CtrainAddress.Ctrain, ctrain.itemId);
+    await transaction.wait();
+    loadCtrains();
+  }
+
+  
+// if (loadingState === 'loaded' && !ctrains.length) return (<h2>There are currently no Ctrains in the marketplace</h2>);
   return (
     <>
       <h2 className="title">Marketplace</h2>
@@ -49,111 +98,34 @@ export const MarketList = () => {
             <option value="audi">Audi</option>
           </select>
           <select name="select-price" id="select-price" className="price-select">
-            <option selected value="volvo">
+            <option selected value="Common">
               LOWEST PRICE
             </option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+            <option value="Rare">Saab</option>
+            <option value="Epic">Mercedes</option>
+            <option value="Legendary">Audi</option>
           </select>
         </article>
       </section>
       <div className="train-list">
-        {/*=============TRAIN ONE ======================*/}
+     
         <main className="train">
-          <p className="sno">#1</p>
-          <article className="train-image">
-            <img src={common} alt="common train" />
-          </article>
-          <article className="bullet">
-            <img src={common_bullet} alt="common train bullet" />
-          </article>
-          <section className="train-container">
-            <Table bordered hover>
-              <tbody>
-                <tr>
-                  <td className="table-data">
-                    <span className="icon">
-                      <img src={level} alt="level" />
-                    </span>
-                    <span className="level">Level:&nbsp;</span>
-                    <span className="value">0</span>
-                  </td>
-                  <td width={'60%'} className="table-data">
-                    <span className="icon">
-                      <img src={acceleration} alt="acceleration" />
-                    </span>
-                    <span className="acceleration">Acceleration:&nbsp;</span>
-                    <span className="value">20</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="table-data">
-                    <span className="icon">
-                      <img src={expo} alt="exp" />
-                    </span>
-                    <span className="expo">Exp:&nbsp;</span>
-                    <span className="value">0.00</span>
-                  </td>
-                  <td className="table-data">
-                    <span className="icon">
-                      <img src={speed} alt="speed" />
-                    </span>
-                    <span className="speed">Speed:&nbsp;</span>
-                    <span className="value">30.00</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="table-data">
-                    <span className="icon">
-                      <img src={load} alt="load" />
-                    </span>
-                    <span className="load">Loads:&nbsp;</span>
-                    <span className="value">2</span>
-                  </td>
-                  <td className="table-data">
-                    <span className="icon">
-                      <img src={brake} alt="brake" />
-                    </span>
-                    <span className="brake">Brakes:&nbsp;</span>
-                    <span className="value">16</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="table-data">
-                    <span className="icon">
-                      <img src={fuel} alt="fuel" />
-                    </span>
-                    <span className="fuel">Fuel:&nbsp;</span>
-                    <span className="value">No</span>
-                  </td>
-                  <td className="table-data">
-                    <span className="image-icon">
-                      <img src={station} alt="station" />
-                    </span>
-                  </td>
-                </tr>
-                <tr>
-                  <td className="table-data">
-                    <span className="icon">
-                      <img src={status} alt="status" />
-                    </span>
-                    <span className="status">Status:&nbsp;</span>
-                    <span className="value">Perf</span>
-                  </td>
-                  <td className="table-data">
-                    <span className="image-icon">
-                      <img src={mechanic} alt="mechanic" />
-                    </span>
-                  </td>
-                </tr>
-              </tbody>
-            </Table>
-          </section>
-          <BuyCTrainButton cTrainValue={'Buy 540 CTRAIN'} />
+        
+          {
+            ctrains.map((ctrain, i) => (
+              <div key={i}>        
+               <p className="sno">{ctrain.itemId}</p>
+                  
+
+
+
+
+              </div>
+            ))
+          }
         </main>
         {/*=============TRAIN TWO ======================*/}
-        <main className="train">
+        {/* <main className="train">
           <p className="sno">#2</p>
           <article className="train-image">
             <img src={rare} alt="rare train" />
@@ -244,9 +216,9 @@ export const MarketList = () => {
             </Table>
           </section>
           <BuyCTrainButton cTrainValue={'Buy 560 CTRAIN'} />
-        </main>
+        </main> */}
         {/*=============TRAIN THREE ======================*/}
-        <main className="train">
+        {/* <main className="train">
           <p className="sno">#3</p>
           <article className="train-image">
             <img src={epic} alt="epic train" />
@@ -337,9 +309,9 @@ export const MarketList = () => {
             </Table>
           </section>
           <BuyCTrainButton cTrainValue={'Buy 640 CTRAIN'} />
-        </main>
+        </main> */}
         {/*=============TRAIN FOUR ======================*/}
-        <main className="train">
+        {/* <main className="train">
           <p className="sno">#4</p>
           <article className="train-image">
             <img src={legendary} alt="legendary train" />
@@ -430,8 +402,107 @@ export const MarketList = () => {
             </Table>
           </section>
           <BuyCTrainButton cTrainValue={'Buy 890 CTRAIN'} />
-        </main>
+        </main> */}
       </div>
     </>
   );
 };
+
+
+
+
+
+
+
+
+
+
+// <article className="train-image">
+// <img src={common} alt="common train" />
+//  </article>
+//  <article className="bullet">
+//    <img src={common_bullet} alt="common train bullet" />
+//  </article>
+//  <section className="train-container">
+//    <Table bordered hover>
+//      <tbody>
+//        <tr>
+//          <td className="table-data">
+//            <span className="icon">
+//              <img src={level} alt="level" />
+//            </span>
+//            <span className="level">Level:&nbsp;</span>
+//            <span className="value">0</span>
+//          </td>
+//          <td width={'60%'} className="table-data">
+//            <span className="icon">
+//              <img src={acceleration} alt="acceleration" />
+//            </span>
+//            <span className="acceleration">Acceleration:&nbsp;</span>
+//            <span className="value">20</span>
+//          </td>
+//        </tr>
+//        <tr>
+//          <td className="table-data">
+//            <span className="icon">
+//              <img src={expo} alt="exp" />
+//            </span>
+//            <span className="expo">Exp:&nbsp;</span>
+//            <span className="value">0.00</span>
+//          </td>
+//          <td className="table-data">
+//            <span className="icon">
+//              <img src={speed} alt="speed" />
+//            </span>
+//            <span className="speed">Speed:&nbsp;</span>
+//            <span className="value">30.00</span>
+//          </td>
+//        </tr>
+//        <tr>
+//          <td className="table-data">
+//            <span className="icon">
+//              <img src={load} alt="load" />
+//            </span>
+//            <span className="load">Loads:&nbsp;</span>
+//            <span className="value">2</span>
+//          </td>
+//          <td className="table-data">
+//            <span className="icon">
+//              <img src={brake} alt="brake" />
+//            </span>
+//            <span className="brake">Brakes:&nbsp;</span>
+//            <span className="value">16</span>
+//          </td>
+//        </tr>
+//        <tr>
+//          <td className="table-data">
+//            <span className="icon">
+//              <img src={fuel} alt="fuel" />
+//            </span>
+//            <span className="fuel">Fuel:&nbsp;</span>
+//            <span className="value">No</span>
+//          </td>
+//          <td className="table-data">
+//            <span className="image-icon">
+//              <img src={station} alt="station" />
+//            </span>
+//          </td>
+//        </tr>
+//        <tr>
+//          <td className="table-data">
+//            <span className="icon">
+//              <img src={status} alt="status" />
+//            </span>
+//            <span className="status">Status:&nbsp;</span>
+//            <span className="value">Perf</span>
+//          </td>
+//          <td className="table-data">
+//            <span className="image-icon">
+//             <img src={mechanic} alt="mechanic" />
+//           </span>
+//          </td>
+//       </tr>
+//      </tbody>
+//     </Table>
+//   </section>
+// <BuyCTrainButton cTrainValue={'Buy 540 CTRAIN'} />

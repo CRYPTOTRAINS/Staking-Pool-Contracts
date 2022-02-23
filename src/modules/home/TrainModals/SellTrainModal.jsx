@@ -3,11 +3,10 @@
 
 import './FuelModal.css';
 import Modal from '../../common/Modal/Modal';
-import buy_train from '../../../assets/images/box.png';
+import buy_train from '../../../assets/images/legends.png';
 import BuyCTrainButton from '../../common/BuyCTrainButton/BuyCTrainButton';
 import { ethers } from "ethers";
 import CtrainAddress from "../../../contracts/ctrain-address.json";
-import CtrainArtifact from "../../../contracts/Ctrain.json";
 import MarketPlaceAddress from "../../../contracts/marketPlace-address.json";
 import MarketPlaceArtifact from "../../../contracts/MarketPlace.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
