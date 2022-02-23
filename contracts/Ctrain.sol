@@ -21,13 +21,16 @@ contract Ctrain is ERC721URIStorage, Pausable {
 
     address private owner;
 
-    uint256 public nftPerAddressLimit = 10;
+    uint256 private nftPerAddressLimit = 10;
+      uint256 private nftPresaleLimit = 5;
     uint256 private _totalPresaleSupply = 3000;
 
     IERC20 public tokenAddress;
     address public reserveAddress;
 
     address[] private whitelistedAddresses;
+
+    mapping(address => uint256) private addressMintedBalance;
 
     struct Train {
         uint256 id;
@@ -61,23 +64,21 @@ contract Ctrain is ERC721URIStorage, Pausable {
         
     }
 
-    function createToken(uint256 _mintAmount) public payable {
-        require(_mintAmount > 0, "Minimum number of mintable token is 1");
-        require(_mintAmount <= 5, "Maximum number of mintable token is 5");
+    function createToken() public payable {
+        require(_totalPresaleSupply >= 1, "Token is sold out");
+        uint256 balance = balanceOf(msg.sender);
+        require(balance <= nftPerAddressLimit, "You've reached maximum allowed limit per address");
         uint256 timePresale = _startOfPresale + 3600;
         uint256 timePublicSale = _startOfPresale + 7200;
-       uint256 _price = 1;
+        uint256 _price;
         if(block.timestamp <=  timePresale) {
             require(isWhitelisted(msg.sender), "You are not whitelisted for presale");
-            require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
-             _totalPresaleSupply -= _mintAmount;
+             _totalPresaleSupply -= 1;
             _price = 420000000000000000000;
         } else if (block.timestamp > timePresale && block.timestamp <= timePublicSale) {
             require(isWhitelisted(msg.sender), " You are not a whitelisted for presale");
-            require(_mintAmount <= _totalPresaleSupply, "Presale token is sold out");
-             _totalPresaleSupply -= _mintAmount;
+             _totalPresaleSupply -= 1;
             _price = 510000000000000000000;
-    
         } else {
              _price = 600000000000000000000;
         }
@@ -86,27 +87,24 @@ contract Ctrain is ERC721URIStorage, Pausable {
         require(msg.value == fee, "You must pay the required fee");
         payable(reserveAddress).transfer(fee);
         
-        uint256 _mintingPrice = _price * _mintAmount;
-        uint256 ownerMintedCount = balanceOf(msg.sender);
-        require(ownerMintedCount + _mintAmount <= nftPerAddressLimit, "max NFT per address exceeded");
-        tokenAddress.transferFrom(msg.sender, address(this), _mintingPrice);
-
-        for (uint256 i = 1; i <= _mintAmount; i++) {
+        tokenAddress.transferFrom(msg.sender, address(this), _price);
             
-            uint8 randRarity = uint8(_createRandomRarity(100));
-            uint8 acceleration = uint8(_createRandomAcceleration(100));
-            uint8 speed = uint8(_createRandomRarity(100));
-            uint8 brakes = uint8(_createRandomRarity(100));
-            uint8 loads = uint8(_createRandomAcceleration(100));
+        uint8 randRarity = uint8(_createRandomRarity(100));
+        uint8 acceleration = uint8(_createRandomAcceleration(100));
+        uint8 speed = uint8(_createRandomRarity(100));
+        uint8 brakes = uint8(_createRandomRarity(100));
+        uint8 loads = uint8(_createRandomAcceleration(100));
 
-            Train memory newTrain = Train(COUNTER, 1, randRarity, false, acceleration, speed, brakes, loads);
-            trains.push(newTrain);
-            uint256 newItemId = _tokenIds.current();
-            _mint(msg.sender, newItemId);
-            setApprovalForAll(contractAddress, true);
-            _tokenIds.increment();
+        uint256 ownerMintedCount = addressMintedBalance[msg.sender];
+        require(ownerMintedCount + 1 <= nftPresaleLimit, "max NFT per address exceeded");
+        uint256 newItemId = _tokenIds.current();
+        Train memory newTrain = Train(newItemId, 1, randRarity, false, acceleration, speed, brakes, loads);
+        trains.push(newTrain);
             
-       }
+        _mint(msg.sender, newItemId);
+        addressMintedBalance[msg.sender]++;
+        setApprovalForAll(contractAddress, true);
+        _tokenIds.increment();
     }
 
     function whitelistUsers(address[] calldata _users) public {

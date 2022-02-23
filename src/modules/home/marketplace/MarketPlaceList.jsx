@@ -69,11 +69,13 @@ export const MarketList = () => {
   }
 
 
-  async function buyCtrain(ctrain) {
+  async function buyCtrain() { //ctrain
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
-    const transaction = await contract.buy(CtrainAddress.Ctrain, ctrain.itemId);
+    
+    const transaction = await contract.buy(CtrainAddress.Ctrain, 0); // ctrain.itemId
+    console.log("called")
     await transaction.wait();
     loadCtrains();
   }
@@ -119,7 +121,6 @@ return (
           {
             trains.map((train, i) => (
               <div className="train" key={train.trainID}>
-                    
                <p className="sno">{train.trainID}</p>
                  <article className="train-image">
                  <img src={common} alt="common train" />
@@ -210,7 +211,7 @@ return (
                       </tbody>
                      </Table>
                    </section>
-                 <BuyCTrainButton cTrainValue={'Buy 540 CTRAIN'} />
+                 <BuyCTrainButton cTrainValue={'Buy 540 CTRAIN'} onClick={() => buyCtrain()} />
               </div>
             ))
           }
