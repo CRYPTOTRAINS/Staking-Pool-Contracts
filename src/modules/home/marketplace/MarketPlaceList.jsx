@@ -32,6 +32,7 @@ import Web3Modal from "web3modal";
 import MarketPlaceAddress from "../../../contracts/marketPlace-address.json";
 import MarketPlaceArtifact from "../../../contracts/MarketPlace.json";
 import CtrainAddress from "../../../contracts/ctrain-address.json";
+import CtrainArtifact from "../../../contracts/Ctrain.json";
 
 export const MarketList = () => {
 
@@ -46,11 +47,11 @@ export const MarketList = () => {
     const web3Modal = new Web3Modal()
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection);
-    const marketContract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, provider);
-    const data = await marketContract.fetchMarketItems();
-
+    const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, provider);
+    const data = await contract.getOwnerTrains(MarketPlaceAddress.MarketPlace);
     const ctrains = await Promise.all(data.map(async i => {
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
+      
       let ctrain = {
         price,
         itemId: i.itemId.toNumber(),
@@ -63,6 +64,7 @@ export const MarketList = () => {
     setCtrains(ctrains);
     setLoadingState('loaded');
   }
+
 
   async function buyCtrain(ctrain) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -88,14 +90,14 @@ export const MarketList = () => {
             <img src={reload} alt="reload" />
           </button>
         </div>
-        <article className="search-select">
+        {/* <article className="search-select">
           <select name="select-train" id="select-train" className="train-select">
-            <option selected value="volvo">
+            <option selected value="Common">
               ALL TRAINS
             </option>
-            <option value="saab">Saab</option>
-            <option value="mercedes">Mercedes</option>
-            <option value="audi">Audi</option>
+            <option value="Rare">Saab</option>
+            <option value="Epic">Mercedes</option>
+            <option value="Legendary">Audi</option>
           </select>
           <select name="select-price" id="select-price" className="price-select">
             <option selected value="Common">
@@ -105,7 +107,7 @@ export const MarketList = () => {
             <option value="Epic">Mercedes</option>
             <option value="Legendary">Audi</option>
           </select>
-        </article>
+        </article> */}
       </section>
       <div className="train-list">
      
