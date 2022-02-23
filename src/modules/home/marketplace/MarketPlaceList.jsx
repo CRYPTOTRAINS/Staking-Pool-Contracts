@@ -114,11 +114,12 @@ return (
         </article> */}
       </section>
       
-        <main className="train">
-        <div className="train-grid">
+        <main className="train-list">
+         
           {
             trains.map((train, i) => (
-              <div key={i}>        
+              <div className="train" key={train.trainID}>
+                    
                <p className="sno">{train.trainID}</p>
                  <article className="train-image">
                  <img src={common} alt="common train" />
@@ -215,9 +216,10 @@ return (
 
 
               </div>
+                
             ))
           }
-          </div>
+          
         </main>
         {/*=============TRAIN TWO ======================*/}
         {/* <main className="train">
