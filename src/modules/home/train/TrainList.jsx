@@ -137,7 +137,7 @@ export const TrainList = () => {
             <p className="sno">{train.trainID}</p>
           <img src={sell} className="sell" alt="sell" onClick={addSellTrainModal} onKeyDown={addSellTrainModal} />
           <article className="train-image">
-            
+           <img src={rare} alt="rare train" />
           </article>
           <article className="bullet">
             <img src={common_bullet} alt="common train bullet" />

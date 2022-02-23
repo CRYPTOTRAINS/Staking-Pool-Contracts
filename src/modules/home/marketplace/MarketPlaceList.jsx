@@ -36,7 +36,7 @@ import CtrainArtifact from "../../../contracts/Ctrain.json";
 
 export const MarketList = () => {
 
-  const [ctrains, setCtrains] = useState([]);
+  const [trains, setTrains] = useState([]);
   const [loadingState, setLoadingState] = useState('not-loaded');
 
   useEffect(() => {
@@ -49,19 +49,22 @@ export const MarketList = () => {
     const provider = new ethers.providers.Web3Provider(connection);
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, provider);
     const data = await contract.getOwnerTrains(MarketPlaceAddress.MarketPlace);
-    const ctrains = await Promise.all(data.map(async i => {
-      let price = ethers.utils.formatUnits(i.price.toString(), 'ether');
-      
-      let ctrain = {
-        price,
-        itemId: i.itemId.toNumber(),
-        seller: i.seller,
-        owner: i.owner,
+    const trains = await Promise.all(data.map(async i => {
+      let train = {
+        trainID: i.id.toString(),
+        trainLevel: i.level.toString(),
+        trainRarity: i.rarity.toString(),
+        trainFuel: i.fuel,
+        trainAcceleration: i.acceleration,
+        trainSpeed: i.speed,
+        trainBrakes: i.brakes,
+        trainLoads: i.loads,
       }
-      return ctrain;
-    }));
 
-    setCtrains(ctrains);
+      return train;
+  }));
+
+    setTrains(trains);
     setLoadingState('loaded');
   }
 
@@ -76,8 +79,9 @@ export const MarketList = () => {
   }
 
   
-// if (loadingState === 'loaded' && !ctrains.length) return (<h2>There are currently no Ctrains in the marketplace</h2>);
-  return (
+if (loadingState === 'loaded' && !trains.length) return (<h2>There are currently no Ctrains in the marketplace</h2>);
+  
+return (
     <>
       <h2 className="title">Marketplace</h2>
       <section className="search-section">
@@ -109,15 +113,103 @@ export const MarketList = () => {
           </select>
         </article> */}
       </section>
-      <div className="train-list">
-     
+      
         <main className="train">
-        
+        <div className="train-grid">
           {
-            ctrains.map((ctrain, i) => (
+            trains.map((train, i) => (
               <div key={i}>        
-               <p className="sno">{ctrain.itemId}</p>
-                  
+               <p className="sno">{train.trainID}</p>
+                 <article className="train-image">
+                 <img src={common} alt="common train" />
+                  </article>
+                  <article className="bullet">
+                    <img src={common_bullet} alt="common train bullet" />
+                  </article>
+                  <section className="train-container">
+                    <Table bordered hover>
+                      <tbody>
+                        <tr>
+                          <td className="table-data">
+                            <span className="icon">
+                              <img src={level} alt="level" />
+                            </span>
+                            <span className="level">Level:&nbsp;</span>
+                            <span className="value">{train.trainLevel}</span>
+                         </td>
+                         <td width={'60%'} className="table-data">
+                            <span className="icon">
+                              <img src={acceleration} alt="acceleration" />
+                            </span>
+                           <span className="acceleration">Acceleration:&nbsp;</span>
+                            <span className="value">{train.trainAcceleration}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="table-data">
+                            <span className="icon">
+                              <img src={expo} alt="exp" />
+                            </span>
+                            <span className="expo">Exp:&nbsp;</span>
+                            <span className="value">0.00</span>
+                          </td>
+                          <td className="table-data">
+                            <span className="icon">
+                              <img src={speed} alt="speed" />
+                            </span>
+                            <span className="speed">Speed:&nbsp;</span>
+                            <span className="value">{train.trainSpeed}</span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="table-data">
+                           <span className="icon">
+                              <img src={load} alt="load" />
+                
+                            </span>
+                            <span className="load">Loads:&nbsp;</span>
+                            <span className="value">{train. trainLoads}</span>
+                          </td>
+                          <td className="table-data">
+                            <span className="icon">
+                              <img src={brake} alt="brake" />
+                            </span>
+                            <span className="brake">Brakes:&nbsp;</span>
+                            <span className="value">{train.trainBrakes}</span>
+                          </td>
+                       </tr>
+                        <tr>
+                          <td className="table-data">
+                            <span className="icon">
+                              <img src={fuel} alt="fuel" />
+                            </span>
+                            <span className="fuel">Fuel:&nbsp;</span>
+                            <span className="value">{train.trainFuel}</span>
+                          </td>
+                          <td className="table-data">
+                            <span className="image-icon">
+                              <img src={station} alt="station" />
+                            </span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td className="table-data">
+                            <span className="icon">
+                              <img src={status} alt="status" />
+                            </span>
+                            <span className="status">Status:&nbsp;</span>
+                            <span className="value">Perf</span>
+                          </td>
+                          <td className="table-data">
+                            <span className="image-icon">
+                             <img src={mechanic} alt="mechanic" />
+                           </span>
+                          </td>
+                      </tr>
+                      </tbody>
+                     </Table>
+                   </section>
+                 <BuyCTrainButton cTrainValue={'Buy 540 CTRAIN'} />
 
 
 
@@ -125,6 +217,7 @@ export const MarketList = () => {
               </div>
             ))
           }
+          </div>
         </main>
         {/*=============TRAIN TWO ======================*/}
         {/* <main className="train">
@@ -405,106 +498,7 @@ export const MarketList = () => {
           </section>
           <BuyCTrainButton cTrainValue={'Buy 890 CTRAIN'} />
         </main> */}
-      </div>
+      
     </>
   );
 };
-
-
-
-
-
-
-
-
-
-
-// <article className="train-image">
-// <img src={common} alt="common train" />
-//  </article>
-//  <article className="bullet">
-//    <img src={common_bullet} alt="common train bullet" />
-//  </article>
-//  <section className="train-container">
-//    <Table bordered hover>
-//      <tbody>
-//        <tr>
-//          <td className="table-data">
-//            <span className="icon">
-//              <img src={level} alt="level" />
-//            </span>
-//            <span className="level">Level:&nbsp;</span>
-//            <span className="value">0</span>
-//          </td>
-//          <td width={'60%'} className="table-data">
-//            <span className="icon">
-//              <img src={acceleration} alt="acceleration" />
-//            </span>
-//            <span className="acceleration">Acceleration:&nbsp;</span>
-//            <span className="value">20</span>
-//          </td>
-//        </tr>
-//        <tr>
-//          <td className="table-data">
-//            <span className="icon">
-//              <img src={expo} alt="exp" />
-//            </span>
-//            <span className="expo">Exp:&nbsp;</span>
-//            <span className="value">0.00</span>
-//          </td>
-//          <td className="table-data">
-//            <span className="icon">
-//              <img src={speed} alt="speed" />
-//            </span>
-//            <span className="speed">Speed:&nbsp;</span>
-//            <span className="value">30.00</span>
-//          </td>
-//        </tr>
-//        <tr>
-//          <td className="table-data">
-//            <span className="icon">
-//              <img src={load} alt="load" />
-//            </span>
-//            <span className="load">Loads:&nbsp;</span>
-//            <span className="value">2</span>
-//          </td>
-//          <td className="table-data">
-//            <span className="icon">
-//              <img src={brake} alt="brake" />
-//            </span>
-//            <span className="brake">Brakes:&nbsp;</span>
-//            <span className="value">16</span>
-//          </td>
-//        </tr>
-//        <tr>
-//          <td className="table-data">
-//            <span className="icon">
-//              <img src={fuel} alt="fuel" />
-//            </span>
-//            <span className="fuel">Fuel:&nbsp;</span>
-//            <span className="value">No</span>
-//          </td>
-//          <td className="table-data">
-//            <span className="image-icon">
-//              <img src={station} alt="station" />
-//            </span>
-//          </td>
-//        </tr>
-//        <tr>
-//          <td className="table-data">
-//            <span className="icon">
-//              <img src={status} alt="status" />
-//            </span>
-//            <span className="status">Status:&nbsp;</span>
-//            <span className="value">Perf</span>
-//          </td>
-//          <td className="table-data">
-//            <span className="image-icon">
-//             <img src={mechanic} alt="mechanic" />
-//           </span>
-//          </td>
-//       </tr>
-//      </tbody>
-//     </Table>
-//   </section>
-// <BuyCTrainButton cTrainValue={'Buy 540 CTRAIN'} />

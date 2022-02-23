@@ -68,3 +68,22 @@ select {
    align-items: center;
   }
 }
+
+.train-grid {
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  justify-items: center;
+  align-items: center;
+}
+
+@media (min-width: 600px) and (max-width: 769px) {
+  .train-grid {
+    grid-template-columns: 50% 50%;
+  }
+}
+
+@media (max-width: 599px) {
+  .train-grid {
+    grid-template-columns: auto;
+  }
+}
