@@ -76,7 +76,6 @@ export const MarketList = () => {
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
     
     const transaction = await contract.buy(CtrainAddress.Ctrain, tokenId); // ctrain.itemId
-    console.log("called")
     await transaction.wait();
     loadCtrains();
   }
