@@ -80,7 +80,7 @@ contract MarketPlace is ReentrancyGuard {
     
     uint256 CtrainFee = (price * 15)/100;
     uint256 sellerFee = price - CtrainFee;
-    tokenAddress.transferFrom(msg.sender, address(this), CtrainFee);
+    tokenAddress.transferFrom(msg.sender, owner, CtrainFee);
     tokenAddress.transferFrom(msg.sender, seller, sellerFee);
 
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);

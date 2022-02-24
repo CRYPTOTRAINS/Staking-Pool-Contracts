@@ -92,9 +92,9 @@ contract Ctrain is ERC721URIStorage, Pausable {
             
         uint8 randRarity = uint8(_createRandomRarity(100));
         uint8 acceleration = uint8(_createRandomAcceleration(100));
-        uint8 speed = uint8(_createRandomRarity(100));
+        uint8 speed = uint8(_createRandomRarity(110));
         uint8 brakes = uint8(_createRandomRarity(100));
-        uint8 loads = uint8(_createRandomAcceleration(100));
+        uint8 loads = uint8(_createRandomAcceleration(110));
 
         uint256 ownerMintedCount = addressMintedBalance[msg.sender];
         require(ownerMintedCount + 1 <= nftPresaleLimit, "max NFT per address exceeded");

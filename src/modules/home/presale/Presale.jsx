@@ -114,7 +114,7 @@ export const Presale = () => {
     }
   }
 
-  async function checkWhitelist(address) {
+  async function checkWhitelist() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
