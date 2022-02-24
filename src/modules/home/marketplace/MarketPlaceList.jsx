@@ -33,6 +33,8 @@ import MarketPlaceAddress from "../../../contracts/marketPlace-address.json";
 import MarketPlaceArtifact from "../../../contracts/MarketPlace.json";
 import CtrainAddress from "../../../contracts/ctrain-address.json";
 import CtrainArtifact from "../../../contracts/Ctrain.json";
+import ENMTAddress from "../../../contracts/ENMT-address.json";
+import ENMTArtifact from "../../../contracts/ENMT.json";
 
 export const MarketList = () => {
 
@@ -77,15 +79,28 @@ export const MarketList = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
+    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+   
    try {
-     const cost = await contract.fetchPrice(tokenId);
-    const tx =  await token.approve(MarketPlaceAddress.MarketPlace, cost);
-    await tx.wait();
+      const cost = await contract.fetchPrice(tokenId);
+      const tx =  await token.approve(MarketPlaceAddress.MarketPlace, cost);
+      await tx.wait();
+      const transaction = await contract.buy(CtrainAddress.Ctrain, tokenId);
+      await transaction.wait();
+      if (receipt.status === 0) {
+        setStatus("Transaction failed");
+        throw new Error("Transaction failed");
+      } else {
+        setStatus("Transaction successful");
+      }
    } catch(error) {
-
+    if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+      setStatus(`${error.message}`);
+      return;
+    }
+    setStatus(`${error.message}`);
    }
-    const transaction = await contract.buy(CtrainAddress.Ctrain, tokenId);
-    await transaction.wait();
+    setPrice(cost);
     loadCtrains();
   }
 
