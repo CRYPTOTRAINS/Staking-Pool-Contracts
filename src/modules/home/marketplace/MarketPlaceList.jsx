@@ -38,6 +38,7 @@ export const MarketList = () => {
 
   const [trains, setTrains] = useState([]);
   const [loadingState, setLoadingState] = useState('not-loaded');
+  const [price, setPrice] = useState('');
 
   useEffect(() => {
     loadCtrains();
@@ -48,6 +49,8 @@ export const MarketList = () => {
     const connection = await web3Modal.connect()
     const provider = new ethers.providers.Web3Provider(connection);
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, provider);
+    
+
     const data = await contract.getOwnerTrains(MarketPlaceAddress.MarketPlace);
     const trains = await Promise.all(data.map(async i => {
       let train = {
@@ -64,18 +67,18 @@ export const MarketList = () => {
 
       return train;
   }));
-
+    
     setTrains(trains);
     setLoadingState('loaded');
   }
 
 
-  async function buyCtrain(tokenId) { //ctrain
+  async function buyCtrain(tokenId) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
-    
-    const transaction = await contract.buy(CtrainAddress.Ctrain, tokenId); // ctrain.itemId
+   
+    const transaction = await contract.buy(CtrainAddress.Ctrain, tokenId);
     await transaction.wait();
     loadCtrains();
   }
@@ -211,7 +214,7 @@ return (
                       </tbody>
                      </Table>
                    </section>
-                 <BuyCTrainButton cTrainValue={`Buy ${train.price} CTRAIN`} onClick={() => buyCtrain(train.trainID)} />
+                 <BuyCTrainButton cTrainValue={`Buy ${price} CTRAIN`} onClick={() => buyCtrain(train.trainID)} />
               </div>
             ))
           }
