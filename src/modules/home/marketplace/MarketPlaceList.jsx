@@ -77,7 +77,13 @@ export const MarketList = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
-   
+   try {
+     const cost = await contract.fetchPrice(tokenId);
+    const tx =  await token.approve(MarketPlaceAddress.MarketPlace, cost);
+    await tx.wait();
+   } catch(error) {
+
+   }
     const transaction = await contract.buy(CtrainAddress.Ctrain, tokenId);
     await transaction.wait();
     loadCtrains();
