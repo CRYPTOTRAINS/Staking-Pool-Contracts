@@ -39,7 +39,6 @@ import ModalService from '../../../services/ModalService';
 import DispatchModal from '../TrainModals/DispatchModal';
 import FuelModal from '../TrainModals/FuelModal';
 import BuyTicketModal from '../TrainModals/BuyTicketModal';
-import SellTrainModal from '../TrainModals/SellTrainModal';
 import RepairModal from '../TrainModals/RepairModal';
 import UnboxModal from '../TrainModals/UnboxModal';
 import WinnerModal from '../TrainModals/WinnerModal';
@@ -49,7 +48,6 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 export const TrainList = () => {
   const [trains, setTrains] = useState([]);
   const [formNumber, updateFormNumber] = useState({no:0});
-  // const [state, setState] = useState("");
 
   useEffect(() => {
     loadNFTs()
@@ -126,10 +124,6 @@ export const TrainList = () => {
   const addBuyTicketModal = () => {
     ModalService.open(BuyTicketModal);
   };
-
-  // const addSellTrainModal = (id) => {
-  //   ModalService.open(SellTrainModal);
-  // };
 
   const addRepairModal = () => {
     ModalService.open(RepairModal);
