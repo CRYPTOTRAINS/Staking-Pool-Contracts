@@ -82,7 +82,7 @@ export const MarketList = () => {
   }
 
   
-if (loadingState === 'loaded' && !trains.length) return (<h2>There are currently no Ctrains in the marketplace</h2>);
+if (loadingState === 'loaded' && !trains.length) return (<h2 className="title">There are currently no Ctrains in the marketplace</h2>);
   
 return (
     <>
