@@ -41,6 +41,7 @@ contract Ctrain is ERC721URIStorage, Pausable {
         uint8 speed;
         uint8 brakes;
         uint8 loads;
+        uint256 price;
     }
     
     Train[] public trains;
@@ -98,7 +99,7 @@ contract Ctrain is ERC721URIStorage, Pausable {
         uint256 ownerMintedCount = addressMintedBalance[msg.sender];
         require(ownerMintedCount + 1 <= nftPresaleLimit, "max NFT per address exceeded");
         uint256 newItemId = _tokenIds.current();
-        Train memory newTrain = Train(newItemId, 1, randRarity, false, acceleration, speed, brakes, loads);
+        Train memory newTrain = Train(newItemId, 1, randRarity, false, acceleration, speed, brakes, loads, _price);
         trains.push(newTrain);
             
         _mint(msg.sender, newItemId);

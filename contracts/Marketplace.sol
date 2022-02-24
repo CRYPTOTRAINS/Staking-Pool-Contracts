@@ -73,86 +73,26 @@ contract MarketPlace is ReentrancyGuard {
   }
 
  
-  function buy(address nftContract, uint256 itemId) public payable nonReentrant {
-    uint tokenId = idToMarketItem[itemId].tokenId;
-    uint256 price = idToMarketItem[itemId].price;
-    tokenAddress.approve(address(this), price);
-    tokenAddress.transferFrom(msg.sender, address(this), price);
-    address seller = idToMarketItem[itemId].seller;
-    // 15% fee
+  function buy(address nftContract, uint256 tokenId) public payable nonReentrant {
+  uint256 price = idToMarketItem[tokenId].price;
+   
+    address seller = idToMarketItem[tokenId].seller;
+    
     uint256 CtrainFee = (price * 15)/100;
     uint256 sellerFee = price - CtrainFee;
-
-    tokenAddress.transferFrom(address(this), seller, sellerFee);
+    tokenAddress.transferFrom(msg.sender, address(this), CtrainFee);
+    tokenAddress.transferFrom(msg.sender, seller, sellerFee);
 
     IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
-    idToMarketItem[itemId].owner = payable(msg.sender);
-    idToMarketItem[itemId].sold = true;
+    idToMarketItem[tokenId].owner = payable(msg.sender);
+    idToMarketItem[tokenId].sold = true;
     _itemsSold.increment();
     
   }
 
-  function fetchMarketItems() public view returns (MarketItem[] memory) {
-    uint itemCount = _itemIds.current();
-    uint unsoldItemCount = _itemIds.current() - _itemsSold.current();
-    uint currentIndex = 0;
-
-    MarketItem[] memory items = new MarketItem[](unsoldItemCount);
-    for (uint i = 0; i < itemCount; i++) {
-      if (idToMarketItem[i + 1].owner == address(0)) {
-        uint currentId = i + 1;
-        MarketItem storage currentItem = idToMarketItem[currentId];
-        items[currentIndex] = currentItem;
-        currentIndex += 1;
-      }
-    }
-    return items;
-  }
-
-  function fetchMyNFTs() public view returns (MarketItem[] memory) {
-    uint totalItemCount = _itemIds.current();
-    uint itemCount = 0;
-    uint currentIndex = 0;
-
-    for (uint i = 0; i < totalItemCount; i++) {
-      if (idToMarketItem[i + 1].owner == msg.sender) {
-        itemCount += 1;
-      }
-    }
-
-    MarketItem[] memory items = new MarketItem[](itemCount);
-    for (uint i = 0; i < totalItemCount; i++) {
-      if (idToMarketItem[i + 1].owner == msg.sender) {
-        uint currentId = i + 1;
-        MarketItem storage currentItem = idToMarketItem[currentId];
-        items[currentIndex] = currentItem;
-        currentIndex += 1;
-      }
-    }
-    return items;
-  }
-
-  function fetchItemsCreated() public view returns (MarketItem[] memory) {
-    uint totalItemCount = _itemIds.current();
-    uint itemCount = 0;
-    uint currentIndex = 0;
-
-    for (uint i = 0; i < totalItemCount; i++) {
-      if (idToMarketItem[i + 1].seller == msg.sender) {
-        itemCount += 1;
-      }
-    }
-
-    MarketItem[] memory items = new MarketItem[](itemCount);
-    for (uint i = 0; i < totalItemCount; i++) {
-      if (idToMarketItem[i + 1].seller == msg.sender) {
-        uint currentId = i + 1;
-        MarketItem storage currentItem = idToMarketItem[currentId];
-        items[currentIndex] = currentItem;
-        currentIndex += 1;
-      }
-    }
-    return items;
+  function fetchPrice(uint256 tokenId) public view returns(uint256) {
+    uint256 cost = idToMarketItem[tokenId].price;
+    return cost;
   }
 
   function TokenWithdraw(uint256 _amount) external {
