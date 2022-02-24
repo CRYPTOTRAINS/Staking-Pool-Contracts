@@ -90,23 +90,27 @@ export const Presale = () => {
     const price = (600000000000000000000).toLocaleString("fullwide", { useGrouping: false });
     
     try {
+      setStatus("Please approve transaction...");
       const tx = await token.approve(CtrainAddress.Ctrain, price);
+      setStatus("Processing transaction, please wait...")
       await tx.wait();
       const fee = (5400000000000000).toLocaleString("fullwide", { useGrouping: false });
+      setStatus("Processing transaction, please wait...")
       const transaction = await contract.createToken({ value: fee });
+      setStatus("Processing transaction, please wait...")
       const receipt = await transaction.wait();
         if (receipt.status === 0) {
           setStatus("Transaction failed");
           throw new Error("Transaction failed");
         } else {
-          setStatus("Transaction successful");
+          setStatus("Transaction successful!!!");
         }
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        setStatus(`${error.data.message}`);
+        setStatus(`${error.message}`);
         return;
       }
-      setStatus(`${error.data.message}`);
+      setStatus(`${error.message}`);
     }
   }
 
@@ -114,27 +118,19 @@ export const Presale = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
-    try {
-      const transaction = await contract.isWhitelisted(address);
-      const receipt = await transaction.wait();
-        if (receipt.status === 0) {
-          throw new Error("Transaction failed");
-        } else {
-          setWhitelist("Congrats, your wallet is whitelisted");
-        }
-
-    } catch(error) {
-      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        return;
-      }
-      setStatus('');
-    }
+    
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    const account = accounts[0];
+    const transaction = await contract.isWhitelisted(account);
+    await transaction.wait();
+    setWhitelist("Congrats, your wallet is whitelisted");
+    
   }
    
   return (
     <main>
       <div id="flipdown" className="flipdown"></div>
-    <h5 className='py-3'>{status}</h5>
+    <h5 className='py-3 title'>{status}</h5>
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
       <h5 className='py-3'>{presaleStatus}</h5>

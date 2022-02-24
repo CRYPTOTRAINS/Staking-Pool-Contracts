@@ -158,6 +158,9 @@ export const TrainList = () => {
           </button>
         </article>
       </section>
+
+      <p className='title'>{status}</p>
+
       <h2 className="title">Your Trains</h2>
       <div>
         {/*=============TRAIN ONE ======================*/}
