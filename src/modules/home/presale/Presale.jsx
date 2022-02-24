@@ -114,7 +114,6 @@ export const Presale = () => {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, signer);
-   
     try {
       const transaction = await contract.isWhitelisted(address);
       const receipt = await transaction.wait();
@@ -134,7 +133,7 @@ export const Presale = () => {
    
   return (
     <main>
-<div id="flipdown" className="flipdown"></div>
+      <div id="flipdown" className="flipdown"></div>
     <h5 className='py-3'>{status}</h5>
       <img className="bg" src={backgroundImage} alt="background" />
       <h1 className="presale-header">NFT PRESALE</h1>
@@ -160,9 +159,6 @@ export const Presale = () => {
       <section className="presale-main">
         <article className="presale-img">
           <div className="presale-main-items">
-            {/* <p className="quantity">QUANTITY:  <input placeholder="e.g 2" required className="no"
-                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p> */}
-           
             <button className="approve">
               <img src={approve} className="approve" onClick={createToken} onKeyDown={createToken} alt="approve button" />
             </button>

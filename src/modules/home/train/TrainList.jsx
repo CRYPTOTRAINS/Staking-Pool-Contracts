@@ -89,7 +89,7 @@ export const TrainList = () => {
     ModalService.open(BuyTicketModal);
   };
 
-  const addSellTrainModal = () => {
+  const addSellTrainModal = (id) => {
     ModalService.open(SellTrainModal);
   };
 

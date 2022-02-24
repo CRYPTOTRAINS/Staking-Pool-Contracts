@@ -15,7 +15,7 @@ import { useState } from "react";
 
 const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
-export default function BuyTicketModal(props) {
+export default function  SellTrainModal(props) {
   const [formNumber, updateFormNumber] = useState({no:0});
 
   async function sell() {
