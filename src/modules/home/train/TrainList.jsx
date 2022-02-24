@@ -30,6 +30,10 @@ import { useEffect, useState } from "react";
 import { ethers } from "ethers";
 import CtrainAddress from "../../../contracts/ctrain-address.json";
 import CtrainArtifact from "../../../contracts/Ctrain.json";
+import MarketPlaceAddress from "../../../contracts/marketPlace-address.json";
+import MarketPlaceArtifact from "../../../contracts/MarketPlace.json";
+import ENMTAddress from "../../../contracts/ENMT-address.json";
+import ENMTArtifact from "../../../contracts/ENMT.json";
 import ModalRoot from '../../common/Modal/ModalRoot';
 import ModalService from '../../../services/ModalService';
 import DispatchModal from '../TrainModals/DispatchModal';
@@ -44,6 +48,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 
 export const TrainList = () => {
   const [trains, setTrains] = useState([]);
+  const [formNumber, updateFormNumber] = useState({no:0});
   // const [state, setState] = useState("");
 
   useEffect(() => {
@@ -77,6 +82,39 @@ export const TrainList = () => {
     setTrains(trains);
   }
 
+  async function sell(tokenId) {
+    
+    const no = formNumber;
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
+    const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
+
+    const num = no.no;
+    const price = (num * 1000000000000000000).toLocaleString("fullwide", { useGrouping: false });
+  
+    try {
+      const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
+      await tx.wait();
+      const transaction = await contract.sell(CtrainAddress.Ctrain, tokenId, price);
+      const receipt = await transaction.wait();
+        if (receipt.status === 0) {
+          alert("Transaction failed");
+          throw new Error("Transaction failed");
+        } else {
+          alert("Transaction successful");
+        }
+
+    } catch(error) {
+      if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
+        alert(`${error.message}`);
+        return;
+      }
+      alert(`${error.message}`);
+    }
+  }
+
   const addModal = () => {
     ModalService.open(DispatchModal);
   };
@@ -89,9 +127,9 @@ export const TrainList = () => {
     ModalService.open(BuyTicketModal);
   };
 
-  const addSellTrainModal = (id) => {
-    ModalService.open(SellTrainModal);
-  };
+  // const addSellTrainModal = (id) => {
+  //   ModalService.open(SellTrainModal);
+  // };
 
   const addRepairModal = () => {
     ModalService.open(RepairModal);
@@ -135,7 +173,10 @@ export const TrainList = () => {
            trains.map((train, i) => (    
           <div className="train" key={train.trainID}>
             <p className="sno">{train.trainID}</p>
-          <img src={sell} className="sell" alt="sell" onClick={addSellTrainModal} onKeyDown={addSellTrainModal} />
+          {/* <img src={sell} className="sell" alt="sell"  /> */}
+          <button onClick={() => sell(train.trainID)} >sell</button>
+          <p className="quantity">Price:  <input placeholder="600" required className="nom"
+                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
           <article className="train-image">
            <img src={rare} alt="rare train" />
           </article>
