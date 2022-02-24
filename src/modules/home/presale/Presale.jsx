@@ -122,8 +122,11 @@ export const Presale = () => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts[0];
     const transaction = await contract.isWhitelisted(account);
-    await transaction.wait();
-    setWhitelist("Congrats, your wallet is whitelisted");
+    if (transaction === true) {
+      setWhitelist("Congrats, your wallet is whitelisted!!");
+    } else {
+      setWhitelist("Your wallet is NOT whitelisted");
+    }
     
   }
    
