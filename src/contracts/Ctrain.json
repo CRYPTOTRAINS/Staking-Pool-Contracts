@@ -214,13 +214,7 @@
       "type": "function"
     },
     {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_mintAmount",
-          "type": "uint256"
-        }
-      ],
+      "inputs": [],
       "name": "createToken",
       "outputs": [],
       "stateMutability": "payable",
@@ -296,6 +290,11 @@
               "internalType": "uint8",
               "name": "loads",
               "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
             }
           ],
           "internalType": "struct Ctrain.Train[]",
@@ -351,6 +350,11 @@
               "internalType": "uint8",
               "name": "loads",
               "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "price",
+              "type": "uint256"
             }
           ],
           "internalType": "struct Ctrain.Train[]",
@@ -412,19 +416,6 @@
           "internalType": "string",
           "name": "",
           "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "nftPerAddressLimit",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
         }
       ],
       "stateMutability": "view",
@@ -690,6 +681,11 @@
           "internalType": "uint8",
           "name": "loads",
           "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
         }
       ],
       "stateMutability": "view",
