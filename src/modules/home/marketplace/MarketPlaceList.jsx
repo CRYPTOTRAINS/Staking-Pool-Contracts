@@ -36,8 +36,9 @@ import CtrainArtifact from "../../../contracts/Ctrain.json";
 import ENMTAddress from "../../../contracts/ENMT-address.json";
 import ENMTArtifact from "../../../contracts/ENMT.json";
 
-export const MarketList = () => {
+const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 
+export const MarketList = () => {
   const [trains, setTrains] = useState([]);
   const [loadingState, setLoadingState] = useState('not-loaded');
   const [price, setPrice] = useState('');
