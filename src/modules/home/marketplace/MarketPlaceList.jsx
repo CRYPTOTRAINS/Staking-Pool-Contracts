@@ -42,6 +42,7 @@ export const MarketList = () => {
   const [trains, setTrains] = useState([]);
   const [loadingState, setLoadingState] = useState('not-loaded');
   const [price, setPrice] = useState('');
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     loadCtrains();
@@ -88,6 +89,7 @@ export const MarketList = () => {
       await tx.wait();
       const transaction = await contract.buy(CtrainAddress.Ctrain, tokenId);
       await transaction.wait();
+      setStatus("Please wait, processing transaction.....")
       if (receipt.status === 0) {
         setStatus("Transaction failed");
         throw new Error("Transaction failed");
@@ -140,7 +142,9 @@ return (
           </select>
         </article>
       </section>
-      
+
+      <p className='title'>{status}</p>
+
         <main className="train-list">
          
           {

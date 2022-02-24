@@ -48,6 +48,7 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 export const TrainList = () => {
   const [trains, setTrains] = useState([]);
   const [formNumber, updateFormNumber] = useState({no:0});
+  const [status, setStatus] = useState('');
 
   useEffect(() => {
     loadNFTs()
@@ -95,21 +96,24 @@ export const TrainList = () => {
     try {
       const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
       await tx.wait();
+      setStatus("Please wait, transaction processing...");
       const transaction = await contract.sell(CtrainAddress.Ctrain, tokenId, price);
+      setStatus("Please wait, transaction processing...");
       const receipt = await transaction.wait();
+      setStatus("Please wait, transaction processing...");
         if (receipt.status === 0) {
-          alert("Transaction failed");
+          setStatus("Transaction failed");
           throw new Error("Transaction failed");
         } else {
-          alert("Transaction successful");
+          setStatus("Transaction successful");
         }
 
     } catch(error) {
       if (error.code === ERROR_CODE_TX_REJECTED_BY_USER) {
-        alert(`${error.message}`);
+        setStatus(`${error.message}`);
         return;
       }
-      alert(`${error.message}`);
+      setStatus(`${error.message}`);
     }
   }
 
