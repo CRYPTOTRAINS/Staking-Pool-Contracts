@@ -83,12 +83,16 @@ export const MarketList = () => {
     const contract = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, signer);
     const token = new ethers.Contract(ENMTAddress.ENMT, ENMTArtifact.abi, signer);
    
+    const cost = await contract.fetchPrice(tokenId);
+    
    try {
-      const cost = await contract.fetchPrice(tokenId);
+    setStatus("Please approve transaction....")
       const tx =  await token.approve(MarketPlaceAddress.MarketPlace, cost);
+      setStatus("Please wait, processing transaction.....")
       await tx.wait();
       const transaction = await contract.buy(CtrainAddress.Ctrain, tokenId);
-      await transaction.wait();
+      setStatus("Please wait, processing transaction.....")
+      const receipt = await transaction.wait();
       setStatus("Please wait, processing transaction.....")
       if (receipt.status === 0) {
         setStatus("Transaction failed");

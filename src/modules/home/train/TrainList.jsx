@@ -96,7 +96,9 @@ export const TrainList = () => {
     const price = (num * 1000000000000000000).toLocaleString("fullwide", { useGrouping: false });
   
     try {
+      setStatus("Please approve transaction...");
       const tx = await token.approve(MarketPlaceAddress.MarketPlace, price);
+      setStatus("Please wait, transaction processing...");
       await tx.wait();
       setStatus("Please wait, transaction processing...");
       const transaction = await contract.sell(CtrainAddress.Ctrain, tokenId, price);
@@ -115,7 +117,7 @@ export const TrainList = () => {
         setStatus(`${error.message}`);
         return;
       }
-      setStatus(`${error.message}`);
+      setStatus(`${error.data.message}`);
     }
   }
 
