@@ -7,6 +7,7 @@ import './TrainItem.css';
 import Table from 'react-bootstrap/Table';
 import common from '../../../assets/images/common.png';
 import common_bullet from '../../../assets/images/common_bullet.png';
+import commoner_bullet from '../../../assets/images/common_bullet.png';
 import rare from '../../../assets/images/rare.png';
 import rare_bullet from '../../../assets/images/rare_bullet.png';
 import epic from '../../../assets/images/epic.png';
@@ -184,13 +185,49 @@ export const TrainList = () => {
             <p >Price:  <input placeholder="600" required className='nom'
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
          
+         <article className="train-image">
+            <img src={rare} alt="rare train" />
+          </article>
+
+          {train.trainRarity <= 5 ? (
+            <article className="bullet">
+              <img src={legendary_bullet} alt="legendary train bullet" />
+            </article>
+            ) : (
+              <p></p>
+          )}
+
+          {5 < train.trainRarity >= 15  ? (
+            <article className="bullet">
+              <img src={epic_bullet} alt="epic train bullet" />
+            </article>
+            ) : (
+              <p></p>
+          )}
+
+          {30 >= train.trainRarity > 15  ? (
+            <article className="bullet">
+              <img src={rare_bullet} alt="rare train bullet" />
+            </article>
+            ) : (
+              <p></p>
+          )}
+
+          {30 < train.trainRarity <= 100  ? (
+            <article className="bullet">
+              <img src={common_bullet} alt="common train bullet" />
+            </article>
+            ) : (
+              <p></p>
+          )}
+
+
+
+
+
+
+
           
-          <article className="train-image">
-           <img src={rare} alt="rare train" />
-          </article>
-          <article className="bullet">
-            <img src={common_bullet} alt="common train bullet" />
-          </article>
           <section className="train-container">
             <Table bordered hover>
               <tbody>
