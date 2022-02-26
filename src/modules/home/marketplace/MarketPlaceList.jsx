@@ -154,7 +154,7 @@ return (
           {
             trains.map((train, i) => (
               <div className="train" key={train.trainID}>
-               <p className="sno">{train.trainID}</p>
+               <p className="sno">Ctrain-Id: #{train.trainID}</p>
                  <article className="train-image">
                  <img src={common} alt="common train" />
                   </article>
