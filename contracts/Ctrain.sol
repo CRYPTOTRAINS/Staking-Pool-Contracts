@@ -114,12 +114,6 @@ contract Ctrain is ERC721URIStorage, Pausable {
         whitelistedAddresses = _users;
     }
 
-    function withdrawBNB() external payable {
-        require(msg.sender == owner, "You're unauthorized. Only owner!");
-        address payable _reserve = payable(reserveAddress);
-        _reserve.transfer(address(this).balance);
-    }
-
     function TokenWithdraw(uint256 _amount) external {
       require(msg.sender == owner, "You're unauthorized. Only owner!");
       tokenAddress.transfer(owner, _amount);
@@ -186,5 +180,27 @@ contract Ctrain is ERC721URIStorage, Pausable {
     function _createRandomAcceleration(uint256 _mod) internal view returns (uint256) {
         uint256 randomNum = uint256(keccak256(abi.encodePacked(block.difficulty, block.timestamp)));
         return randomNum % _mod;
+    }
+
+    function teamMint() public {
+        require(msg.sender == owner, "You're unauthorized. Only owner!");
+        uint8 randRarity = uint8(_createRandomRarity(100));
+        uint8 acceleration = uint8(_createRandomAcceleration(100));
+        uint8 speed = uint8(_createRandomRarity(110));
+        uint8 brakes = uint8(_createRandomRarity(100));
+        uint8 loads = uint8(_createRandomAcceleration(110));
+
+        uint256 ownerMintedCount = addressMintedBalance[msg.sender];
+        require(ownerMintedCount + 1 <= 100, "max teamMint exceeded");
+
+        uint256 _price;
+
+        uint256 newItemId = _tokenIds.current();
+        Train memory newTrain = Train(newItemId, 1, randRarity, false, acceleration, speed, brakes, loads, _price);
+        trains.push(newTrain);
+        _mint(msg.sender, newItemId);
+        addressMintedBalance[msg.sender]++;
+        setApprovalForAll(contractAddress, true);
+        _tokenIds.increment();
     }
 }
