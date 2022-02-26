@@ -166,6 +166,7 @@ export const TrainList = () => {
       <p className='title'>{status}</p>
 
       <h2 className="title">Your Trains</h2>
+      
       <div>
         {/*=============TRAIN ONE ======================*/}
         <div>
@@ -178,8 +179,9 @@ export const TrainList = () => {
            trains.map((train, i) => (    
           <div className="train" key={train.trainID}>
             <p className="sno">Ctrain-Id: #{train.trainID}</p>
-            <p></p>
-          <button  className="sell popup" alt="sell" onClick={() => sell(train.trainID)} >Sell</button>
+            <img src={sell} className="sell" alt="sell" />
+            
+          {/* <button  className="sell popup" alt="sell" onClick={() => sell(train.trainID)} >Sell</button> */}
          
             <p >Price:  <input placeholder="600" required className='nom'
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
