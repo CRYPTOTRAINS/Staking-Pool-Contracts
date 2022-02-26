@@ -7,7 +7,6 @@ import './TrainItem.css';
 import Table from 'react-bootstrap/Table';
 import common from '../../../assets/images/common.png';
 import common_bullet from '../../../assets/images/common_bullet.png';
-import commoner_bullet from '../../../assets/images/common_bullet.png';
 import rare from '../../../assets/images/rare.png';
 import rare_bullet from '../../../assets/images/rare_bullet.png';
 import epic from '../../../assets/images/epic.png';
@@ -189,7 +188,7 @@ export const TrainList = () => {
           {train.trainRarity <= 5 ? (
             <div>
             <article className="train-image">
-             <img src={rare} alt="rare train" />
+             <img src={legendary} alt="rare train" />
             </article>
             
             <article className="bullet">
@@ -205,7 +204,7 @@ export const TrainList = () => {
           {5 < train.trainRarity >= 15  ? (
             <div>
               <article className="train-image">
-              <img src={rare} alt="rare train" />
+              <img src={epic} alt="epic train" />
             </article>
 
               <article className="bullet">
@@ -233,7 +232,7 @@ export const TrainList = () => {
           {30 < train.trainRarity <= 100  ? (
             <div>
             <article className="train-image">
-              <img src={rare} alt="rare train" />
+              <img src={common} alt="common train" />
             </article>
 
             <article className="bullet">
