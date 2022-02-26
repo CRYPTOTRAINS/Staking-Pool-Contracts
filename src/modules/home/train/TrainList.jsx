@@ -203,10 +203,6 @@ export const TrainList = () => {
                     <span className="value">{train.trainLevel}</span>
                   </td>
                   <td width={'60%'} className="table-data">
-                    {/* <span className="icon">
-                      <img src={acceleration} alt="acceleration" />
-                    </span>
-                    <span className="acceleration">Acceleration:&nbsp;</span> */}
                    
                     <span>
                       {train.trainAcceleration <= 10 ? (
@@ -229,13 +225,6 @@ export const TrainList = () => {
                     
                     </span>
                     
-                      
-                    
-                    
-
-
-
-                    
                   </td>
                 </tr>
                 <tr>
@@ -247,11 +236,31 @@ export const TrainList = () => {
                     <span className="value">0.00</span>
                   </td>
                   <td className="table-data">
-                    <span className="icon">
-                      <img src={speed} alt="speed" />
+                    <span>
+                      {train.trainSpeed <= 10 ? (
+                                 <span className="value speed icon"><img src={speed} alt="speed" />Speed: 40</span>
+                            ) : (
+                                <p></p>
+                        )}
+                      
+                      {30 >= train.trainSpeed > 10  ? (
+                          <span className="value speed icon"> <img src={speed} alt="speed" />Speed: 25</span>
+                        ) : (
+                                <p></p>
+                        )}
+
+                      {30 < train.trainSpeed <= 100  ? (
+                          <span className="value speed icon"><img src={speed} alt="speed" />Speed: 10</span>
+                        ) : (
+                                <p></p>
+                        )}
+                    
                     </span>
-                    <span className="speed">Speed:&nbsp;</span>
-                    <span className="value">{train.trainSpeed}</span>
+
+
+
+
+
                   </td>
                 </tr>
                 <tr>
