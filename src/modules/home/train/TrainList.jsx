@@ -25,7 +25,6 @@ import mechanic from '../../../assets/icons/mechanic.png';
 import legendary_bullet from '../../../assets/images/legendary_bullet.png';
 import dispatch from '../../../assets/images/dispatch_button.png';
 import reward from '../../../assets/images/reward_button.png';
-import sell from '../../../assets/images/sell.png';
 import seller from '../../../assets/images/sell.png';
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
@@ -180,9 +179,7 @@ export const TrainList = () => {
            trains.map((train, i) => (    
           <div className="train" key={train.trainID}>
             <p className="sno">Ctrain-Id: #{train.trainID}</p>
-            <img src={seller} className="sell" alt="sell" ></img>
-            
-          {/* <button  className="sell popup" alt="sell" onClick={() => sell(train.trainID)} >Sell</button> */}
+            <img src={seller} className="sell" alt="sell" onClick={() => sell(train.trainID)} onKeyDown={() => sell(train.trainID)} />
          
             <p >Price:  <input placeholder="600" required className='nom'
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
