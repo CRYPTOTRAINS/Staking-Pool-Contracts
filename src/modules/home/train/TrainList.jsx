@@ -177,7 +177,7 @@ export const TrainList = () => {
         {
            trains.map((train, i) => (    
           <div className="train" key={train.trainID}>
-            <p className="sno">{train.trainID}</p>
+            <p className="sno">Ctrain-Id: #{train.trainID}</p>
             <p></p>
           <button  className="sell popup" alt="sell" onClick={() => sell(train.trainID)} >Sell</button>
          
