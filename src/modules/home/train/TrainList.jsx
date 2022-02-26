@@ -184,39 +184,62 @@ export const TrainList = () => {
          
             <p >Price:  <input placeholder="600" required className='nom'
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
-         
-         <article className="train-image">
-            <img src={rare} alt="rare train" />
-          </article>
+        
 
           {train.trainRarity <= 5 ? (
+            <div>
+            <article className="train-image">
+             <img src={rare} alt="rare train" />
+            </article>
+            
             <article className="bullet">
               <img src={legendary_bullet} alt="legendary train bullet" />
             </article>
+            </div>
             ) : (
               <p></p>
+
+            
           )}
 
           {5 < train.trainRarity >= 15  ? (
-            <article className="bullet">
-              <img src={epic_bullet} alt="epic train bullet" />
+            <div>
+              <article className="train-image">
+              <img src={rare} alt="rare train" />
             </article>
+
+              <article className="bullet">
+                <img src={epic_bullet} alt="epic train bullet" />
+              </article>
+            </div>
             ) : (
               <p></p>
           )}
 
           {30 >= train.trainRarity > 15  ? (
-            <article className="bullet">
-              <img src={rare_bullet} alt="rare train bullet" />
-            </article>
+            <div>
+              <article className="train-image">
+                <img src={rare} alt="rare train" />
+              </article>
+            
+              <article className="bullet">
+                <img src={rare_bullet} alt="rare train bullet" />
+              </article>
+            </div>
             ) : (
               <p></p>
           )}
 
           {30 < train.trainRarity <= 100  ? (
+            <div>
+            <article className="train-image">
+              <img src={rare} alt="rare train" />
+            </article>
+
             <article className="bullet">
               <img src={common_bullet} alt="common train bullet" />
             </article>
+            </div>
             ) : (
               <p></p>
           )}
