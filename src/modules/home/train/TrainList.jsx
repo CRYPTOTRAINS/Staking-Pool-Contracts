@@ -181,14 +181,14 @@ export const TrainList = () => {
             <p className="sno">Ctrain-Id: #{train.trainID}</p>
             <img src={seller} className="sell" alt="sell" onClick={() => sell(train.trainID)} onKeyDown={() => sell(train.trainID)} />
          
-            <p >Price:  <input placeholder="600" required className='nom'
-                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
+            {/* <p >Price:  <input placeholder="600" required className='nom'
+                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p> */}
         
 
           {train.trainRarity <= 5 ? (
             <div>
             <article className="train-image">
-             <img src={legendary} alt="rare train" />
+             <img src={legendary} alt="legendary train" />
             </article>
             
             <article className="bullet">
@@ -197,16 +197,14 @@ export const TrainList = () => {
             </div>
             ) : (
               <p></p>
-
-            
           )}
 
-          {5 < train.trainRarity >= 15  ? (
+          {15 >= train.trainRarity > 5  ? ( // >=15
             <div>
               <article className="train-image">
               <img src={epic} alt="epic train" />
             </article>
-
+            
               <article className="bullet">
                 <img src={epic_bullet} alt="epic train bullet" />
               </article>
