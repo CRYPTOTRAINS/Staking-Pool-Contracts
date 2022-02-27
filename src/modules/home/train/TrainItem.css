@@ -20,12 +20,21 @@
 
 .sell {
   position: relative;
+  top: 0;
+  bottom: 75px;
+  left: 25%;
+  right: 0;
+}
+
+.sell-flex {
   display: flex;
-  width: 15%;
-  align-self: flex-end;
-  margin-right: 1rem;
-  top: -2.6rem;
-  cursor: pointer;
+  justify-content: space-between;
+  margin-left: 2%;
+  margin-right: 8%;
+}
+
+.sell-image {
+  width: 25%;
 }
 
 .train-image {

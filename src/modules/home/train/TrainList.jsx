@@ -179,26 +179,22 @@ export const TrainList = () => {
         {
            trains.map((train, i) => (    
           <div className="train" key={train.trainID}>
-            <p className="sno">Ctrain-Id: #{train.trainID}</p>
-            <img src={seller} className="sell" alt="sell" onClick={() => sell(train.trainID)} onKeyDown={() => sell(train.trainID)} />
-         
-            {/* <p >Price:  <input placeholder="600" required className='nom'
-                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p> */}
-        
-        
-
-
-                <div className="box">
-                    <a className="button" href="#popup1">Let me Pop up</a>
+            <div className='sell-flex'>
+              <p className="sno">Ctrain-Id: #{train.trainID}</p>
+              <div className="sell">
+                    <a href="#popup1"><img src={seller}  className="sell-image" alt="sell"></img></a>
                 </div>
-
-                  <div id="popup1" className="overlay">
+            </div>
+  
+                  <div id="popup1" className="over">
                     <div className="popup">
                       <h2>Here i am</h2>
-                      <a className="close" href="https">&times;</a>
-                      {/* <div className="content">
-                        Thank to pop me out of that button, but now i'm done so you can close this window.
-                      </div> */}
+                      <a className="close" href="./train">&times;</a>
+                      <div className="content">
+                      <p >Price:  <input placeholder="600" required className='nom'
+                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
+                  <a className="button" href="#popup1"><img src={seller} className="sell" alt="sell" onClick={() => sell(train.trainID)} onKeyDown={() => sell(train.trainID)}></img></a>
+		                  </div>
                     </div>
                   </div>
 
