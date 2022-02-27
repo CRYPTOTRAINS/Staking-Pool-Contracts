@@ -186,17 +186,23 @@ export const TrainList = () => {
                 </div>
             </div>
   
-                  <div id="popup1" className="over">
-                    <div className="popup">
-                      <h2>Here i am</h2>
-                      <a className="close" href="./train">&times;</a>
+              <div id="popup1" className="over">
+                <div className="popup">
+                {/* <img className="buy-ticket" src={legendary} alt="buy ticket" /> */}
+                    <a className="close" href="./train">&times;</a>
                       <div className="content">
-                      <p >Price:  <input placeholder="600" required className='nom'
-                  onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p>
-                  <a className="button" href="#popup1"><img src={seller} className="sell" alt="sell" onClick={() => sell(train.trainID)} onKeyDown={() => sell(train.trainID)}></img></a>
+                        <p >Price: <input placeholder="600" required className='nom'
+                          onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  />
+                        </p>
+                      
+                          <a href="#popup1">
+                            <img className="inside-sell" src={seller} alt="sell" onClick={() => sell(train.trainID)}  onKeyDown={() => sell(train.trainID)}></img>
+                          </a>
+                    
+                          
 		                  </div>
-                    </div>
-                  </div>
+                </div>
+              </div>
 
 
 

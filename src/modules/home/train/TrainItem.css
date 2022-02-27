@@ -37,6 +37,10 @@
   width: 25%;
 }
 
+.inside-sell {
+  width: 15%;
+}
+
 .train-image {
   display: grid;
   justify-items: center;
