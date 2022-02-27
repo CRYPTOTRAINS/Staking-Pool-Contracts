@@ -275,11 +275,11 @@ return (
                                       <p></p>
                               )}
                           
-                            {train.trainSpeed <= 30  ? (
+                            {30 >= train.trainSpeed > 10  ? (
                                 <span className="value speed icon"> <img src={speed} alt="speed" />Speed: 25</span>
-                              ) : (
-                                      <p></p>
-                              )}
+                             ) : (
+                                <p></p>
+                            )}
 
                             {train.trainSpeed > 30  ? (
                                 <span className="value speed icon"><img src={speed} alt="speed" />Speed: 10</span>
