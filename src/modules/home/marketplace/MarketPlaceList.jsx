@@ -155,12 +155,65 @@ return (
             trains.map((train, i) => (
               <div className="train" key={train.trainID}>
                <p className="sno">Ctrain-Id: #{train.trainID}</p>
-                 <article className="train-image">
-                 <img src={common} alt="common train" />
-                  </article>
-                  <article className="bullet">
-                    <img src={common_bullet} alt="common train bullet" />
-                  </article>
+
+                      {train.trainRarity <= 5 ? (
+                        <div>
+                        <article className="train-image">
+                        <img src={legendary} alt="legendary train" />
+                        </article>
+                        
+                        <article className="bullet">
+                          <img src={legendary_bullet} alt="legendary train bullet" />
+                        </article>
+                        </div>
+                        ) : (
+                          <p></p>
+                      )} 
+
+                      {15 >= train.trainRarity > 5  ? ( // >=15
+                        <div>
+                          <article className="train-image">
+                          <img src={epic} alt="epic train" />
+                        </article>
+                        
+                          <article className="bullet">
+                            <img src={epic_bullet} alt="epic train bullet" />
+                          </article>
+                        </div>
+                        ) : (
+                          <p></p>
+                      )}
+
+                      {30 >= train.trainRarity > 15  ? (
+                        <div>
+                          <article className="train-image">
+                            <img src={rare} alt="rare train" />
+                          </article>
+                        
+                          <article className="bullet">
+                            <img src={rare_bullet} alt="rare train bullet" />
+                          </article>
+                        </div>
+                        ) : (
+                          <p></p>
+                      )}
+                
+                      {train.trainRarity > 30  ? (
+                        <div>
+                        
+                        <article className="train-image">
+                          <img src={common} alt="common train" />
+                        </article>
+
+                        <article className="bullet">
+                          <img src={common_bullet} alt="common train bullet" />
+                        </article>
+                        </div>
+                        ) : (
+                          <p></p>
+                      )}
+
+
                   <section className="train-container">
                     <Table bordered hover>
                       <tbody>
