@@ -197,7 +197,7 @@ export const TrainList = () => {
             </div>
             ) : (
               <p></p>
-          )}
+          )} 
 
           {15 >= train.trainRarity > 5  ? ( // >=15
             <div>
@@ -226,9 +226,10 @@ export const TrainList = () => {
             ) : (
               <p></p>
           )}
-
-          {30 < train.trainRarity <= 100  ? (
+    
+          {train.trainRarity > 30  ? (
             <div>
+             
             <article className="train-image">
               <img src={common} alt="common train" />
             </article>
@@ -274,7 +275,7 @@ export const TrainList = () => {
                                 <p></p>
                         )}
 
-                      {30 < train.trainAcceleration <=100  ? (
+                      {train.trainAcceleration > 30  ? (
                           <span className="value acceleration icon"><img src={acceleration} alt="acceleration" />Acceleration: 15</span>
                         ) : (
                                 <p></p>
@@ -299,14 +300,14 @@ export const TrainList = () => {
                             ) : (
                                 <p></p>
                         )}
-                      
-                      {30 >= train.trainSpeed > 10  ? (
+                     
+                      {train.trainSpeed <= 30  ? (
                           <span className="value speed icon"> <img src={speed} alt="speed" />Speed: 25</span>
                         ) : (
                                 <p></p>
                         )}
 
-                      {30 < train.trainSpeed <= 100  ? (
+                      {train.trainSpeed > 30  ? (
                           <span className="value speed icon"><img src={speed} alt="speed" />Speed: 10</span>
                         ) : (
                                 <p></p>
@@ -330,7 +331,7 @@ export const TrainList = () => {
                                 <p></p>
                         )}
 
-                      {30 < train.trainLoads <= 100  ? (
+                      {30 <= train.trainLoads < 100  ? (
                           <span className="value load icon"><img src={load} alt="load" />Loads: 1</span>
                         ) : (
                                 <p></p>
@@ -348,6 +349,7 @@ export const TrainList = () => {
                   </td>
                   <td className="table-data">
                     <span>
+                    
                       {train.trainBrakes <= 10 ? (
                                  <span className="value brake icon"><img src={brake} alt="brake" />Brakes: 30</span>
                             ) : (
@@ -359,8 +361,8 @@ export const TrainList = () => {
                         ) : (
                                 <p></p>
                         )}
-
-                      {30 < train.trainBrakes <= 100  ? (
+                     
+                      {train.trainBrakes > 30  ? (
                           <span className="value brake icon"><img src={brake} alt="brake" />Brakes: 5</span>
                         ) : (
                                 <p></p>
