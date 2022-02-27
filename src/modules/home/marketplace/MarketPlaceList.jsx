@@ -54,19 +54,25 @@ export const MarketList = () => {
     const provider = new ethers.providers.Web3Provider(connection);
     const contract = new ethers.Contract(CtrainAddress.Ctrain, CtrainArtifact.abi, provider);
     
+    const market = new ethers.Contract(MarketPlaceAddress.MarketPlace, MarketPlaceArtifact.abi, provider );
+    // const price = await market.fetchPrice(i.id.toString());
 
     const data = await contract.getOwnerTrains(MarketPlaceAddress.MarketPlace);
     const trains = await Promise.all(data.map(async i => {
+      const price = await market.fetchPrice(i.id.toString());
+      // console.log(((price).toString())/10e17)
+      const cost = ((price).toString())/10e17
       let train = {
+        
         trainID: i.id.toString(),
         trainLevel: i.level.toString(),
         trainRarity: i.rarity.toString(),
         trainFuel: i.fuel,
-        trainAcceleration: i.acceleration,
+        trainAcceleration: i.acceleration, 
         trainSpeed: i.speed,
         trainBrakes: i.brakes,
         trainLoads: i.loads,
-        price: i.price,
+        trainPrice: cost,
       }
 
       return train;
@@ -154,7 +160,11 @@ return (
           {
             trains.map((train, i) => (
               <div className="train" key={train.trainID}>
-               <p className="sno">Ctrain-Id: #{train.trainID}</p>
+                <div className="cost">
+                  <p className="sno">Ctrain-Id: #{train.trainID}</p>
+                  <p className="sno">Price: {train.trainPrice}</p>
+                </div>
+              
 
                       {train.trainRarity <= 5 ? (
                         <div>

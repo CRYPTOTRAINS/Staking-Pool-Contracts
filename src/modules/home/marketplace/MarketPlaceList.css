@@ -9,6 +9,12 @@
   margin: 0.6rem;
 }
 
+.cost {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 5%;
+}
+
 .search {
   display: flex;
 }
