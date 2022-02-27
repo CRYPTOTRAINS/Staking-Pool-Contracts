@@ -4,6 +4,7 @@
  */
 import './TrainList.css';
 import './TrainItem.css';
+import './popup.css';
 import Table from 'react-bootstrap/Table';
 import common from '../../../assets/images/common.png';
 import common_bullet from '../../../assets/images/common_bullet.png';
