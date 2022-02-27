@@ -205,22 +205,6 @@ export const TrainList = () => {
               </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           {train.trainRarity <= 5 ? (
             <div>
             <article className="train-image">
@@ -331,7 +315,7 @@ export const TrainList = () => {
                                 <p></p>
                         )}
                      
-                      {train.trainSpeed <= 30  ? (
+                      {30 >= train.trainSpeed > 10  ? (
                           <span className="value speed icon"> <img src={speed} alt="speed" />Speed: 25</span>
                         ) : (
                                 <p></p>
