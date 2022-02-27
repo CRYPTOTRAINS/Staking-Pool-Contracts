@@ -589,6 +589,13 @@
     },
     {
       "inputs": [],
+      "name": "teamMint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "tokenAddress",
       "outputs": [
         {
@@ -732,13 +739,6 @@
       "name": "whitelistUsers",
       "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "withdrawBNB",
-      "outputs": [],
-      "stateMutability": "payable",
       "type": "function"
     }
   ],
