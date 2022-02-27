@@ -243,12 +243,6 @@ export const TrainList = () => {
           )}
 
 
-
-
-
-
-
-          
           <section className="train-container">
             <Table bordered hover>
               <tbody>
