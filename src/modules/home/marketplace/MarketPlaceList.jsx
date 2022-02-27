@@ -174,25 +174,25 @@ return (
                          </td>
                          <td width={'60%'} className="table-data">
                          <span>
-                      {train.trainAcceleration <= 10 ? (
-                                 <span className="value acceleration icon"><img src={acceleration} alt="acceleration" />Acceleration: 50</span>
-                            ) : (
-                                <p></p>
-                        )}
-                      
-                      {30 >= train.trainAcceleration > 10  ? (
-                          <span className="value acceleration icon"> <img src={acceleration} alt="acceleration" />Acceleration: 35</span>
-                        ) : (
-                                <p></p>
-                        )}
+                            {train.trainAcceleration <= 10 ? (
+                                      <span className="value acceleration icon"><img src={acceleration} alt="acceleration" />Acceleration: 50</span>
+                                  ) : (
+                                      <p></p>
+                              )}
+                            
+                            {30 >= train.trainAcceleration > 10  ? (
+                                <span className="value acceleration icon"> <img src={acceleration} alt="acceleration" />Acceleration: 35</span>
+                              ) : (
+                                      <p></p>
+                              )}
 
-                      {train.trainAcceleration > 30  ? (
-                          <span className="value acceleration icon"><img src={acceleration} alt="acceleration" />Acceleration: 15</span>
-                        ) : (
-                                <p></p>
-                        )}
+                            {train.trainAcceleration > 30  ? (
+                                <span className="value acceleration icon"><img src={acceleration} alt="acceleration" />Acceleration: 15</span>
+                              ) : (
+                                      <p></p>
+                              )}
                     
-                    </span>
+                        </span>
                           </td>
                         </tr>
                         <tr>
@@ -204,11 +204,26 @@ return (
                             <span className="value">0.00</span>
                           </td>
                           <td className="table-data">
-                            <span className="icon">
-                              <img src={speed} alt="speed" />
-                            </span>
-                            <span className="speed">Speed:&nbsp;</span>
-                            <span className="value">{train.trainSpeed}</span>
+                          <span>
+                            {train.trainSpeed <= 10 ? (
+                                      <span className="value speed icon"><img src={speed} alt="speed" />Speed: 40</span>
+                                  ) : (
+                                      <p></p>
+                              )}
+                          
+                            {train.trainSpeed <= 30  ? (
+                                <span className="value speed icon"> <img src={speed} alt="speed" />Speed: 25</span>
+                              ) : (
+                                      <p></p>
+                              )}
+
+                            {train.trainSpeed > 30  ? (
+                                <span className="value speed icon"><img src={speed} alt="speed" />Speed: 10</span>
+                              ) : (
+                                      <p></p>
+                              )}
+                    
+                          </span>
                           </td>
                         </tr>
                         <tr>
