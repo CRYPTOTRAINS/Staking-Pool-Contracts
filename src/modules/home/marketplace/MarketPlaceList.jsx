@@ -228,12 +228,25 @@ return (
                         </tr>
                         <tr>
                           <td className="table-data">
-                           <span className="icon">
-                              <img src={load} alt="load" />
-                
-                            </span>
-                            <span className="load">Loads:&nbsp;</span>
-                            <span className="value">{train. trainLoads}</span>
+                          <span>
+                            {train.trainLoads <= 10 ? (
+                                      <span className="value load icon"><img src={load} alt="load" />Loads: 3</span>
+                                  ) : (
+                                      <p></p>
+                              )}
+                            
+                            {30 >= train.trainLoads > 10  ? (
+                                <span className="value load icon"> <img src={load} alt="load" />Loads: 2</span>
+                              ) : (
+                                      <p></p>
+                              )}
+                            {train.trainLoads > 30  ? (
+                                <span className="value load icon"><img src={load} alt="load" />Loads: 1</span>
+                              ) : (
+                                      <p></p>
+                              )}
+                          
+                          </span>
                           </td>
                           <td className="table-data">
                             <span className="icon">

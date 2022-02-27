@@ -339,13 +339,6 @@ export const TrainList = () => {
                     
                     </span>
 
-
-
-
-
-
-
-
                   </td>
                   <td className="table-data">
                     <span>
