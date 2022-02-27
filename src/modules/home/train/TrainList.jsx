@@ -185,6 +185,39 @@ export const TrainList = () => {
             {/* <p >Price:  <input placeholder="600" required className='nom'
                   onChange={e => updateFormNumber({...formNumber, no: e.target.value})}  /></p> */}
         
+        
+
+
+                <div className="box">
+                    <a className="button" href="#popup1">Let me Pop up</a>
+                </div>
+
+                  <div id="popup1" className="overlay">
+                    <div className="popup">
+                      <h2>Here i am</h2>
+                      <a className="close" href="https">&times;</a>
+                      {/* <div className="content">
+                        Thank to pop me out of that button, but now i'm done so you can close this window.
+                      </div> */}
+                    </div>
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           {train.trainRarity <= 5 ? (
             <div>
