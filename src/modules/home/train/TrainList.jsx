@@ -291,7 +291,7 @@ export const TrainList = () => {
                     <span className="value">{train.trainLevel}</span>
                   </td>
                   <td width={'60%'} className="table-data">
-                   
+                 
                     <span>
                       {train.trainAcceleration <= 10 ? (
                                  <span className="value acceleration icon"><img src={acceleration} alt="acceleration" />Acceleration: 50</span>

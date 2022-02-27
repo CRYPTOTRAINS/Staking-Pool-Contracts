@@ -60,8 +60,9 @@ export const MarketList = () => {
     const data = await contract.getOwnerTrains(MarketPlaceAddress.MarketPlace);
     const trains = await Promise.all(data.map(async i => {
       const price = await market.fetchPrice(i.id.toString());
-      // console.log(((price).toString())/10e17)
+      
       const cost = ((price).toString())/10e17
+      
       let train = {
         
         trainID: i.id.toString(),
