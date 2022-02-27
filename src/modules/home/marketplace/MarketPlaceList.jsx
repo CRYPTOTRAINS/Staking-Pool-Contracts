@@ -249,11 +249,27 @@ return (
                           </span>
                           </td>
                           <td className="table-data">
-                            <span className="icon">
-                              <img src={brake} alt="brake" />
+                          <span>
+                    
+                              {train.trainBrakes <= 10 ? (
+                                        <span className="value brake icon"><img src={brake} alt="brake" />Brakes: 30</span>
+                                    ) : (
+                                        <p></p>
+                                )}
+                              
+                              {30 >= train.trainBrakes > 10  ? (
+                                  <span className="value brake icon"> <img src={brake} alt="brake" />Brakes: 20</span>
+                                ) : (
+                                        <p></p>
+                                )}
+                            
+                              {train.trainBrakes > 30  ? (
+                                  <span className="value brake icon"><img src={brake} alt="brake" />Brakes: 5</span>
+                                ) : (
+                                        <p></p>
+                                )}
+                  
                             </span>
-                            <span className="brake">Brakes:&nbsp;</span>
-                            <span className="value">{train.trainBrakes}</span>
                           </td>
                        </tr>
                         <tr>
