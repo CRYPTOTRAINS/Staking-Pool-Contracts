@@ -244,7 +244,7 @@ return (
                                 <span className="value load icon"><img src={load} alt="load" />Loads: 1</span>
                               ) : (
                                       <p></p>
-                              )}
+                             )}
                           
                           </span>
                           </td>
